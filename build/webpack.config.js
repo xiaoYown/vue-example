@@ -21,8 +21,7 @@ function getEntry(globPath) {
 	return entries;
 }
 var entries = getEntry("./src/views/*/*.js"); // 获得入口js文件
-entries.jquery = ['jquery'];
-entries.vue = ['vue'];
+
 module.exports = {
 	entry: entries,
 	output: {
@@ -32,6 +31,24 @@ module.exports = {
 		publicPath: isPro ? config.build.assetsPublicPath : config.dev.assetsPublicPath // 文件引入路径
 	},
 	module: {
+		preLoaders: [
+			{
+				test: /\.vue$/,
+				loader: 'eslint',
+				include: [
+					path.join(__dirname, '../src')
+				],
+				exclude: /node_modules/
+			},
+			{
+				test: /\.js$/,
+					loader: 'eslint',
+					include: [
+					path.join(__dirname, '../src')
+				],
+				exclude: /node_modules/
+			}
+		],
 		loaders: [
 			{
 				test: /\.vue$/,

@@ -2,7 +2,6 @@ var path                =	require('path'),
 	utils               =	require('./utils'),
 	webpack             =	require('webpack'),
 	merge               =	require('webpack-merge'),
-	chunks 				=   require('./chunks'),
 	config 				= 	require('../config'),
 	baseWebpack         =	require('./webpack.config.js'),
 	ExtractTextPlugin   =	require('extract-text-webpack-plugin'),
@@ -19,45 +18,40 @@ var plugins =  [
 	}),
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new ExtractTextPlugin(utils.assetsPath('css/[name].css?[chunkhash]')), 	//单独使用style标签加载css并设置其路径
+	// 提取 vendor
 	new webpack.optimize.CommonsChunkPlugin({
 		name: 'vendor',
 		minChunks: function(module, count){
 			return 	( 
 				module.resource && 
 				/\.js$/.test(module.resource) && 
-				module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0 &&
-				module.resource.indexOf(path.join(__dirname, '../node_modules/jquery')) !== 0 &&
-				module.resource.indexOf(path.join(__dirname, '../node_modules/vue')) !== 0
+				module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0
 			)
 		}
 	}),
+	// 提取 vue / vuex / vue-router
 	new webpack.optimize.CommonsChunkPlugin({
 		name: 'vue',
-		chunks: ['vue', 'index', 'components', 'demo']
+		minChunks: function(module, count){
+			return 	( 
+				module.resource && 
+				/\.js$/.test(module.resource) && 
+				module.resource.indexOf(path.join(__dirname, '../node_modules/vue')) === 0
+			)
+		}
 	}),
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'jquery',
-		chunks: ['jquery', 'index', 'demo']
-	}),
+	// new webpack.optimize.CommonsChunkPlugin({
+	// 	name: 'common',
+	// 	chunks: ['index', 'components', 'demo']
+	// }),
 ];
-// chunks.forEach(function(item){
-// 	plugins.push(
-// 		new webpack.optimize.CommonsChunkPlugin(item)
-// 	);
-// });
+// 对应 script 插入
 var pages = {
-	index: ['vue', 'index', 'vendor', 'jquery'],
-	demo: ['vue', 'demo', 'vendor', 'jquery'],
+	index: ['vue', 'index', 'vendor'],
+	demo: ['vue', 'demo', 'vendor'],
 	components: ['vue', 'components', 'vendor'],
 };
 Object.keys(baseWebpack.entry).forEach(function(name){
-	if( name == 'jquery' || name == 'vue' ) return;
-	var entryChunks = [ name ];
-	// chunks.forEach(function(item){
-	// 	if( item.chunks == Infinity || !item.chunks || item.chunks.indexOf( name ) != -1 ){
-	// 		entryChunks.push( item.name );
-	// 	}
-	// });
 	var plugin = new HtmlWebpackPlugin({
 		filename: path.resolve(__dirname, `../dist/${name}.html`),
 		template: path.resolve(__dirname, `../src/pages/${name}.html`),
@@ -76,7 +70,7 @@ Object.keys(baseWebpack.entry).forEach(function(name){
 
 var newWebpack = merge(baseWebpack, {
 	output: {
-		filename: utils.assetsPath('js/[name].js?[chunkhash]')
+		filename: utils.assetsPath('js/[name].js?h=[chunkhash]')
 	},
 	module: {
 		loaders: utils.styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })

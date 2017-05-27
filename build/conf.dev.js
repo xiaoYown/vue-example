@@ -21,7 +21,6 @@ var plugins = [
 ];
 
 Object.keys(baseWebpack.entry).forEach(function(name){
-	if( name == 'jquery' || name == 'vue' ) return;
 	baseWebpack.entry[name] = ['./build/dev-client'].concat(baseWebpack.entry[name]);
 
 	var plugin = new HtmlWebpackPlugin({

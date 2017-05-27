@@ -28,7 +28,6 @@
 
 <script>
 	require('sass/base.scss');
-	var $ = require('jquery')
 
 	export default {
 		components: {
