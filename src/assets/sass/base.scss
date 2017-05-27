@@ -1,0 +1,25 @@
+@import './mixin/function';
+@import './mixin/font';
+@import './mixin/reset';
+
+.icon, .icon_bf:before, .icon_af:after, .icon_ab{
+	// background: url('../images/spriter.png') no-repeat;
+	background-size: 230px 80px;
+	display: inline-block;
+	position: relative;
+}
+.icon_bf:before, .icon_af:after, .icon_ab{
+	content:'';
+}
+// 透明过渡
+.fade-enter-active, .fade-leave-active{
+	transition: all .4s linear;
+}
+.fade-enter, .fade-leave-active{
+	opacity: 0
+}
+
+.inner-wrap{
+	width: 800px;
+	margin: 0 auto;
+}

@@ -1,0 +1,100 @@
+//字体大小
+.font-16{
+    font-size: 8px !important;
+    [data-dpr="2"] &{
+        font-size: 16px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 24px !important;
+    }
+}
+.font-20{
+    font-size: 10px !important;
+    [data-dpr="2"] &{
+        font-size: 20px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 30px !important;
+    }
+}
+.font-22{
+    font-size: 11px !important;
+    [data-dpr="2"] &{
+        font-size: 22px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 33px !important;
+    }
+}
+.font-24{
+    font-size: 12px !important;
+    [data-dpr="2"] &{
+        font-size: 24px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 36px !important;
+    }
+}
+.font-26{
+    font-size: 13px !important;
+    [data-dpr="2"] &{
+        font-size: 26px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 39px !important;
+    }
+}
+.font-28{
+    font-size: 14px !important;
+    [data-dpr="2"] &{
+        font-size: 28px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 42px !important;
+    }
+}
+.font-30{
+    font-size: 15px !important;
+    [data-dpr="2"] &{
+        font-size: 30px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 45px !important;
+    }
+}
+.font-32{
+    font-size: 16px !important;
+    [data-dpr="2"] &{
+        font-size: 32px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 48px !important;
+    }
+}
+.font-34{
+    font-size: 17px !important;
+    [data-dpr="2"] &{
+        font-size: 34px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 50px !important;
+    }
+}
+.font-36{
+    font-size: 18px !important;
+    [data-dpr="2"] &{
+        font-size: 36px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 54px !important;
+    }
+}
+.font-40{
+    font-size: 20px !important;
+    [data-dpr="2"] &{
+        font-size: 40px !important;
+    }
+    [data-dpr="3"] &{
+        font-size: 60px !important;
+    }
+}

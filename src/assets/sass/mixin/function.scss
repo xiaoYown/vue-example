@@ -1,0 +1,17 @@
+@function rem($px){
+	@return $px*320/750/20 + rem;
+}
+@mixin round($r,$bool:false) {
+	@if $bool==rem {
+		-webkit-border-radius: rem($r);
+		-moz-border-radius: rem($r);
+		-o-border-radius: rem($r);
+		border-radius: rem($r);
+	}
+	@else {
+		-webkit-border-radius:$r;
+		-moz-border-radius: $r;
+		-o-border-radius: $r;
+		border-radius: $r;
+	}
+}
