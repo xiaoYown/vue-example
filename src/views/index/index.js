@@ -13,45 +13,45 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 
 const routes = [
-	{ 	path: '/',
-		component: require('Views/index/index.vue'),
-		name: 'index',
-		meta: {
-			user: true,
-		},
-	},
-	{ 	path: '/login', 	
-		component: require('components/login.vue'), 
-		name: 'login',
-		meta: {
-			user: false,
-		},
-	},
-	{ 	path: '*', 	
-		component: require('Views/404.vue'),
-		meta: {
-			user: false,
-		},
-	},
+  { 	path: '/',
+    component: require('Views/index/index.vue'),
+    name: 'index',
+    meta: {
+      user: true,
+    },
+  },
+  { 	path: '/login', 	
+    component: require('components/login.vue'), 
+    name: 'login',
+    meta: {
+      user: false,
+    },
+  },
+  { 	path: '*', 	
+    component: require('Views/404.vue'),
+    meta: {
+      user: false,
+    },
+  },
 ];
 
 const router = new VueRouter({
-	routes,
+  routes,
 });
 
 router.beforeEach(({meta, path}, from, next) => {
-	let sessionId = getCookie('session');
-	if( !!sessionId ){
-		return next();
-	} else if( meta.user && path != '/login' ) {
-		return next({path: '/login'});
-	}
-	next();
+  let sessionId = getCookie('session');
+  if( !!sessionId ){
+    return next();
+  } else if( meta.user && path != '/login' ) {
+    return next({path: '/login'});
+  }
+  next();
 });
 
 new Vue({
-	el: '#page-home',
-	router,
-	store,
-	...App
+  el: '#page-home',
+  router,
+  store,
+  ...App
 });

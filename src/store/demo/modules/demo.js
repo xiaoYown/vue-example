@@ -15,13 +15,13 @@ const state = {
  *  @param String method get/add/del/put 请求首次获取 / 增 / 删 / 改 
  */
 const mutations = {
-	
+  
     [types.SAVE_STATE_SHOW]( state, payload ){
         switch( payload.method ){
-			case 'put':
-				state.stateShow = payload.data;
-				break;
-		}
+      case 'put':
+        state.stateShow = payload.data;
+        break;
+    }
     },
     [types.SAVE_CAL_DATA]( state, payload ){
         switch(payload.method){
@@ -40,7 +40,7 @@ const mutations = {
 };
 
 const actions = {
-	
+  
     saveStateShow: ({ commit }, param) => {
         commit(types.SAVE_STATE_SHOW, param);
     },

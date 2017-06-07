@@ -11,19 +11,19 @@ const state = {
  *  @param String method get/add/del/put 请求首次获取 / 增 / 删 / 改 
  */
 const mutations = {
-	[types.SAVE_USER_INFO]( state, payload ) {
-		switch( payload.method ){
-			case 'put':
-				state.userInfo = payload.data;
-				break;
-		}
-	},
+  [types.SAVE_USER_INFO]( state, payload ) {
+    switch( payload.method ){
+      case 'put':
+        state.userInfo = payload.data;
+        break;
+    }
+  },
 };
 
 const actions = {
-	saveUserInfo: ({ commit }, param) => {
-		commit(types.SAVE_USER_INFO, param);
-	},
+  saveUserInfo: ({ commit }, param) => {
+    commit(types.SAVE_USER_INFO, param);
+  },
 
 };
 

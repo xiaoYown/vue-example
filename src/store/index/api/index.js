@@ -9,7 +9,7 @@ import * as resource from './resource'
  * @method delete: {method: 'DELETE'}
  */
 export default {
-	// index (options) {							// actions request
-	// 	return resource.index.save({...options});
-	// },
+  // index (options) {							// actions request
+  // 	return resource.index.save({...options});
+  // },
 }

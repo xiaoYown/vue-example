@@ -11,10 +11,10 @@ Vue.use(Vuex);
 Vue.config.warnExpressionErrors = false;
 
 const store = new Vuex.Store({
-	modules: {
-		user,
-		demo,
-	},
+  modules: {
+    user,
+    demo,
+  },
     strict: process.env.NODE_ENV !== 'production',
     middlewares
 });

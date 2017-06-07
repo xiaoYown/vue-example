@@ -13,46 +13,46 @@ Vue.use(VueResource);
 Vue.use(lazy);
 
 const routes = [
-	{ 	path: '/', 	
-		name: 'components',
-		component: require('./views/index.vue'),
-		meta: {
-			user: true,
-		},
-	},
-	{ 	path: '/drag', 	
-		name: 'drag',
-		component: require('./views/drag.vue'),
-		meta: {
-			user: true,
-		},
-	},
-	{ 	path: '/login', 	
-		name: 'login',
-	},
-	{ 	path: '*', 	
-		component: require('Views/404.vue'),
-	},
+  { 	path: '/', 	
+    name: 'components',
+    component: require('./views/index.vue'),
+    meta: {
+      user: true,
+    },
+  },
+  { 	path: '/drag', 	
+    name: 'drag',
+    component: require('./views/drag.vue'),
+    meta: {
+      user: true,
+    },
+  },
+  { 	path: '/login', 	
+    name: 'login',
+  },
+  { 	path: '*', 	
+    component: require('Views/404.vue'),
+  },
 ];
 
 const router = new VueRouter({
-	routes,
+  routes,
 });
 
 router.beforeEach(({meta, path}, from, next) => {
-	let sessionId = getCookie('session');
-	if( !!sessionId || !meta.user ){
-		return next();
-	} else {
-		window.location.href = "index.html#/login";
-		return
-	}
-	next();
+  let sessionId = getCookie('session');
+  if( !!sessionId || !meta.user ){
+    return next();
+  } else {
+    window.location.href = "index.html#/login";
+    return
+  }
+  next();
 });
 
 new Vue({
-	el: '#page-components',
-	router,
-	store,
-	...App,
+  el: '#page-components',
+  router,
+  store,
+  ...App,
 });

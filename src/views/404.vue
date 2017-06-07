@@ -1,6 +1,6 @@
 <template lang="jade">
-	div
-	  h1 {{msg}}
+  div
+    h1 {{msg}}
 </template>
 
 <script>
