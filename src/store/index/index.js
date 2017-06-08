@@ -1,13 +1,13 @@
-import Vue 				from 'vue';
-import Vuex 			from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-import middlewares 		from '../middlewares';
+import middlewares from '../middlewares'
 
-import user 			from './modules/user';
+import user from './modules/user'
 
-Vue.config.debug = true;
-Vue.use(Vuex);
-Vue.config.warnExpressionErrors = false;
+Vue.config.debug = true
+Vue.use(Vuex)
+Vue.config.warnExpressionErrors = false
 
 const store = new Vuex.Store({
   modules: {
@@ -15,7 +15,7 @@ const store = new Vuex.Store({
   },
     strict: process.env.NODE_ENV !== 'production',
     middlewares
-});
+})
 export default store
 /*
   state     -- 每个应用将仅仅包含一个 store 实例
