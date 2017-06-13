@@ -105,12 +105,12 @@
     data () {
       return {
         /* 功能状态 */
-        isDrag  : false,
+        isDrag: false,
         isRotate: false,
         isResize: false,
         /* 数据存储 */
-        axis:     {},
-        axis_bf:  {},
+        axis: {},
+        axis_bf: {},
         center: {},
         deg_op: 0,
         /* 样式存储 */
@@ -130,8 +130,8 @@
         handler (newVal) {
           this.setStyle(newVal)
         },
-        deep: true,
-      },
+        deep: true
+      }
     },
     created () {
       this.axis = {
@@ -159,38 +159,37 @@
       /* 组件参数渲染 */
       setStyle (axis) {
         this.style = {
-          top   : axis.y + 'px',
-          left  : axis.x + 'px',
-          width : axis.w + 'px',
+          top: axis.y + 'px',
+          left: axis.x + 'px',
+          width: axis.w + 'px',
           height: this.cross ? 0 : axis.h + 'px',
           transform: 'rotate(' + axis.r + 'deg)',
-          transformOrigin: axis.w/2 + 'px ' + axis.h/2 + 'px'
+          transformOrigin: axis.w / 2 + 'px ' + axis.h / 2 + 'px'
         }
-        if( !this.cross ){
+        if (!this.cross) {
           this.style.border = '1px solid #ccc'
         }
       },
       setCursor () {
         let cursors = [
-          'se-resize', 's-resize', 'sw-resize', 'w-resize', 
-          'nw-resize', 's-resize', 'sw-resize', 'w-resize'
+          'se-resize', 's-resize', 'sw-resize', 'w-resize', 'nw-resize', 's-resize', 'sw-resize', 'w-resize'
         ]
         let start = 0
-        if( this.axis.r >= 337 || this.axis.r < 23 ){
+        if (this.axis.r >= 337 || this.axis.r < 23) {
           start = 0
-        } else if ( this.axis.r >= 23  && this.axis.r < 68  ){
+        } else if (this.axis.r >= 23 && this.axis.r < 68) {
           start = 1
-        } else if ( this.axis.r >= 68  && this.axis.r < 113 ){
+        } else if (this.axis.r >= 68 && this.axis.r < 113) {
           start = 2
-        } else if ( this.axis.r >= 113 && this.axis.r < 158 ){
+        } else if (this.axis.r >= 113 && this.axis.r < 158) {
           start = 3
-        } else if ( this.axis.r >= 158 && this.axis.r < 203 ){
+        } else if (this.axis.r >= 158 && this.axis.r < 203) {
           start = 4
-        } else if ( this.axis.r >= 203 && this.axis.r < 248 ){
+        } else if (this.axis.r >= 203 && this.axis.r < 248) {
           start = 5
-        } else if ( this.axis.r >= 248 && this.axis.r < 293 ){
+        } else if (this.axis.r >= 248 && this.axis.r < 293) {
           start = 6
-        } else if ( this.axis.r >= 293 && this.axis.r < 337 ){
+        } else if (this.axis.r >= 293 && this.axis.r < 337) {
           start = 7
         }
         this.cursorStyle = {
@@ -206,17 +205,17 @@
       },
       /* 记录鼠标位置 */
       setMouse (event) {
-        let el;
+        let el
         this.mouse = {
           x: event.clientX,
-          y: event.clientY,
+          y: event.clientY
         }
         switch (this.resizeBtn) {
           case 't-r':
             el = 'b-l'
             break
         }
-        if( this.$refs[`resize-${el}`] ){
+        if (this.$refs[`resize-${el}`]) {
           this.location = {
             x: this.$refs[`resize-${el}`].getBoundingClientRect().left,
             y: this.$refs[`resize-${el}`].getBoundingClientRect().top
@@ -225,7 +224,7 @@
       },
       /* 鼠标按下, 记录鼠标位置, 记录 变化前 坐标信息 */
       mosuedown (event) {
-        this.setMouse(event);
+        this.setMouse(event)
         this.axis_bf = {
           x: this.axis.x,
           y: this.axis.y,
@@ -236,40 +235,40 @@
       },
       /* 鼠标移动 */
       mousemove (event) {
-        if( this.isDrag )   { 
+        if (this.isDrag) {
           this.draging(event)
         }
-        if( this.isResize ) { 
+        if (this.isResize) {
           this.resizing(event)
         }
-        if( this.isRotate ) { 
+        if (this.isRotate) {
           this.rotating(event)
         }
       },
       /* 鼠标松开 */
       mouseup (event) {
-        if( this.isDrag )   { 
+        if (this.isDrag) {
           this.dragend(event)
         }
-        if( this.isResize ) { 
+        if (this.isResize) {
           this.resized(event)
         }
-        if( this.isRotate ) { 
+        if (this.isRotate) {
           this.rotated(event)
         }
 
-        this.isDrag     = false
-        this.isResize   = false
-        this.isRotate   = false
+        this.isDrag = false
+        this.isResize = false
+        this.isRotate = false
       },
       /* 实时数据变化响应 */
       changing (axis) {
-        this.setStyle(axis);
+        this.setStyle(axis)
         this.$emit('changing', axis)
       },
       /* 变化最终结果响应 */
       changed (axis) {
-        this.axis = axis;
+        this.axis = axis
         // console.log(JSON.stringify(axis))
         this.$emit('changed', axis)
         this.setCursor()
@@ -278,37 +277,36 @@
         this.mosuedown(event)
         this.isDrag = true
       },
-      resizeStart(event){
-        this.resizeBtn = event.target.parentNode.className.match(/xy\-resize\-([^\s]+)(\s|$)/)[1]
+      resizeStart (event) {
+        this.resizeBtn = event.target.parentNode.className.match(/xy-resize-([^\s]+)(\s|$)/)[1]
 
         this.mosuedown(event)
 
-        this.isResize  = true
+        this.isResize = true
       },
       rotateStart (event) {
+        let _distance_,
+          __distance__
+        _distance_ = event.clientY - this.center.y
+        __distance__ = event.clientX - this.center.x
         this.mosuedown(event)
-
         this.getCenter()
-
-        let l_a = event.clientY - this.center.y,
-            l_b = event.clientX - this.center.x;
-
-        if( l_a < 0 && l_b >= 0 ){
-          this.deg_op = Math.atan( l_b / -l_a )*180 / Math.PI
-        } else if( l_a >= 0 && l_b > 0 ){
-          this.deg_op = Math.atan( l_a / l_b )*180 / Math.PI + 90
-        } else if(  l_a > 0 && l_b <= 0 ){
-          this.deg_op = 270 - Math.atan( l_a / -l_b )*180 / Math.PI
-        } else if(  l_a <= 0 && l_b < 0 ){
-          this.deg_op = Math.atan( -l_a / -l_b )*180 / Math.PI + 270
+        if (_distance_ < 0 && __distance__ >= 0) {
+          this.deg_op = Math.atan(__distance__ / -_distance_) * 180 / Math.PI
+        } else if (_distance_ >= 0 && __distance__ > 0) {
+          this.deg_op = Math.atan(_distance_ / __distance__) * 180 / Math.PI + 90
+        } else if (_distance_ > 0 && __distance__ <= 0) {
+          this.deg_op = 270 - Math.atan(_distance_ / -__distance__) * 180 / Math.PI
+        } else if (_distance_ <= 0 && __distance__ < 0) {
+          this.deg_op = Math.atan(-_distance_ / -__distance__) * 180 / Math.PI + 270
         }
-        this.isRotate   = true
+        this.isRotate = true
       },
       draging (event) {
-        if( event.clientX == 0 && event.clientY == 0 ) return
+        if (event.clientX === 0 && event.clientY === 0) return
         let axis = {
-          x: this.axis_bf.x + ( event.clientX - this.mouse.x ),
-          y: this.axis_bf.y + ( event.clientY - this.mouse.y ),
+          x: this.axis_bf.x + (event.clientX - this.mouse.x),
+          y: this.axis_bf.y + (event.clientY - this.mouse.y),
           w: this.axis_bf.w,
           h: this.axis_bf.h,
           r: this.axis_bf.r
@@ -322,23 +320,23 @@
       },
       getCenter () {
         let center = {
-          x: this.$el.offsetLeft  + this.axis.w/2,
-          y: this.$el.offsetTop + 48 + this.axis.h/2
+          x: this.$el.offsetLeft + this.axis.w / 2,
+          y: this.$el.offsetTop + 48 + this.axis.h / 2
         }
         this.center = center
       },
       rotating (event) {
-        if( event.clientX == 0 && event.clientY == 0 ) return
-
-        let y_d = this.center.y - event.clientY,
-            deg_ed = 0;
-        if ( y_d < 0 ) {
-          deg_ed = 180 - Math.atan( (event.clientX - this.center.x) / ( 0 - y_d ) ) * 180 / Math.PI
+        if (event.clientX === 0 && event.clientY === 0) return
+        let distanceY, degEnd
+        distanceY = this.center.y - event.clientY
+        degEnd = 0
+        if (distanceY < 0) {
+          degEnd = 180 - Math.atan((event.clientX - this.center.x) / (0 - distanceY)) * 180 / Math.PI
         } else {
-          deg_ed = Math.atan( (event.clientX - this.center.x) / y_d ) * 180 / Math.PI
+          degEnd = Math.atan((event.clientX - this.center.x) / distanceY) * 180 / Math.PI
         }
 
-        let deg = this.axis_bf.r + Math.floor(deg_ed - this.deg_op)
+        let deg = this.axis_bf.r + Math.floor(degEnd - this.deg_op)
 
         this.axis.r = deg < 0 ? deg + 360 : deg >= 360 ? deg - 360 : deg
 
@@ -348,41 +346,42 @@
         this.changed(this.axis)
       },
       resizing (event) {
+        let L, axis, distance, _axis, degC, degC_, degL, z, _z, coord, _coord
         // 鼠标位置与计算宽高相对点之间的距离
-        let L = 0,
-          // 未发生改变属性
-          axis = {
-            x: this.axis.x,
-            y: this.axis.y,
-            w: this.axis.w,
-            h: this.axis.h
-          },
-          // 鼠标移动距离
-          distance = {
-            x: event.clientX - this.mouse.x,
-            y: event.clientY - this.mouse.y
-          },
-          // x/y/w/h 变化值
-          _axis = {
-            x: 0,
-            y: 0,
-            w: 0,
-            h: 0
-          },
-          // resize 前旋转角度与等腰三角形夹角
-          deg_c = 0,
-          // resizing 旋转角度与等腰三角形夹角
-          deg_c_ = 0,
-          // 距离计算夹角
-          deg_l = 0,
-          // resize 前旋转角度与等腰三角 腰 l
-          z = 0,
-          // resizing 旋转角度与等腰三角 腰 l
-          _z = 0,
-          // 发生旋转时稳定点坐标
-          coord = { x: 0, y: 0 },
-          // 发生旋转时不稳定点坐标
-          _coord = { x: 0, y: 0 }
+        L = 0
+        // 未发生改变属性
+        axis = {
+          x: this.axis.x,
+          y: this.axis.y,
+          w: this.axis.w,
+          h: this.axis.h
+        }
+        // 鼠标移动距离
+        distance = {
+          x: event.clientX - this.mouse.x,
+          y: event.clientY - this.mouse.y
+        }
+        // x/y/w/h 变化值
+        _axis = {
+          x: 0,
+          y: 0,
+          w: 0,
+          h: 0
+        }
+        // resize 前旋转角度与等腰三角形夹角
+        degC = 0
+        // resizing 旋转角度与等腰三角形夹角
+        degC_ = 0
+        // 距离计算夹角
+        degL = 0
+        // resize 前旋转角度与等腰三角 腰 l
+        z = 0
+        // resizing 旋转角度与等腰三角 腰 l
+        _z = 0
+        // 发生旋转时稳定点坐标
+        coord = { x: 0, y: 0 }
+        // 发生旋转时不稳定点坐标
+        _coord = { x: 0, y: 0 }
 
         switch (this.resizeBtn) {
           case 't-l':
@@ -394,9 +393,9 @@
           case 't-r':
             // 鼠标 - 静止点 距离
             L = Math.sqrt(Math.pow(event.clientX - this.location.x, 2) + Math.pow(event.clientY - this.location.y, 2))
-            deg_l = (Math.acos(Math.abs(event.clientX - this.location.x) / L) * 180 / Math.PI - this.axis.r) * Math.PI / 180
-            distance.x = Math.cos(deg_l) * L
-            distance.y = Math.sin(deg_l) * L
+            degL = (Math.acos(Math.abs(event.clientX - this.location.x) / L) * 180 / Math.PI - this.axis.r) * Math.PI / 180
+            distance.x = Math.cos(degL) * L
+            distance.y = Math.sin(degL) * L
             if (distance.x > distance.y || Math.abs(distance.x) > Math.abs(distance.y)) {
               axis.w = distance.x
               axis.h = distance.x
@@ -434,18 +433,18 @@
             }
 
             if (this.axis.r !== 0) {
-              deg_c = Math.atan(this.axis_bf.h / this.axis_bf.w) + this.axis.r * Math.PI / 180
-              deg_c_ = Math.atan(this.axis.h / this.axis.w) + this.axis.r * Math.PI / 180
+              degC = Math.atan(this.axis_bf.h / this.axis_bf.w) + this.axis.r * Math.PI / 180
+              degC_ = Math.atan(this.axis.h / this.axis.w) + this.axis.r * Math.PI / 180
               z = Math.sqrt((Math.pow(this.axis_bf.h, 2) + Math.pow(this.axis_bf.w, 2)) / 4)
               _z = Math.sqrt((Math.pow(this.axis.h, 2) + Math.pow(this.axis.w, 2)) / 4)
 
               coord = {
-                x: this.axis_bf.x + this.axis_bf.w / 2 - z * Math.cos(deg_c),
-                y: this.axis_bf.y + this.axis_bf.h / 2 - z * Math.sin(deg_c)
+                x: this.axis_bf.x + this.axis_bf.w / 2 - z * Math.cos(degC),
+                y: this.axis_bf.y + this.axis_bf.h / 2 - z * Math.sin(degC)
               }
               _coord = {
-                x: this.axis.x + this.axis.w / 2 - _z * Math.cos(deg_c_),
-                y: this.axis.y + this.axis.h / 2 - _z * Math.sin(deg_c_)
+                x: this.axis.x + this.axis.w / 2 - _z * Math.cos(degC_),
+                y: this.axis.y + this.axis.h / 2 - _z * Math.sin(degC_)
               }
               _axis = {
                 x: coord.x - _coord.x,

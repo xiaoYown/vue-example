@@ -63,7 +63,7 @@
 					return {
 						page: 1,
 						pages: 1,
-						pageSize: 10,
+						pageSize: 10
 					}
 				}
 			}
@@ -86,97 +86,89 @@
 						ct: '30',
 						checked: false,
 					}
-				],
+				]
 			}
 		},
-		// created(){
-		// 	for( let i = 0, len = this.list.length; i < len; i++ ){
-		// 		this.list[i].checked = false;
-		// 		if( this.info.pageSize == this.list[i].id ){
-		// 			this.list[i].checked = true;
-		// 		}
-		// 	}
-		// },
 		watch: {
 			'info': {
 				handler(newVal){
-					if( this.index <= newVal.pages )
-						this.index = newVal.page;
-					// this.pageSize = newVal.pageSize;
+					if (this.index <= newVal.pages) {
+						this.index = newVal.page
+          }
 				},
 				deep: true
 			}
 		},
 		computed: {
-			page(){
+			page () {
 				let page  = {},
-					_page = this.info.page;
-				if( _page === 1 ){
-					_page += 1;
-				} else if( _page === this.info.pages ){
-					_page -= 1;
+					_page = this.info.page
+				if (_page === 1) {
+					_page += 1
+				} else if (_page === this.info.pages) {
+					_page -= 1
 				}
-				page.first  = _page - 1;
-				page.second = _page;
-				page.third  = _page + 1;
+				page.first = _page - 1
+				page.second = _page
+				page.third = _page + 1
 
 				return page
 			}
 		},
 		methods: {
-			indexChange(){
-				let index = (this.index + '').replace(/[^\d]/g,'');
-				if( index > this.info.pages )
-					index = this.info.pages;
-				this.index = index;
+			indexChange () {
+				let index = (this.index + '').replace(/[^\d]/g,'')
+				if (index > this.info.pages) {
+					index = this.info.pages
+        }
+				this.index = index
 			},
-			sizeChange(size){
-				// this.pageSize = size;
+			sizeChange (size) {
 				this.index = 1;
 				this.$emit('page-link', {
 					page: 1,
 					pages: this.info.pages,
 					pageSize: parseInt(size)
-				});
+				})
 			},
-			link(identity){
+			link (identity) {
 				let info = {
 					page: this.info.page,
 					pages: this.info.pages,
-					pageSize: this.info.pageSize,
-				};
-				switch ( identity ){
-					case 'page-1':
-						info.page = this.page.first;
-						break;
-					case 'page-2':
-						info.page = this.page.second;
-						break;
-					case 'page-3':
-						info.page = this.page.third;
-						break;
-					case 'first':
-						info.page = 1;
-						break;
-					case 'last':
-						info.page = this.info.pages;
-						break;
-					case 'previous':
-						info.page = this.info.page - 1;
-						break;
-					case 'next':
-						info.page = this.info.page + 1;
-						break;
-					case 'link':
-						info.page = parseInt(this.index);
-						if( !this.index ) return;
-						break;
+					pageSize: this.info.pageSize
 				}
-				if( info.page == this.info.page || info.page > this.info.pages || info.page < 1 ) return;
-				this.$emit('page-link', info);
-			}
-		}
-	}
+				switch (identity){
+					case 'page-1':
+						info.page = this.page.first
+						break
+					case 'page-2':
+						info.page = this.page.second
+						break
+					case 'page-3':
+						info.page = this.page.third
+						break
+					case 'first':
+						info.page = 1
+						break
+					case 'last':
+						info.page = this.info.pages
+						break
+					case 'previous':
+						info.page = this.info.page - 1
+						break
+					case 'next':
+						info.page = this.info.page + 1
+						break
+					case 'link':
+						info.page = parseInt(this.index)
+						if( !this.index ) return
+						break
+				}
+				if (info.page == this.info.page || info.page > this.info.pages || info.page < 1) return
+				this.$emit('page-link', info)
+      }
+    }
+  }
 
 </script>
 
