@@ -1,19 +1,19 @@
 <template lang="jade">
   .wrap-demo
-    button(@click="getData")	ajax
+    button(@click="getData") ajax
 </template>
 
 <script>
   export default {
-    data(){
+    data () {
       return {}
     },
     methods: {
-      getData(){
+      getData () {
         this.$http.get('/static/test.json')
-          .then(function(res){
+          .then(function (res) {
             console.log(res.body)
-          }, function(status){
+          }, function (status) {
 
           })
       }

@@ -106,98 +106,101 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex';
+  import { mapState, mapActions } from 'vuex'
 
-  import { getAttribute } from 'tools/utils';
+  import { getAttribute } from 'tools/utils'
 
   export default {
-    data(){
+    data () {
       return {
         stateData: {
           name: '',
           age: '',
           email: '',
-          addr: '',
+          addr: ''
         },
         choosed: {
           t: false,
           b: false,
           l: false,
-          r: false,
+          r: false
         },
-        jstyle: {},
+        jstyle: {}
       }
     },
     computed: mapState({
       stateShow: state => state.demo.stateShow,
       calData: state => state.demo.calData,
-      style: state => state.demo.style,
+      style: state => state.demo.style
     }),
     watch: {
       style: {
-        handler(newVal){
-          this.getStyle();
+        handler (newVal) {
+          this.getStyle()
         },
-        deep: true,
+        deep: true
       }
     },
     methods: {
       ...mapActions(['saveStateShow', 'saveUserInfo', 'saveCalData', 'saveStyle']),
-      saveState(){
+      saveState () {
         this.saveStateShow({
           method: 'put',
-          data: getAttribute(this.stateData),
-        });
+          data: getAttribute(this.stateData)
+        })
         this.saveUserInfo({
           method: 'put',
           data: {
-            name: this.stateData.name,
+            name: this.stateData.name
           }
         })
       },
-      cal(symbol){
-        let data = this.calData;
-        switch (symbol){
+      cal (symbol) {
+        let data = this.calData
+        switch (symbol) {
           case '+':
-            data += 1;
-            break;
+            data += 1
+            break
           case '-':
-            data -= 1;
-            break;
+            data -= 1
+            break
         }
         this.saveCalData({
           method: 'put',
-          data,
+          data
         })
       },
-      getStyle(){
+      getStyle () {
         this.jstyle = {
-          borderTop: 		`${this.style.t}px solid #000`,
-          borderBottom: 	`${this.style.b}px solid #000`,
-          borderLeft: 	`${this.style.l}px solid #000`,
-          borderRight: 	`${this.style.r}px solid #000`,
-        };
+          borderTop: `${this.style.t}px solid #000`,
+          borderBottom: `${this.style.b}px solid #000`,
+          borderLeft: `${this.style.l}px solid #000`,
+          borderRight: `${this.style.r}px solid #000`
+        }
       },
-      choosePlace(place){
-        this.choosed[place] = !this.choosed[place];
+      choosePlace (place) {
+        this.choosed[place] = !this.choosed[place]
       },
-      setBorder(w){
-        
-        let style = {...this.style};
+      setBorder (w) {
+        let style = {...this.style}
 
-        if( this.choosed.t )
-          style.t = w;
-        if( this.choosed.b )
-          style.b = w;
-        if( this.choosed.l )
-          style.l = w;
-        if( this.choosed.r )
-          style.r = w;
+        if (this.choosed.t) {
+          style.t = w
+        }
+        if (this.choosed.b) {
+          style.b = w
+        }
+        if (this.choosed.l) {
+          style.l = w
+        }
+        if (this.choosed.r) {
+          style.r = w
+        }
 
         this.saveStyle({
-          method: 'put', 
+          method: 'put',
           data: style
-        });
+        })
       }
     }
   }

@@ -11,28 +11,26 @@
   }
 </style>
 <template lang="jade">
-.content
-  transition(name="fade",mode="out-in")
-    div(v-show="show")
-      transition(name="fade" mode="out-in")
-        router-view
+  .content
+    transition(name="fade",mode="out-in")
+      div(v-show="show")
+        transition(name="fade" mode="out-in")
+          router-view
 </template>
 
 <script>
-  require('sass/base.scss');
-
+  require('sass/base.scss')
   export default {
-
-    data(){
+    data () {
       return {
-        show: false,
+        show: false
       }
     },
-    created(){
-      this.show = false;
+    created () {
+      this.show = false
     },
-    mounted(){
-      this.show = true;
-    },
+    mounted () {
+      this.show = true
+    }
   }
 </script>

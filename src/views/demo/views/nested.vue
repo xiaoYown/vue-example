@@ -8,14 +8,14 @@
 <script>
 
   export default {
-    data() {
+    data () {
       return {
         params: {
           name: this.$route.name,
-          age:  this.$route.age,
+          age: this.$route.age
         }
       }
-    },
+    }
   }
 </script>
 

@@ -12,46 +12,46 @@
 
 <script>
   export default {
-    data(){
+    data () {
       return {
         axis: {
           x: 200,
           y: 200,
           h: 200,
           w: 200,
-          r: 0,
+          r: 0
         },
         style: {}
       }
     },
     watch: {
       axis: {
-        handler(newVal){
-          this.setStyle(newVal);
+        handler (newVal) {
+          this.setStyle(newVal)
         },
         deep: true
-      },
+      }
     },
-    created(){
-      this.setStyle(this.axis);
+    created () {
+      this.setStyle(this.axis)
     },
     components: {
-        'xy-drag': require('components/ui/drag.vue')
+      'xy-drag': require('components/ui/drag.vue')
     },
     methods: {
-      changing(data){
+      changing (data) {
         this.axis = data
       },
-      changed(data){
+      changed (data) {
         // console.log(JSON.stringify(data))
         this.axis = data
       },
-      setStyle(data){
+      setStyle (data) {
         // console.log(data.r)
         this.style = {
-          top   : data.y + 'px',
-          left  : data.x + 'px',
-          width : data.w + 'px',
+          top: data.y + 'px',
+          left: data.x + 'px',
+          width: data.w + 'px',
           height: data.h + 'px',
           transform: 'rotate(' + data.r + 'deg)'
         }

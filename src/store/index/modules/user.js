@@ -1,32 +1,31 @@
-import Vue								from 'vue';
-import { saveCookie } 					from 'tools/client'; 
-import { httpResponse, getAttribute } 	from 'tools/utils'; 
+// import Vue from 'vue'
+// import { saveCookie } from 'tools/client'
+// import { httpResponse } from 'tools/utils'
 
-import api								from '../api';
-import * as types 						from './types';
+// import api from '../api'
+import * as types from './types'
 const state = {
-    userInfo: {},
-};
+  userInfo: {}
+}
 /** state 操作说明
- *  @param String method get/add/del/put 请求首次获取 / 增 / 删 / 改 
+ *  @param String method get/add/del/put 请求首次获取 / 增 / 删 / 改
  */
 const mutations = {
-  [types.SAVE_USER_INFO]( state, payload ) {
-    switch( payload.method ){
+  [types.SAVE_USER_INFO] (state, payload) {
+    switch (payload.method) {
       case 'put':
-        state.userInfo = payload.data;
-        break;
+        state.userInfo = payload.data
+        break
     }
-  },
-};
+  }
+}
 
 const actions = {
   saveUserInfo: ({ commit }, param) => {
-    commit(types.SAVE_USER_INFO, param);
-  },
-
-};
+    commit(types.SAVE_USER_INFO, param)
+  }
+}
 
 export default {
-    state, mutations, actions
-};
+  state, mutations, actions
+}

@@ -11,10 +11,10 @@ Vue.config.warnExpressionErrors = false
 
 const store = new Vuex.Store({
   modules: {
-    user,
+    user
   },
-    strict: process.env.NODE_ENV !== 'production',
-    middlewares
+  strict: process.env.NODE_ENV !== 'production',
+  middlewares
 })
 export default store
 /*

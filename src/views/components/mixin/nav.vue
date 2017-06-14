@@ -9,27 +9,26 @@
 <script>
   
   import { getCookie } from 'tools/client'
-
   import { mapState, mapActions } from 'vuex'
 
   export default {
     computed: mapState({
-        userInfo: state => state.user.userInfo,
-      }),
-    created(){
+      userInfo: state => state.user.userInfo
+    }),
+    created () {
       let userName = getCookie('session')
 
-      if( !!userName ){
+      if (userName) {
         this.saveUserInfo({
           method: 'put',
           data: {
-            name: userName,
-          },
+            name: userName
+          }
         })
       }
     },
     methods: {
-      ...mapActions(['saveUserInfo']),
+      ...mapActions(['saveUserInfo'])
     }
   }
 </script>

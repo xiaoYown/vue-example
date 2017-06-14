@@ -27,22 +27,22 @@
 </template>
 
 <script>
-  require('sass/base.scss');
+  require('sass/base.scss')
 
   export default {
     components: {
-      'nav-demo': require('./mixin/nav.vue'),
+      'nav-demo': require('./mixin/nav.vue')
     },
-    data(){
+    data () {
       return {
-        show: false,
+        show: false
       }
     },
-    created(){
-      this.show = false;
+    created () {
+      this.show = false
     },
-    mounted(){
-      this.show = true;
-    },
+    mounted () {
+      this.show = true
+    }
   }
 </script>

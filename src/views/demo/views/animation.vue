@@ -27,50 +27,50 @@
     components: {
       dynamic: require('components/animation/dynamic.vue')
     },
-    data(){
+    data () {
       return {
         show: false,
         show_01: false,
         show_01_: false,
-        dynamicType: 1,
+        dynamicType: 1
       }
     },
     methods: {
-      moveIn(){
-        this.show = !this.show;
+      moveIn () {
+        this.show = !this.show
       },
-      dynamicAnimate(type){
-        this.dynamicType = type;
+      dynamicAnimate (type) {
+        this.dynamicType = type
       },
-      moveIn_01(){
-        this.show_01 = !this.show_01;
-        if( !this.show_01_ )
-          this.show_01_ = true;
-      },
-      beforeEnter(){
-        let _this = this;
-        this.$refs.animate_01.className += ' animation_01';
-
-        function end(){
-          _this.$refs.animate_01.className = _this.$refs.animate_01.className.replace(/(^|\s)?animation_01(^|\s)?/g, '');
-          _this.$refs.animate_01.removeEventListener( 'animationend', end);
+      moveIn_01 () {
+        this.show_01 = !this.show_01
+        if (!this.show_01_) {
+          this.show_01_ = true
         }
-        this.$refs.animate_01.addEventListener( 'animationend', end);
       },
-      enter(){
-      },
-      leave(){
-        let _this = this;
-        this.$refs.animate_01.className += ' animation_leave_01';
-
-        function end(){
-          _this.show_01_ = false;
-          _this.$refs.animate_01.className = _this.$refs.animate_01.className.replace(/(^|\s)?animation_leave_01(^|\s)?/g, '');
-          _this.$refs.animate_01.removeEventListener( 'animationend', end);
+      beforeEnter () {
+        let _this = this
+        this.$refs.animate_01.className += ' animation_01'
+        function end () {
+          _this.$refs.animate_01.className = _this.$refs.animate_01.className.replace(/(^|\s)?animation_01(^|\s)?/g, '')
+          _this.$refs.animate_01.removeEventListener('animationend', end)
         }
-        this.$refs.animate_01.addEventListener( 'animationend', end);
+        this.$refs.animate_01.addEventListener('animationend', end)
+      },
+      enter () {
+      },
+      leave () {
+        let _this = this
+        this.$refs.animate_01.className += ' animation_leave_01'
+
+        function end () {
+          _this.show_01_ = false
+          _this.$refs.animate_01.className = _this.$refs.animate_01.className.replace(/(^|\s)?animation_leave_01(^|\s)?/g, '')
+          _this.$refs.animate_01.removeEventListener('animationend', end)
+        }
+        this.$refs.animate_01.addEventListener('animationend', end)
       }
-    },
+    }
   }
 </script>
 

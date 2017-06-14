@@ -1,69 +1,72 @@
-import Vue 			from 'vue';
-import VueRouter 	from 'vue-router';
-import VueResource  from 'vue-resource';
-import { sync } 	from 'vuex-router-sync';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+// import { sync } from 'vuex-router-sync'
 
-import App 			from './app-demo.vue';
-import lazy 		from 'vue-lazy-component';
-import { getCookie } from 'tools/client';
-import store 		from 'Store/demo';
+import App from './app-demo.vue'
+import lazy from 'vue-lazy-component'
+import { getCookie } from 'tools/client'
+import store from 'Store/demo'
 
-Vue.use(VueRouter);
-Vue.use(VueResource);
-Vue.use(lazy);
+Vue.use(VueRouter)
+Vue.use(VueResource)
+Vue.use(lazy)
 
 const UserProfile = {
-  template: '<div>children-1</div>',
-};
+  template: '<div>children-1</div>'
+}
 
 const UserPosts = {
-  template: '<div>children-2</div>',
-};
-
+  template: '<div>children-2</div>'
+}
 
 const routes = [
-  { 	path: '/', 	
+  {
+    path: '/',
     name: 'demo',
     component: require('./views/index.vue'),
     meta: {
-      user: true,
-    },
+      user: true
+    }
   },
-  { 	path: '/foo',
+  {
+    path: '/foo',
     name: 'demo-foo',
     component: require('./views/foo.vue'),
     meta: {
-      user: true,
-    },
+      user: true
+    }
   },
-  { 	path: '/bar', 	
+  {
+    path: '/bar',	
     name: 'demo-bar',
     component: require('./views/bar.vue'),
     meta: {
-      user: true,
-    },
+      user: true
+    }
   },
-  { 	path: '/animation', 	
+  {
+    path: '/animation',
     name: 'demo-animation',
     component: require('./views/animation.vue'),
     meta: {
-      user: true,
-    },
+      user: true
+    }
   },
   {
     path: '/params/:name/:age',
     name: 'params',
     component: require('./views/params.vue'),
     meta: {
-      user: true,
-    },
+      user: true
+    }
   },
   {
     path: '/vuex',
     name: 'vuex',
     component: require('./views/vuex.vue'),
     meta: {
-      user: true,
+      user: true
     },
   },
   {
@@ -87,32 +90,34 @@ const routes = [
       }
     ]
   },
-  { 	path: '/login', 	
-    name: 'login',
+  { 	
+    path: '/login', 	
+    name: 'login'
   },
-  { 	path: '*', 	
-    component: require('Views/404.vue'),
-  },
-];
+  { 	
+    path: '*', 	
+    component: require('Views/404.vue')
+  }
+]
 
 const router = new VueRouter({
-  routes,
-});
+  routes
+})
 
 router.beforeEach(({meta, path}, from, next) => {
   let sessionId = getCookie('session');
   if( !!sessionId || !meta.user ){
-    return next();
+    return next()
   } else {
     window.location.href = "index.html#/login";
     return
   }
-  next();
-});
+  next()
+})
 
 new Vue({
   el: '#page-demo',
   router,
   store,
-  ...App,
-});
+  ...App
+})

@@ -7,7 +7,7 @@
 export default {
   data () {
     return {
-        msg: '404!'
+      msg: '404!'
     }
   }
 }

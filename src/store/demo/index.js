@@ -1,22 +1,21 @@
-import Vue 				from 'vue';
-import Vuex 			from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-import middlewares 		from '../middlewares';
+import middlewares from '../middlewares'
 
-import user 			from './modules/user';
-import demo 			from './modules/demo';
+import user from './modules/user'
+import demo from './modules/demo'
 
-Vue.config.debug = true;
-Vue.use(Vuex);
-Vue.config.warnExpressionErrors = false;
+Vue.config.debug = true
+Vue.use(Vuex)
+Vue.config.warnExpressionErrors = false
 
 const store = new Vuex.Store({
   modules: {
     user,
-    demo,
+    demo
   },
-    strict: process.env.NODE_ENV !== 'production',
-    middlewares
-});
+  strict: process.env.NODE_ENV !== 'production',
+  middlewares
+})
 export default store
-
