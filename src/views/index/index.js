@@ -49,7 +49,7 @@ router.beforeEach(({meta, path}, from, next) => {
   next()
 })
 
-new Vue({
+module.exports = new Vue({
   el: '#page-home',
   router,
   store,

@@ -38,7 +38,7 @@ const routes = [
     }
   },
   {
-    path: '/bar',	
+    path: '/bar',
     name: 'demo-bar',
     component: require('./views/bar.vue'),
     meta: {
@@ -67,13 +67,13 @@ const routes = [
     component: require('./views/vuex.vue'),
     meta: {
       user: true
-    },
+    }
   },
   {
     path: '/nested',
     component: require('./views/nested.vue'),
     meta: {
-      user: true,
+      user: true
     },
     children: [
       {
@@ -90,12 +90,12 @@ const routes = [
       }
     ]
   },
-  { 	
-    path: '/login', 	
+  {
+    path: '/login',
     name: 'login'
   },
-  { 	
-    path: '*', 	
+  {
+    path: '*',
     component: require('Views/404.vue')
   }
 ]
@@ -105,17 +105,15 @@ const router = new VueRouter({
 })
 
 router.beforeEach(({meta, path}, from, next) => {
-  let sessionId = getCookie('session');
-  if( !!sessionId || !meta.user ){
+  let sessionId = getCookie('session')
+  if (!!sessionId || !meta.user) {
     return next()
   } else {
-    window.location.href = "index.html#/login";
-    return
+    window.location.href = 'index.html#/login'
   }
-  next()
 })
 
-new Vue({
+module.exports = new Vue({
   el: '#page-demo',
   router,
   store,
