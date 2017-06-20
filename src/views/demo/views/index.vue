@@ -10,7 +10,7 @@
     },
     methods: {
       getData () {
-        this.$http.get('/static/test.json')
+        this.$http.get('/static/data/test.json')
           .then(function (res) {
             console.log(res.body)
           }, function (status) {
