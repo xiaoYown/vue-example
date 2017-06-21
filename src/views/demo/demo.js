@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
+// import VueResource from 'vue-resource'
+import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
 
 import App from './app-demo.vue'
-import lazy from 'vue-lazy-component'
+// import lazy from 'vue-lazy-component'
 import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
 Vue.use(VueRouter)
-Vue.use(VueResource)
-Vue.use(lazy)
+// Vue.use(VueResource)
+// Vue.use(lazy)
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+Vue.prototype.$http = axios
 
 const UserProfile = {
   template: '<div>children-1</div>'

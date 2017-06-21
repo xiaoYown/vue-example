@@ -12,7 +12,7 @@
       getData () {
         this.$http.get('/static/data/test.json')
           .then(function (res) {
-            console.log(res.body)
+            console.log(res)
           }, function (status) {
 
           })

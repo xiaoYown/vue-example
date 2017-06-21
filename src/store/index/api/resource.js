@@ -1,10 +1,12 @@
-import Vue from 'vue'
-import VueResource from 'vue-resource'
+// import Vue from 'vue'
+// import VueResource from 'vue-resource'
+import axios from 'axios'
+Vue.prototype.$http = axios
 // import { getCookie, signOut } from '../utils/authService' //引入登录、获取cookie方法
 // 获取URL配置
 var CONFIG = require('config/config.js')
 // 注册VueResource
-Vue.use(VueResource)
+// Vue.use(VueResource)
 
 // HTTP相关
 Vue.http.options.crossOrigin = true

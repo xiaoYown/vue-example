@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
+// import VueResource from 'vue-resource'
+import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
 
 import App from './app-components.vue'
@@ -9,7 +10,8 @@ import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
 Vue.use(VueRouter)
-Vue.use(VueResource)
+// Vue.use(VueResource)
+Vue.prototype.$http = axios
 Vue.use(lazy)
 
 const routes = [

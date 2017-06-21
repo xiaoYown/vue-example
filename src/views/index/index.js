@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
+// import VueResource from 'vue-resource'
+import axios from 'axios'
 // import { sync } from 'vuex-router-sync' // 同步vuex与路由的状态
 
 import {getCookie} from 'tools/client'
@@ -9,7 +10,8 @@ import App from './app-index.vue'
 import store from 'Store/index'
 
 Vue.use(VueRouter)
-Vue.use(VueResource)
+// Vue.use(VueResource)
+Vue.prototype.$http = axios
 
 const routes = [
   {

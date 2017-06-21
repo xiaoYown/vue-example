@@ -2,10 +2,11 @@
 import * as resource from './resource'
 /** vue-reource 说明
  * @method get: {method: 'GET'}
- * @method save: {method: 'POST'}
- * @method query: {method: 'GET'}
- * @method update: {method: 'PUT'}
- * @method remove: {method: 'DELETE'}
+ * @method post: {method: 'POST'}
+ * @method head: {method: 'HEAD'}
+ * @method request: {method: 'GET'}
+ * @method patch: {method: 'PATCH'}
+ * @method put: {method: 'PUT'}
  * @method delete: {method: 'DELETE'}
  */
 export default {
