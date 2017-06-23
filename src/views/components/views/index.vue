@@ -9,6 +9,10 @@
     .ui-components-wrap
       xy-range(
         :percent="rangeNum",
+        :min="rangParam.min",
+        :max="rangParam.max",
+        :unit="rangParam.unit",
+        :val="rangParam.val",
         @range-change="rangeChange"
       )
       p {{ rangeNum }}
@@ -30,6 +34,7 @@
   require('sass/base.scss')
 
   export default {
+    name: 'xy-ui',
     components: {
       'xy-switch': require('components/ui/switch.vue'),
       'xy-range': require('components/ui/range.vue'),
@@ -40,6 +45,12 @@
       return {
         switchOpen: true,
         rangeNum: 0.5,
+        rangParam: {
+          min: 0,
+          max: 100,
+          unit: 1,
+          val: 50
+        },
         selectList: [
           {
             id: '1',

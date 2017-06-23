@@ -4,7 +4,7 @@
       ref="runway",
       @click.stop="progressChoose"
     )
-      .xy-range-progress(:style="{ width: axis.w*100 + '%' }")
+      .xy-range-progress(:style="{ width: width + '%' }")
         span.xy-range-thumb
           span.xy-range-thumb-shadow(
             ref="shadow",
@@ -16,8 +16,33 @@
 </template>
 
 <script>
+  function percentCal (val, max) {
+    return Math.floor(val * 100 / max) / 100
+  }
+
   export default {
+    name: 'xy-rang',
     props: {
+      mark: {
+        type: String,
+        default: ''
+      },
+      min: {
+        type: Number,
+        default: 0
+      },
+      max: {
+        type: Number,
+        default: 100
+      },
+      unit: {
+        type: Number,
+        default: 1
+      },
+      val: {
+        type: Number,
+        default: 0
+      },
       percent: {
         type: Number,
         default: 0
@@ -33,10 +58,12 @@
         },
         axis: {
           w: 0
-        }
+        },
+        width: 0
       }
     },
     created () {
+      this.width = percentCal(this.val - this.min, this.max - this.min)
       this.axis.w = this.percent
     },
     watch: {
@@ -45,6 +72,10 @@
       }
     },
     methods: {
+      dragstart (event) {
+        this.mouse.x = event.clientX * 100
+        this.pointer.x = this.axis.w
+      },
       dragmove (event) {
         if (event.clientX === 0 && event.clientY === 0) return
         let width = this.$refs.runway.clientWidth
@@ -57,10 +88,6 @@
           x = 0
         }
         this.axis.w = x / 100
-      },
-      dragstart (event) {
-        this.mouse.x = event.clientX
-        this.pointer.x = this.axis.w
       },
       dragend (event) {
         this.$emit('range-change', this.axis.w)
