@@ -4,7 +4,10 @@
   "description": "",
   "dependencies": {
     "jquery": "^3.2.1",
-    "velocity": "^0.7.2"
+    "qs": "^6.5.0",
+    "velocity": "^0.7.2",
+    "vue-core-image-upload": "^2.2.4",
+    "vue-socket.io": "^2.1.1-a"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.2",
@@ -43,6 +46,7 @@
     "react-cookie": "^1.0.4",
     "sass-loader": "^4.0.2",
     "shelljs": "^0.7.5",
+    "socket.io": "^2.0.3",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.4.0",

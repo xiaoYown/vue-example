@@ -1,15 +1,18 @@
 <template lang="jade">
   nav.nav-demo
     .nav-content
-      a.select.link(href="./") home
-      router-link.select.link(to="/") demo
-      router-link.select.link(to="/foo") foo
-      router-link.select.link(to="/bar") bar
-      router-link.select.link(to="/animation") animation
-      router-link.select.link(to="/vuex") vuex
-      // router-link.select.link(to="/nested") nested
-      router-link.select.link(:to="{ name: 'params', params: { name: userInfo.name, age: 12 } }") params
       div.select.user-name {{ userInfo.name }}
+      span.link-show(@click="showLink = !showLink") link
+      .nav__link-box(v-show="showLink")
+        a.select.link(href="./") home
+        router-link.select.link(to="/") demo
+        router-link.select.link(to="/foo") foo
+        router-link.select.link(to="/bar") bar
+        router-link.select.link(to="/animation") animation
+        router-link.select.link(to="/vuex") vuex
+        router-link.select.link(to="/socket") socket
+        // router-link.select.link(to="/nested") nested
+        router-link.select.link(:to="{ name: 'params', params: { name: userInfo.name, age: 12 } }") params
 </template>
 
 <script>
@@ -19,6 +22,11 @@
   import { mapState, mapActions } from 'vuex'
 
   export default {
+    data () {
+      return {
+        showLink: false
+      }
+    },
     computed: mapState({
       userInfo: state => state.user.userInfo
     }),
@@ -43,10 +51,18 @@
 <style lang="sass">
   .nav-demo{
     color: #fff;
-
+    .nav__link-box {
+      top: 60px;;
+      right: 10px;
+      width: 300px;
+      position: fixed;
+      background-color: #56aaff;
+      text-align: left;
+      border-radius: 3px;
+      z-index: 10;
+    }
     background-color: #56aaff;
     .nav-content{
-      width: 800px;
       height: 28px;
 
       text-align: right;
@@ -54,7 +70,7 @@
 
       padding: 10px 0;
       margin: 0 auto;
-      .select{
+      .select, .link-show {
         display: inline-block;
         vertical-align: top;
 
@@ -65,17 +81,20 @@
       .user-name{
         font-size: 20px;
       }
-      .link{
+      .link, .link-show{
         margin-right: 10px;
 
         border: 1px solid #fff;
         border-radius: 4px;
-
+        cursor: pointer;
         &:hover{
           color: #56aaff;
           background-color: #fff;
           transition: all .4s;
         }
+      }
+      .link {
+        margin: 5px;
       }
     }
   }

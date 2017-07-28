@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 // import VueResource from 'vue-resource'
 import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
+import VueSocketIo from 'vue-socket.io'
 
 import App from './app-demo.vue'
 // import lazy from 'vue-lazy-component'
@@ -10,6 +11,7 @@ import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
 Vue.use(VueRouter)
+Vue.use(VueSocketIo, 'http://192.168.0.200:3004')
 // Vue.use(VueResource)
 // Vue.use(lazy)
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -68,6 +70,14 @@ const routes = [
     path: '/vuex',
     name: 'vuex',
     component: require('./views/vuex.vue'),
+    meta: {
+      user: true
+    }
+  },
+  {
+    path: '/socket',
+    name: 'socket',
+    component: require('./views/socket.vue'),
     meta: {
       user: true
     }
