@@ -52,7 +52,7 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.vue$/,
-				loader: 'vue'
+				loader: 'vue-loader'
 			},
 			{
 				test: /\.js$/,

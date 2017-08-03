@@ -6,8 +6,7 @@
         :class="{self: item.self}"
       )
         h4.xy__socket-guest(v-if="item.name") {{ item.name }}
-        .xy__socket-chat_ctx
-          {{ item.msg }}
+        .xy__socket-chat_ctx {{ item.msg }}
     .xy__socket-bar
       input.xy__socket-msg(v-model="msg",@focus="bindEnter",@blur="remEnter")
       span.xy__socket-send(@click="send") send
