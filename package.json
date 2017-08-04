@@ -2,6 +2,12 @@
   "name": "vue-example-2.0",
   "version": "1.0.0",
   "description": "",
+  "keywords": [
+    "vue",
+    "vuex",
+    "animation",
+    "socket"
+  ],
   "dependencies": {
     "jquery": "^3.2.1",
     "qs": "^6.5.0",

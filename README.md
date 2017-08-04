@@ -30,6 +30,11 @@
 └── .babelrc                 // babel配置
 .
 ```
+### demo 主要内容
+```
+animation vuex socket(socket 测试需要启动server目录下的socket)
+```
+
 ## 生产环境构建  
 ```
 npm run build
@@ -39,7 +44,7 @@ npm run build
 本次创建 vue2 项目目的 :
 
 1. 使用 eslint 进行代码语法检查
-2. 组件递归学习
+2. 组件递归学习(未进行)
 3. ui 组件编写
 ```
 
