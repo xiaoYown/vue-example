@@ -25,6 +25,8 @@ const UserPosts = {
   template: '<div>children-2</div>'
 }
 
+var animation = r => require.ensure([], () => r(require('./views/animation.vue')), 'animation')
+
 const routes = [
   {
     path: '/',
@@ -53,7 +55,7 @@ const routes = [
   {
     path: '/animation',
     name: 'demo-animation',
-    component: require('./views/animation.vue'),
+    component: animation, // require('./views/animation.vue'),
     meta: {
       user: true
     }

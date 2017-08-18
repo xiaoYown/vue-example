@@ -28,6 +28,38 @@
         :info="pagesInfo",
         @page-link="pageLink"
       )
+    .ui-components-wrap
+      xy-button(
+        :size="'small'",
+        @click="showModal = true"
+      ) 删除
+      xy-button(
+        :type="'success'",
+        @click="showModal = true"
+      ) 删除
+      xy-button(
+        :size="'large'",
+        :type="'warning'",
+        @click="showModal = true"
+      ) 删除
+      xy-button(
+        :type="'danger'",
+        @click="showModal = true"
+      ) 删除
+      xy-button(
+        disabled="true",
+        @click="showModal = true"
+      ) 删除
+      transition(name="fade")
+        xy-modal-confirm(
+          v-if="showModal",
+          :message="'确定删除数据集, 删除后将无法恢复'",
+          @confirm="confirm"
+        )
+    .ui-components-wrap
+      xy-button(
+      ) loading
+      xy-loading
 </template>
 
 <script>
@@ -39,7 +71,10 @@
       'xy-switch': require('components/ui/switch.vue'),
       'xy-range': require('components/ui/range.vue'),
       'xy-select': require('components/ui/select.vue'),
-      'xy-pages': require('components/ui/pages.vue')
+      'xy-pages': require('components/ui/pages.vue'),
+      'xy-modal-confirm': require('components/modal/confirm.vue'),
+      'xy-button': require('components/button/index.vue'),
+      'xy-loading': require('components/loading/loading.vue')
     },
     data () {
       return {
@@ -76,7 +111,8 @@
           pages: 10,
           pageSize: 10
         },
-        pagesListShow: []
+        pagesListShow: [],
+        showModal: false
       }
     },
     created () {
@@ -106,6 +142,10 @@
       pagesListChange (data) {
         let start = (this.pagesInfo.page - 1) * this.pagesInfo.pageSize
         this.pagesListShow = this.pagesList.slice(start, start + this.pagesInfo.pageSize)
+      },
+      confirm (data) {
+        this.showModal = false
+        console.log(data)
       }
     }
   }
@@ -136,6 +176,9 @@
         vertical-align: top;
         margin-right: 6px;
       }
+    }
+    [class^=xy-button] {
+      margin-right: 10px;
     }
   }
 </style>
