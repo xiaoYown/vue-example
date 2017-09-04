@@ -85,6 +85,14 @@ const routes = [
     }
   },
   {
+    path: '/recursive',
+    name: 'recursive',
+    component: require('./views/recursive.vue'),
+    meta: {
+      user: true
+    }
+  },
+  {
     path: '/nested',
     component: require('./views/nested.vue'),
     meta: {

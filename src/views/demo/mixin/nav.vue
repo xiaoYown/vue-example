@@ -11,6 +11,7 @@
         router-link.select.link(to="/animation") animation
         router-link.select.link(to="/vuex") vuex
         router-link.select.link(to="/socket") socket
+        router-link.select.link(to="/recursive") recursive
         // router-link.select.link(to="/nested") nested
         router-link.select.link(:to="{ name: 'params', params: { name: userInfo.name, age: 12 } }") params
 </template>
