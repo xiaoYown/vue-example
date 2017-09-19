@@ -1,30 +1,32 @@
 <template lang="jade">
-  .report__cmt-reply(ref="wrap",:class="{size_l: size === 'l'}",@mousedown.stop="outEdit")
-    .report__cmt-reply_area(@mousedown.stop="edit")
-      .report__cmt-reply_pre(ref="pre",v-html="preCt")
+  .emot(ref="wrap",:class="{size_l: size === 'l'}",@mousedown.stop="outEdit")
+    .emot_area(@mousedown.stop="edit")
+      .emot_pre(ref="pre",v-html="preCt")
       label
-        .report__cmt-reply_show(
-          v-show="!writting",
+          // v-show="!writting",
+        .emot_show(
+          ref="html",
           v-html="transCt"
         )
+          // v-show="writting",
         textarea(
-          v-show="writting",
           ref="area",
           :style="style",
           v-model="ct",
           @input="input",
         )
-    .report__cmt-reply_msg
-      el-emot(@choose="chooseEmot")
-      p.report__cmt-reply_send(@click="reply") 发送
+    .emot_msg
+      emot-lib(@select="chooseEmot")
+      // p.emot_send(@click="reply") 发送
 </template>
 
 <script>
   import ems from './emot'
+  require('./emot.scss')
 
   export default {
     components: {
-      'el-emot': require('./emot.vue')
+      'emot-lib': require('./lib.vue')
     },
     props: {
       size: String
@@ -49,15 +51,19 @@
       }
     },
     mounted () {
-      this.style = { width: this.size === 'l' ? '514px' : '428px' }
+      this.$refs.area.addEventListener('scroll', this.scroll)
       document.addEventListener('mousedown', this.outEdit)
     },
     beforeDestroy () {
+      this.$refs.area.removeEventListener('scroll', this.scroll)
       document.removeEventListener('mousedown', this.outEdit)
     },
     methods: {
+      scroll () {
+        this.$refs.html.scrollTop = this.$refs.area.scrollTop
+      },
       edit () {
-        this.writting = true;
+        this.writting = true
       },
       outEdit () {
         this.writting = false
@@ -73,15 +79,15 @@
           this.insertEm(em)
         }
       },
-      insertEm(em) {
-        let part_1 = this.ct.substring(0, this.$refs.area.selectionStart),
-            part_2 = this.ct.substring(this.$refs.area.selectionEnd, this.ct.length),
-            start = this.$refs.area.selectionStart + em.length + 2
-          
-        this.ct = `${part_1}[${em}]${part_2}`
+      insertEm (em) {
+        let part1 = this.ct.substring(0, this.$refs.area.selectionStart)
+        let part2 = this.ct.substring(this.$refs.area.selectionEnd, this.ct.length)
+        let start = this.$refs.area.selectionStart + em.length + 2
+
+        this.ct = `${part1}[${em}]${part2}`
         this.transCt = ems.compile(this.ct)
         setTimeout(() => {
-          this.$refs.area.selectionStart = this.$refs.area.selectionEnd =  start
+          this.$refs.area.selectionStart = this.$refs.area.selectionEnd = start
         }, 1)
       }
     }

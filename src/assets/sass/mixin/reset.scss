@@ -14,9 +14,7 @@ body {
   color:#000;
   margin: 0 auto;
   overflow-x: hidden;
-  font-weight: 300;
   font-family:$fontFamilyBase;
-  line-height: 1.42857143;
   -webkit-box-orient: vertical;
   -webkit-box-align: stretch;
 }
@@ -61,7 +59,7 @@ a:active {opacity:.85;}
 a:focus {outline:none;-moz-outline:none;}
 
 input,textarea,button{outline:none;border:0}
-textarea{resize: none;}
+textarea{resize: none;font-family:$fontFamilyBase;font-size:12px;}
 
 img{max-width: 100%;vertical-align:top;height:auto;border:0;}
 

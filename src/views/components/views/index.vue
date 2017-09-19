@@ -59,7 +59,9 @@
     .ui-components-wrap
       xy-button(
       ) loading
-      xy-loading
+      // xy-loading
+    .ui-components-wrap
+      xy-emot
 </template>
 
 <script>
@@ -74,7 +76,8 @@
       'xy-pages': require('components/ui/pages.vue'),
       'xy-modal-confirm': require('components/modal/confirm.vue'),
       'xy-button': require('components/button/index.vue'),
-      'xy-loading': require('components/loading/loading.vue')
+      'xy-loading': require('components/loading/loading.vue'),
+      'xy-emot': require('components/emot/emot.vue')
     },
     data () {
       return {
