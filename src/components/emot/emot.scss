@@ -17,6 +17,11 @@
     background-color: rgba(0,0,0,.6);
   }
 }
+.emot_cp {
+  width: 24px;
+  height: 24px;
+  vertical-align: top;
+}
 .emot {
   font-size: 12px;
   &_area {
@@ -31,39 +36,26 @@
     .size_l & {
       margin-bottom: 14px;
     }
-    textarea {
-      position: absolute;
-      top: 7px;
-      right: 20px;
-      bottom: 7px;
-      left: 20px;
-      width: 600px;
-      padding-right: 4px;
-      background-color: transparent;
-      line-height: 24px;
-      z-index: 2;
-      opacity: .5;
-      @extend %scroll;
-    }
   }
   &_pre {
-    width: 100%;
-    min-height: 24px;
-    max-height: 72px;
-    line-height: 24px;
-    visibility: hidden;
-  } 
-  &_show {
     position: absolute;
     top: 7px;
-    right: 16px;
+    right: 20px;
     bottom: 7px;
     left: 20px;
-    padding-right: 4px;
+    z-index: 1;
+    // min-height: 24px;
+    // max-height: 72px;
     line-height: 24px;
+    outline: none;
     overflow-y: auto;
-    cursor: text;
     @extend %scroll;
+  }
+  &_shadow {
+    min-height: 24px;
+    line-height: 24px;
+    visibility: hidden;
+    word-break: break-all;
   }
   &_send {
     float: right;

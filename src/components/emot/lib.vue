@@ -1,6 +1,6 @@
 <template lang="jade">
   .emot__lib
-    .emot__lib-choose(@mousedown.stop="open(1)") 选择表情
+    .emot__lib-choose(@mousedown.stop.prevent="open(1)") 选择表情
     ul.emot__lib-box(v-show="show")
       li.emot__lib-img(v-for="emot in emots",@mousedown="select(emot)")
         img(:src="'/static/em/' + emot + '.gif'")
