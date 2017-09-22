@@ -9,15 +9,23 @@
         @input="setShadow",
         contenteditable="true"
       )
-      
     .emot_msg
       emot-lib(@select="chooseEmot")
-      // p.emot_send(@click="reply") 发送
 </template>
 
 <script>
   require('./emot.scss')
-
+  /**
+    * @name Range
+    * @grammar new UM.dom.Range(document)  => Range 实例
+    * @desc 创建一个跟document绑定的空的Range实例
+    * - ***startContainer*** 开始边界的容器节点,可以是elementNode或者是textNode
+    * - ***startOffset*** 容器节点中的偏移量，如果是elementNode就是childNodes中的第几个，如果是textNode就是nodeValue的第几个字符
+    * - ***endContainer*** 结束边界的容器节点,可以是elementNode或者是textNode
+    * - ***endOffset*** 容器节点中的偏移量，如果是elementNode就是childNodes中的第几个，如果是textNode就是nodeValue的第几个字符
+    * - ***document*** 跟range关联的document对象
+    * - ***collapsed*** 是否是闭合状态
+    */
   export default {
     components: {
       'emot-lib': require('./lib.vue')
@@ -41,20 +49,25 @@
           selection.removeAllRanges()
           selection.addRange(this.lastEditRange)
         }
-
         var emotImg = document.createElement('img')
         emotImg.src = src
         emotImg.className = 'emot_cp'
-        // console.log(selection)
-        // console.log(selection.anchorNode)
+        var range
+        var start = 0 // 噶光标重设位置
         var anchor = selection.anchorNode
         if (anchor.nodeName === '#text') {
           // 如果是文本节点则先获取光标对象
-          var range = selection.getRangeAt(0)
+          range = selection.getRangeAt(0)
           // 获取光标对象的范围界定对象，一般就是textNode对象
           var textNode = range.startContainer
           // 获取光标位置
           var rangeStartOffset = range.startOffset
+          for (let i = 0, len = textNode.parentNode.childNodes.length; i < len; i++) {
+            if (textNode.parentNode.childNodes[i] === textNode) {
+              start = i + 2
+              break
+            }
+          }
           var text = textNode.textContent
           var part1 = text.substring(0, rangeStartOffset)
           var part2 = text.substring(rangeStartOffset, text.length)
@@ -65,29 +78,47 @@
           parent.insertBefore(emotImg, textNode)
           parent.insertBefore(textNode2, textNode)
           parent.removeChild(textNode)
-          // 文本节点在光标位置处插入新的表情内容
-          // edit.appendChild(emotImg)
-          // 光标移动到到原来的位置加上新内容的长度
-          range = selection.getRangeAt(0)
-          // range.setStart(textNode, rangeStartOffset + 1)
-          // 光标开始和光标结束重叠
-          // range.collapse(true)
-          // 清除选定对象的所有光标对象
-          // selection.removeAllRanges()
-          // 插入新的光标对象
-          // selection.addRange(range)
         } else if (anchor.nodeName === 'DIV') {
-          if (anchor.childNodes.length > 0) {
-            for (var i = 0; i < anchor.childNodes.length; i++) {
+          let childLen = anchor.childNodes.length
+          // 当光标点不在聚焦对象最后 & 聚焦对象 子对象个数为 0 时
+          if (childLen > 0 && selection.anchorOffset !== childLen) {
+            for (var i = 0; i < childLen; i++) {
               if (i === selection.anchorOffset) {
+                start = i + 1
                 anchor.insertBefore(emotImg, anchor.childNodes[i])
+                break
               }
             }
-            // anchor.insertBefore(emotImg, anchor.firstChild)
           } else {
+            start = childLen + 1
             anchor.appendChild(emotImg)
           }
+          // 创建新的光标对象
+          range = document.createRange()
+        } else {
+          if (anchor.nextSibling) {
+            anchor.parentNode.insertBefore(anchor.nextSibling, emotImg)
+          } else {
+            anchor.parentNode.appendChild(emotImg)
+          }
+          // 创建新的光标对象
+          range = document.createRange()
         }
+        setTimeout(() => {
+          // 光标对象的范围界定为新建的表情节点
+          range.selectNodeContents(anchor)
+          // 光标位置定位在表情节点的最大长度
+          range.setStart(emotImg.parentNode, start)
+          // range.startOffset = 1
+          // 使光标开始和光标结束重叠
+          range.collapse(true)
+          // 清除选定对象的所有光标对象
+          selection.removeAllRanges()
+          // 插入新的光标对象
+          selection.addRange(range)
+
+          this.lastEditRange = selection.getRangeAt(0)
+        }, 20)
 
         // this.lastEditRange = selection.getRangeAt(0)
       },
