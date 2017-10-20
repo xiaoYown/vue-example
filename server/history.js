@@ -1,10 +1,21 @@
 // var history = require('connect-history-api-fallback')
 var path = require('path')
+const fs = require('fs')
 
 var express = require('express')
 var ejs = require('ejs')
 
 var app = express()
+
+function findFile (fileName, found, notFound) {
+  fs.exists(fileName, (exists) => {
+    if (exists) {
+      found()
+    } else {
+      notFound()
+    }
+  });
+}
 
 app.engine('html', ejs.__express)
 app.set('views', './')
@@ -18,15 +29,27 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:page', (req, res) => {
-  res.render(req.params.page, {})
+  findFile(path.join(__dirname, './' + req.params.page + '.html'), () => {
+    res.render(req.params.page, {})
+  }, () => {
+    res.render('index', {})
+  })
 })
 
 app.get('/:page/:params1', (req, res) => {
-  res.render(req.params.page, {})
+  findFile(path.join(__dirname, './' + req.params.page + '.html'), () => {
+    res.render(req.params.page, {})
+  }, () => {
+    res.render('index', {})
+  })
 })
 
 app.get('/:page/:params1/:params2', (req, res) => {
-  res.render(req.params.page, {})
+  findFile(path.join(__dirname, './' + req.params.page + '.html'), () => {
+    res.render(req.params.page, {})
+  }, () => {
+    res.render('index', {})
+  })
 })
 
 app.listen(3010, () => {
