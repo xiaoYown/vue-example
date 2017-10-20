@@ -6,9 +6,13 @@
         h4.user-name {{ userInfo.name }} 
         | welcome !
         br
-        a(href="./demo.html#/") link-demo
+        a(href="/demo") link-demo
+        // router-link(:to="'/login'") login
         br
-        a(href="./components.html#/") link-components
+        a(href="/components") link-components
+        // router-link(:to="'/components'") components
+        br
+        router-link(:to="'/login'") login
 </template>
 
 <script>

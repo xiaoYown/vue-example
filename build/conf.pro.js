@@ -70,7 +70,9 @@ Object.keys(baseWebpack.entry).forEach(function(name){
 
 var newWebpack = merge(baseWebpack, {
 	output: {
-		filename: utils.assetsPath('js/[name].js?h=[chunkhash]')
+		filename: utils.assetsPath('js/[name].js?h=[chunkhash]'),
+		// 按需加载 模块路径指定
+		chunkFilename: utils.assetsPath('js/[name].js?[chunkhash]')
 	},
 	module: {
 		loaders: utils.styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })

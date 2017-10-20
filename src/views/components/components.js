@@ -16,7 +16,7 @@ Vue.use(lazy)
 
 const routes = [
   {
-    path: '/',
+    path: '/components/',
     name: 'components',
     component: require('./views/index.vue'),
     meta: {
@@ -24,7 +24,7 @@ const routes = [
     }
   },
   {
-    path: '/drag',
+    path: '/components/drag',
     name: 'drag',
     component: require('./views/drag.vue'),
     meta: {
@@ -42,6 +42,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

@@ -4,14 +4,14 @@
       div.select.user-name {{ userInfo.name }}
       span.link-show(@click="showLink = !showLink") link
       .nav__link-box(v-show="showLink")
-        a.select.link(href="./") home
-        router-link.select.link(to="/") demo
-        router-link.select.link(to="/foo") foo
-        router-link.select.link(to="/bar") bar
-        router-link.select.link(to="/animation") animation
-        router-link.select.link(to="/vuex") vuex
-        router-link.select.link(to="/socket") socket
-        router-link.select.link(to="/recursive") recursive
+        a.select.link(href="/") home
+        router-link.select.link(to="/demo/") demo
+        router-link.select.link(to="/demo/foo") foo
+        router-link.select.link(to="/demo/bar") bar
+        router-link.select.link(to="/demo/animation") animation
+        router-link.select.link(to="/demo/vuex") vuex
+        router-link.select.link(to="/demo/socket") socket
+        router-link.select.link(to="/demo/recursive") recursive
         // router-link.select.link(to="/nested") nested
         router-link.select.link(:to="{ name: 'params', params: { name: userInfo.name, age: 12 } }") params
 </template>

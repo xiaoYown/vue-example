@@ -29,7 +29,7 @@ var animation = r => require.ensure([], () => r(require('./views/animation.vue')
 
 const routes = [
   {
-    path: '/',
+    path: '/demo',
     name: 'demo',
     component: require('./views/index.vue'),
     meta: {
@@ -37,7 +37,7 @@ const routes = [
     }
   },
   {
-    path: '/foo',
+    path: '/demo/foo',
     name: 'demo-foo',
     component: require('./views/foo.vue'),
     meta: {
@@ -45,7 +45,7 @@ const routes = [
     }
   },
   {
-    path: '/bar',
+    path: '/demo/bar',
     name: 'demo-bar',
     component: require('./views/bar.vue'),
     meta: {
@@ -53,7 +53,7 @@ const routes = [
     }
   },
   {
-    path: '/animation',
+    path: '/demo/animation',
     name: 'demo-animation',
     component: animation, // require('./views/animation.vue'),
     meta: {
@@ -61,7 +61,7 @@ const routes = [
     }
   },
   {
-    path: '/params/:name/:age',
+    path: '/demo/params/:name/:age',
     name: 'params',
     component: require('./views/params.vue'),
     meta: {
@@ -69,7 +69,7 @@ const routes = [
     }
   },
   {
-    path: '/vuex',
+    path: '/demo/vuex',
     name: 'vuex',
     component: require('./views/vuex.vue'),
     meta: {
@@ -77,7 +77,7 @@ const routes = [
     }
   },
   {
-    path: '/socket',
+    path: '/demo/socket',
     name: 'socket',
     component: require('./views/socket.vue'),
     meta: {
@@ -85,7 +85,7 @@ const routes = [
     }
   },
   {
-    path: '/recursive',
+    path: '/demo/recursive',
     name: 'recursive',
     component: require('./views/recursive.vue'),
     meta: {
@@ -93,7 +93,7 @@ const routes = [
     }
   },
   {
-    path: '/nested',
+    path: '/demo/nested',
     component: require('./views/nested.vue'),
     meta: {
       user: true
@@ -124,6 +124,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

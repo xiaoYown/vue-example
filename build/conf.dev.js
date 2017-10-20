@@ -38,7 +38,7 @@ var newWebpack = merge(baseWebpack, {
 		loaders: utils.styleLoaders({ sourceMap: false })
 	},
 	devtool: '#eval-source-map',
-  	plugins: plugins
+	plugins: plugins
 });
 
 module.exports = newWebpack;
