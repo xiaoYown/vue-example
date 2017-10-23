@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 // import VueResource from 'vue-resource'
 import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
-import VueSocketIo from 'vue-socket.io'
+// import VueSocketIo from 'vue-socket.io'
+import VueSocketIo from 'tools/vue-socket'
 
 import App from './app-demo.vue'
 // import lazy from 'vue-lazy-component'
@@ -11,7 +12,10 @@ import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
 Vue.use(VueRouter)
-Vue.use(VueSocketIo, 'http://192.168.0.200:3004')
+Vue.use(VueSocketIo, {
+  chat: 'http://192.168.0.108:3004',
+  test: 'http://192.168.0.108:3005'
+})
 // Vue.use(VueResource)
 // Vue.use(lazy)
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'

@@ -38,8 +38,8 @@ Object.keys(proxyTable).forEach(function (context) {
 })
 app.use(require('connect-history-api-fallback')({
   rewrites: [
-    { from: /\/demo$/, to: '/demo.html'},
-    { from: /\/components$/, to: '/components.html'}
+    { from: /\/demo(\/|$)/, to: '/demo.html'},
+    { from: /\/components(\/|$)/, to: '/components.html'}
   ]
 }))
 app.use(devMiddleware)

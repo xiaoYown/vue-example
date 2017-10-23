@@ -10,6 +10,7 @@
     .xy__socket-bar
       input.xy__socket-msg(v-model="msg",@focus="bindEnter",@blur="remEnter")
       span.xy__socket-send(@click="send") send
+    .xy__socket-2(@click="sendSocket2") socket2
 </template>
 
 <script>
@@ -29,20 +30,22 @@
     sockets: {
       connect (res) {
         console.log(res)
-        this.id = this.$socket.id
+        this.id = this.$chat.id
       },
       customEmit (val) {
         console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
       }
     },
     created () {
-      this.$options.sockets['new message'] = this.newMessage
-      this.$options.sockets['self_new message'] = this.newMessageSelf
+      this.$options.chat['new message'] = this.newMessage
+      this.$options.chat['self_new message'] = this.newMessageSelf
+
+      this.$options.test['self_new message'] = this.newMessageTest
     },
     methods: {
       send () {
         if (!this.msg) return
-        this.$socket.emit('new message', {
+        this.$chat.emit('new message', {
           name: this.name,
           msg: this.msg
         })
@@ -74,6 +77,15 @@
         if (event.keyCode === 13) {
           this.send()
         }
+      },
+      sendSocket2 () {
+        this.$chat.emit('new message', {
+          name: this.name,
+          msg: this.msg
+        })
+      },
+      newMessageTest (data) {
+        window.alert(data.msg)
       }
     }
   }
@@ -153,6 +165,11 @@
       background-color: #56aaff;
       color: #fff;padding: 0 6px;
       cursor: pointer;
+    }
+    &-2 {
+      position: fixed;
+      right: 0;
+      top: 100px;
     }
   }
 </style>
