@@ -30,22 +30,23 @@
     sockets: {
       connect (res) {
         console.log(res)
-        this.id = this.$chat.id
+        this.id = this.$socketChat.id
       },
       customEmit (val) {
         console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
       }
     },
     created () {
-      this.$options.chat['new message'] = this.newMessage
-      this.$options.chat['self_new message'] = this.newMessageSelf
+      this.$options.socketChat['new message'] = this.newMessage
+      this.$options.socketChat['self_new message'] = this.newMessageSelf
 
-      this.$options.test['self_new message'] = this.newMessageTest
+      this.$options.socketTest['test'] = this.backSocket2
+      this.$options.socketTest['self_test'] = this.backSocket2Self
     },
     methods: {
       send () {
         if (!this.msg) return
-        this.$chat.emit('new message', {
+        this.$socketChat.emit('new message', {
           name: this.name,
           msg: this.msg
         })
@@ -79,10 +80,16 @@
         }
       },
       sendSocket2 () {
-        this.$chat.emit('new message', {
+        this.$socketTest.emit('test', {
           name: this.name,
           msg: this.msg
         })
+      },
+      backSocket2 (data) {
+        console.log(data.msg)
+      },
+      backSocket2Self (data) {
+        console.log('self_' + data.msg)
       },
       newMessageTest (data) {
         window.alert(data.msg)

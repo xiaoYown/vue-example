@@ -18,13 +18,10 @@ function allBroadCase (socket, event, data) {
 io.on('connection', function (socket) {
   console.log('connecting ...')
   var addedUser = false
-  // when the client emits 'new message', this listens and executes
-  socket.on('new message', function (data) {
-    console.log(data)
-    // we tell the client to execute 'new message'
-    allBroadCase(socket, 'new message', {
+  socket.on('test', function (data) {
+    allBroadCase(socket, 'test', {
       name: data.name,
-      msg: data.msg
+      msg: 'just for socket2 testing'
     })
   })
 })

@@ -13,8 +13,8 @@ import store from 'Store/demo'
 
 Vue.use(VueRouter)
 Vue.use(VueSocketIo, {
-  chat: 'http://192.168.0.108:3004',
-  test: 'http://192.168.0.108:3005'
+  socketChat: 'http://192.168.0.222:3004',
+  socketTest: 'http://192.168.0.222:3005'
 })
 // Vue.use(VueResource)
 // Vue.use(lazy)
