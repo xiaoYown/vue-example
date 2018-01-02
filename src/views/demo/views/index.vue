@@ -4,9 +4,20 @@
 </template>
 
 <script>
+  import config from 'config/config'
+
   export default {
     data () {
       return {}
+    },
+    created () {
+      // https test
+      this.$http.get(config.apiUrl + '/get')
+        .then(function (res) {
+          console.log(res)
+        }, function (status) {
+
+        })
     },
     methods: {
       getData () {

@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
 // import VueSocketIo from 'vue-socket.io'
-import VueSocketIo from 'tools/vue-socket'
+// import VueSocketIo from 'tools/vue-socket'
 
 import App from './app-demo.vue'
 // import lazy from 'vue-lazy-component'
@@ -12,10 +12,10 @@ import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
 Vue.use(VueRouter)
-Vue.use(VueSocketIo, {
-  socketChat: 'http://192.168.0.222:3004',
-  socketTest: 'http://192.168.0.222:3005'
-})
+// Vue.use(VueSocketIo, {
+//   socketChat: 'http://192.168.0.222:3004',
+//   socketTest: 'http://192.168.0.222:3005'
+// })
 // Vue.use(VueResource)
 // Vue.use(lazy)
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
