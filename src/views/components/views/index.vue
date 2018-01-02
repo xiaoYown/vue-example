@@ -62,6 +62,14 @@
       // xy-loading
     .ui-components-wrap
       xy-emot
+    .ui-components-wrap
+      el-global
+    .ui-components-wrap
+      h4 全局弹窗(use 方式)
+      div
+        button(@click="xyPopup('alert')") alert
+        | &nbsp;
+        button(@click="xyPopup('confirm')") confirm
 </template>
 
 <script>
@@ -148,7 +156,23 @@
       },
       confirm (data) {
         this.showModal = false
-        console.log(data)
+      },
+      xyPopup (type) {
+        if (type === 'alert') {
+          this.$alert({
+            title: '提示',
+            content: '您的信息有误'
+          })
+        } else if (type === 'confirm') {
+          this.$confirm({
+            title: '提示',
+            content: '确认删除',
+            cb: (res) => {
+              console.log(res)
+              this.$closePopup()
+            }
+          })
+        }
       }
     }
   }

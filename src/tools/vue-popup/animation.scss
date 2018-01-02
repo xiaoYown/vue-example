@@ -1,0 +1,14 @@
+.popup-bottom-enter-active, 
+.popup-bottom-leave-active {
+	transition: all .2s linear;
+	transform: translateY(-30px); 
+}
+
+.popup-bottom-enter-to {
+	transform: translateY(0);
+}
+
+.popup-bottom-enter, 
+.popup-bottom-leave-active {
+	opacity: 0;
+}
