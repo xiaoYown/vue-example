@@ -12,23 +12,29 @@
           :options="popOptions",
           @choose="choose"
         )
+        el-prompt(
+          v-else-if="typePop === 'prompt'",
+          :options="popOptions",
+          @choose="choose"
+        )
 </template>
 
 <script>
-  require('./animation.scss')
+  require('./main.scss')
 
   export default {
     name: 'xy_popup',
     components: {
       'el-alert': require('./alert.vue'),
-      'el-confirm': require('./confirm.vue')
+      'el-confirm': require('./confirm.vue'),
+      'el-prompt': require('./prompt.vue')
     },
     data () {
       return {
-        types: ['alert', 'confirm'],
+        types: ['alert', 'confirm', 'prompt'],
         type: '',
         typePop: '',
-        publicAttrs: ['width', 'title', 'content'],
+        publicAttrs: ['width', 'title', 'content', 'placeholder'],
         popOptions: {},
         wrapStyle: {},
         cb: null
@@ -76,15 +82,3 @@
     }
   }
 </script>
-
-<style lang="sass">
-  .xy__popup {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, .6);
-  }
-</style>

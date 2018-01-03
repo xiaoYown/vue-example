@@ -70,6 +70,8 @@
         button(@click="xyPopup('alert')") alert
         | &nbsp;
         button(@click="xyPopup('confirm')") confirm
+        | &nbsp;
+        button(@click="xyPopup('prompt')") prompt
 </template>
 
 <script>
@@ -167,6 +169,15 @@
           this.$confirm({
             title: '提示',
             content: '确认删除',
+            cb: (res) => {
+              console.log(res)
+              this.$closePopup()
+            }
+          })
+        } else if (type === 'prompt') {
+          this.$prompt({
+            title: '请输入内容',
+            placeholder: '仅支持中文',
             cb: (res) => {
               console.log(res)
               this.$closePopup()

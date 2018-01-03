@@ -16,6 +16,9 @@ const createInstaller = function () {
     Vue.prototype.$confirm = function (options) {
       popup.show('confirm', options)
     }
+    Vue.prototype.$prompt = function (options) {
+      popup.show('prompt', options)
+    }
     Vue.prototype.$closePopup = function (options) {
       popup.close()
     }
