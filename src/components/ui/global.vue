@@ -4,6 +4,6 @@
 
 <script>
   export default {
-    name: 'popup-global'
+    name: 'el-global'
   }
 </script>

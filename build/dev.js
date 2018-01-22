@@ -1,23 +1,24 @@
-var path = require('path'),
-  express =	require('express'),
-  webpack =	require('webpack'),
-  webpackDevMiddleware = require('webpack-dev-middleware'),
-  webpackHotMiddleware = require('webpack-hot-middleware'),
-  proxyMiddleware = require('http-proxy-middleware'),
-  opn = require('opn'),
-  config = require('../config'),
-  webpackMerge = 	require('./conf.dev'),
-  baseWebpack =	require('./webpack.config');
+const path = require('path')
+const express =	require('express')
+const webpack =	require('webpack')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const proxyMiddleware = require('http-proxy-middleware')
+const opn = require('opn')
+const config = require('../config')
+const webpackMerge = 	require('./conf.dev')
+const baseWebpack =	require('./webpack.config')
 
 var app = express();
-
 var compiler = webpack(webpackMerge);
 
 var devMiddleware = webpackDevMiddleware(compiler, {
   publicPath: baseWebpack.output.publicPath,
   stats: {
     colors: true,
-    chunks: false
+    chunks: false,
+    modules: false,
+    version: false,
   }
 })
 var hotMiddleware = webpackHotMiddleware(compiler);

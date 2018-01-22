@@ -1,11 +1,11 @@
-var path                =	require('path'),
-	utils               =	require('./utils'),
-	webpack             =	require('webpack'),
-	merge               =	require('webpack-merge'),
-	config 				= 	require('../config'),
-	baseWebpack         =	require('./webpack.config.js'),
-	ExtractTextPlugin   =	require('extract-text-webpack-plugin'),
-	HtmlWebpackPlugin   =	require('html-webpack-plugin');
+const path =	require('path')
+const utils =	require('./utils')
+const webpack =	require('webpack')
+const merge =	require('webpack-merge')
+const config = 	require('../config')
+const baseWebpack =	require('./webpack.config.js')
+const ExtractTextPlugin =	require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin =	require('html-webpack-plugin')
 
 var plugins =  [
 	new webpack.DefinePlugin({
@@ -16,7 +16,7 @@ var plugins =  [
 			warnings: false
 		}
 	}),
-	new webpack.optimize.OccurenceOrderPlugin(),
+	// new webpack.optimize.OccurenceOrderPlugin(),
 	new ExtractTextPlugin(utils.assetsPath('css/[name].css?[chunkhash]')), 	//单独使用style标签加载css并设置其路径
 	// 提取 vendor
 	new webpack.optimize.CommonsChunkPlugin({
@@ -75,14 +75,18 @@ var newWebpack = merge(baseWebpack, {
 		chunkFilename: utils.assetsPath('js/[name].js?[chunkhash]')
 	},
 	module: {
-		loaders: utils.styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })
-	},
-	vue: {
-		loaders: utils.cssLoaders({
-			sourceMap: 	config.build.productionSourceMap,
-			extract: 	true
+		rules: utils.styleLoaders({
+			sourceMap: config.build.productionSourceMap,
+			extract: true,
+			usePostCSS: true
 		})
 	},
+	// vue: {
+	// 	loaders: utils.cssLoaders({
+	// 		sourceMap: 	config.build.productionSourceMap,
+	// 		extract: 	true
+	// 	})
+	// },
 	plugins: plugins
 });
 
