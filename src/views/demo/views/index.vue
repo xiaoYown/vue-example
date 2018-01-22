@@ -4,7 +4,7 @@
 </template>
 
 <script>
-  import config from 'config/config'
+  // import config from 'config/config'
 
   export default {
     data () {
@@ -12,7 +12,7 @@
     },
     created () {
       // https test
-      this.$http.get(config.apiUrl + '/get')
+      this.$http.get('/static/data/test.json')
         .then(function (res) {
           console.log(res)
         }, function (status) {
