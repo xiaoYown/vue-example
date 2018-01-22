@@ -9,6 +9,8 @@ module.exports = {
 		assetsSubDirectory: 'static',
 		assetsPublicPath: '/',
 		productionSourceMap: false,
+		cacheBusting: true,
+    		cssSourceMap: true,
 		chunks: [
 			// {
 			// 	node_module: true,

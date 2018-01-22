@@ -9,6 +9,7 @@
 
 <script>
   export default {
+    name: 'global-button',
     props: {
       type: {
         type: String,

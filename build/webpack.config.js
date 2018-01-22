@@ -1,14 +1,15 @@
-var webpack =	require('webpack'),
-	path 	=	require('path'),
-	glob 	=	require('glob'),
-	utils	=	require('./utils'),
-	config  = 	require('../config'),
+const webpack =	require('webpack')
+const path 	=	require('path')
+const glob 	=	require('glob')
+const utils	=	require('./utils')
+const config  = 	require('../config')
 // 帮助生成 HTML 文件，在 body 元素中，使用 script 来包含所有你的 webpack bundles，只需要在你的 webpack 配置文件中如下配置：
-	HtmlWebpackPlugin = require('html-webpack-plugin'),
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 搭配html-webapck-plugin使用,将css作为chunk追加到对应html中
-	ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const vueLoaderConfig = require('./vue-loader.conf')
 
-var isPro = process.env.NODE_ENV == 'production';
+const isPro = process.env.NODE_ENV == 'production'
 
 function getEntry(globPath) {
   	var entries = {}, basename;
@@ -31,49 +32,51 @@ module.exports = {
 		publicPath: isPro ? config.build.assetsPublicPath : config.dev.assetsPublicPath // 文件引入路径
 	},
 	module: {
-		preLoaders: [
+		rules: [
 			{
 				test: /\.vue$/,
-				loader: 'eslint',
-				include: [
-					path.join(__dirname, '../src')
-				],
-				exclude: /node_modules/
-			},
-			{
-				test: /\.js$/,
-					loader: 'eslint',
-					include: [
-					path.join(__dirname, '../src')
-				],
-				exclude: /node_modules/
-			}
-		],
-		loaders: [
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader'
+				loader: 'vue-loader',
+				options: vueLoaderConfig
+				// options: {
+				// 	loaders: {
+				// 		css: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+				// 			use: 'css-loader',
+				// 			fallback: 'style-loader'
+				// 		})),
+				// 		scss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+				// 			use: ['css-loader', 'postcss-loader', 'sass-loader'],
+				// 			fallback: 'style-loader'
+				// 		})),
+				// 		postcss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+				// 			use: ['css-loader', 'postcss-loader'],
+				// 			fallback: 'style-loader'
+				// 		}))
+				// 	}
+				// }
 			},
 			{
 				test: /\.js$/,
 				exclude:  /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
-				loader: 'babel-loader',
-				query: {
-						presets: ['es2015']
-				},
+				loader: 'babel-loader?cacheDirectory',
+				options: {
+					presets: ['es2015']
+				}
 			},
 			{
-				test: /\.json$/,
-				loader: 'json'
+				test: /\.js|\.vue$/,
+				loader: 'eslint-loader',
+				options: {
+					formatter: require('eslint-friendly-formatter')
+				}
 			},
 			{
 				test: /\.html$/,
-				loader: 'vue-html'
+				loader: 'vue-html-loader'
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
-				loader: 'url',
-				query: {
+				loader: 'url-loader',
+				options: {
 					limit: 10000,
 					name: utils.assetsPath('images/[name].[ext]')
 				}
@@ -82,6 +85,8 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
+			'vue$': 'vue/dist/vue.esm.js',
+			'@': path.resolve(__dirname, '../src'),
 			'src'		: path.resolve(__dirname, '../src'),
 			'config'	: path.resolve(__dirname, '../config'),
 			'js'		: path.resolve(__dirname, '../src/assets/js'),
@@ -95,11 +100,12 @@ module.exports = {
 			'utils'		: path.resolve(__dirname, '../src/utils'),
 			'tools'		: path.resolve(__dirname, '../src/tools'),
 			'dist'		: path.resolve(__dirname, '../dist')
-		}
-	},
-	postcss: [ require('autoprefixer') ],
-		node: {
-		fs: 'empty'
+		},
+		extensions: ['.js', '.vue', '.json']
 	}
+	// postcss: [ require('autoprefixer') ],
+	// 	node: {
+	// 	fs: 'empty'
+	// }
 };
 

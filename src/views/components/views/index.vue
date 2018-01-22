@@ -59,7 +59,19 @@
     .ui-components-wrap
       xy-button(
       ) loading
-      xy-loading
+      // xy-loading
+    .ui-components-wrap
+      xy-emot
+    .ui-components-wrap
+      el-global
+    .ui-components-wrap
+      h4 全局弹窗(use 方式)
+      div
+        button(@click="xyPopup('alert')") alert
+        | &nbsp;
+        button(@click="xyPopup('confirm')") confirm
+        | &nbsp;
+        button(@click="xyPopup('prompt')") prompt
 </template>
 
 <script>
@@ -74,7 +86,8 @@
       'xy-pages': require('components/ui/pages.vue'),
       'xy-modal-confirm': require('components/modal/confirm.vue'),
       'xy-button': require('components/button/index.vue'),
-      'xy-loading': require('components/loading/loading.vue')
+      'xy-loading': require('components/loading/loading.vue'),
+      'xy-emot': require('components/emot/emot.vue')
     },
     data () {
       return {
@@ -145,7 +158,32 @@
       },
       confirm (data) {
         this.showModal = false
-        console.log(data)
+      },
+      xyPopup (type) {
+        if (type === 'alert') {
+          this.$alert({
+            title: '提示',
+            content: '您的信息有误'
+          })
+        } else if (type === 'confirm') {
+          this.$confirm({
+            title: '提示',
+            content: '确认删除',
+            cb: (res) => {
+              console.log(res)
+              this.$closePopup()
+            }
+          })
+        } else if (type === 'prompt') {
+          this.$prompt({
+            title: '请输入内容',
+            placeholder: '仅支持中文',
+            cb: (res) => {
+              console.log(res)
+              this.$closePopup()
+            }
+          })
+        }
       }
     }
   }

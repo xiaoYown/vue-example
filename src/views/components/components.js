@@ -6,17 +6,22 @@ import axios from 'axios'
 
 import App from './app-components.vue'
 import lazy from 'vue-lazy-component'
+import XyPopup from 'tools/vue-popup/main'
 import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
+// 此处注册后可全局直接引入
+Vue.component('el-global', require('components/ui/global.vue'))
+
 Vue.use(VueRouter)
+Vue.use(XyPopup)
 // Vue.use(VueResource)
 Vue.prototype.$http = axios
 Vue.use(lazy)
 
 const routes = [
   {
-    path: '/',
+    path: '/components/',
     name: 'components',
     component: require('./views/index.vue'),
     meta: {
@@ -24,7 +29,7 @@ const routes = [
     }
   },
   {
-    path: '/drag',
+    path: '/components/drag',
     name: 'drag',
     component: require('./views/drag.vue'),
     meta: {
@@ -42,6 +47,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

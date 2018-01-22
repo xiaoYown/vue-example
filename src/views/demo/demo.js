@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 // import VueResource from 'vue-resource'
 import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
-import VueSocketIo from 'vue-socket.io'
+// import VueSocketIo from 'vue-socket.io'
+// import VueSocketIo from 'tools/vue-socket'
 
 import App from './app-demo.vue'
 // import lazy from 'vue-lazy-component'
@@ -11,7 +12,10 @@ import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
 Vue.use(VueRouter)
-Vue.use(VueSocketIo, 'http://192.168.0.200:3004')
+// Vue.use(VueSocketIo, {
+//   socketChat: 'http://192.168.0.222:3004',
+//   socketTest: 'http://192.168.0.222:3005'
+// })
 // Vue.use(VueResource)
 // Vue.use(lazy)
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -29,7 +33,7 @@ var animation = r => require.ensure([], () => r(require('./views/animation.vue')
 
 const routes = [
   {
-    path: '/',
+    path: '/demo',
     name: 'demo',
     component: require('./views/index.vue'),
     meta: {
@@ -37,7 +41,7 @@ const routes = [
     }
   },
   {
-    path: '/foo',
+    path: '/demo/foo',
     name: 'demo-foo',
     component: require('./views/foo.vue'),
     meta: {
@@ -45,7 +49,7 @@ const routes = [
     }
   },
   {
-    path: '/bar',
+    path: '/demo/bar',
     name: 'demo-bar',
     component: require('./views/bar.vue'),
     meta: {
@@ -53,7 +57,7 @@ const routes = [
     }
   },
   {
-    path: '/animation',
+    path: '/demo/animation',
     name: 'demo-animation',
     component: animation, // require('./views/animation.vue'),
     meta: {
@@ -61,7 +65,7 @@ const routes = [
     }
   },
   {
-    path: '/params/:name/:age',
+    path: '/demo/params/:name/:age',
     name: 'params',
     component: require('./views/params.vue'),
     meta: {
@@ -69,7 +73,7 @@ const routes = [
     }
   },
   {
-    path: '/vuex',
+    path: '/demo/vuex',
     name: 'vuex',
     component: require('./views/vuex.vue'),
     meta: {
@@ -77,7 +81,7 @@ const routes = [
     }
   },
   {
-    path: '/socket',
+    path: '/demo/socket',
     name: 'socket',
     component: require('./views/socket.vue'),
     meta: {
@@ -85,7 +89,7 @@ const routes = [
     }
   },
   {
-    path: '/recursive',
+    path: '/demo/recursive',
     name: 'recursive',
     component: require('./views/recursive.vue'),
     meta: {
@@ -93,7 +97,7 @@ const routes = [
     }
   },
   {
-    path: '/nested',
+    path: '/demo/nested',
     component: require('./views/nested.vue'),
     meta: {
       user: true
@@ -124,6 +128,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

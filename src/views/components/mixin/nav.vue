@@ -1,8 +1,8 @@
 <template lang="jade">
   nav.nav-demo
     .nav-content
-      a.select.link(href="./") home
-      router-link.select.link(to="/drag") drag
+      a.select.link(href="/") home
+      router-link.select.link(to="/components/drag") drag
       div.select.user-name {{ userInfo.name }}
 </template>
 

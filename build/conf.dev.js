@@ -1,13 +1,12 @@
-var path 				=   require('path'),
-	config 				= 	require('../config');
+const path = require('path');
+const webpack =	require('webpack');
+const merge =	require('webpack-merge');
+const HtmlWebpackPlugin =	require('html-webpack-plugin');
+const utils =	require('./utils');
+const config = require('../config');
+const baseWebpack =	require('./webpack.config');
 
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
-
-var	webpack 			=	require('webpack'),
-	merge 				=	require('webpack-merge'),
-	HtmlWebpackPlugin 	=	require('html-webpack-plugin'),
-	utils				=	require('./utils'),
-	baseWebpack			=	require('./webpack.config');
 
 process.env.NODE_ENV = config.dev.env;
 
@@ -16,7 +15,7 @@ var plugins = [
 	new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
-	new webpack.NoErrorsPlugin(),
+	new webpack.NoEmitOnErrorsPlugin(),
 	new webpack.HotModuleReplacementPlugin()
 ];
 
@@ -35,10 +34,11 @@ Object.keys(baseWebpack.entry).forEach(function(name){
 
 var newWebpack = merge(baseWebpack, {
 	module: {
-		loaders: utils.styleLoaders({ sourceMap: false })
+		noParse: /node_modules\/(vue)/,
+		rules: utils.styleLoaders({ sourceMap: true, usePostCSS: false })
 	},
-	devtool: '#eval-source-map',
-  	plugins: plugins
+	devtool: 'cheap-module-eval-source-map',
+  plugins: plugins
 });
 
 module.exports = newWebpack;
