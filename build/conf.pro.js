@@ -6,6 +6,7 @@ const config = 	require('../config')
 const baseWebpack =	require('./webpack.config.js')
 const ExtractTextPlugin =	require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin =	require('html-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 var plugins =  [
 	new webpack.DefinePlugin({
@@ -40,6 +41,8 @@ var plugins =  [
 			)
 		}
 	}),
+	// 打包解析
+	new BundleAnalyzerPlugin()
 	// new webpack.optimize.CommonsChunkPlugin({
 	// 	name: 'common',
 	// 	chunks: ['index', 'components', 'demo']

@@ -30,6 +30,15 @@ const UserPosts = {
 }
 
 var animation = r => require.ensure([], () => r(require('./views/animation.vue')), 'animation')
+// const Animation = () => import('../views/animation.vue')
+// const Animation = resolve => require.ensure(['../views/animation.vue'], resolve)
+// const Animation = System.import('../views/animation.vue')
+// function (resolve) {
+//   这个特殊的 require 语法告诉 webpack
+//   自动将编译后的代码分割成不同的块，
+//   这些块将通过 Ajax 请求自动下载。
+//   require(['./my-async-component'], resolve)
+// }
 
 const routes = [
   {

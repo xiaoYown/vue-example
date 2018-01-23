@@ -76,6 +76,9 @@
 
 <script>
   require('sass/base.scss')
+  
+  const jquery = r => require.ensure([], () => r(require('jquery')), 'jquery')
+  console.log(jquery)
 
   export default {
     name: 'xy-ui',
