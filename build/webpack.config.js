@@ -32,6 +32,8 @@ module.exports = {
 		publicPath: isPro ? config.build.assetsPublicPath : config.dev.assetsPublicPath // 文件引入路径
 	},
 	module: {
+		// 配置脱离解析文件
+		noParse: /node_modules\/vue/,
 		rules: [
 			{
 				test: /\.vue$/,

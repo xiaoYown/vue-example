@@ -18,8 +18,10 @@
 <script>
 
   import { getCookie } from 'tools/client'
-
   import { mapState, mapActions } from 'vuex'
+
+  const jquery = r => require.ensure([], () => r(require('jquery')), 'jquery')
+  console.log(jquery)
 
   export default{
     computed: mapState({

@@ -9,16 +9,17 @@
     "socket"
   ],
   "dependencies": {
-    "jquery": "3.2.1",
+    "axios": "0.16.2",
+    "jquery": "^3.2.1",
+    "npm": "^5.6.0",
     "qs": "6.5.0",
+    "react-cookie": "1.0.4",
     "velocity": "0.7.2",
     "vue": "2.3.4",
-    "vue-router": "2.6.0",
-    "vuex": "2.3.1",
     "vue-core-image-upload": "2.2.4",
-    "react-cookie": "1.0.4",
-    "axios": "0.16.2",
-    "vue-socket.io": "2.1.1-a"
+    "vue-router": "2.6.0",
+    "vue-socket.io": "2.1.1-a",
+    "vuex": "2.3.1"
   },
   "devDependencies": {
     "autoprefixer": "6.5.2",
@@ -43,7 +44,7 @@
     "eslint-plugin-standard": "3.0.1",
     "eventsource-polyfill": "0.9.6",
     "express": "4.14.0",
-    "extract-text-webpack-plugin": "1.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "0.9.0",
     "glob": "7.1.1",
     "html-webpack-plugin": "2.24.1",
@@ -53,6 +54,7 @@
     "node-sass": "3.13.1",
     "opn": "4.0.2",
     "ora": "0.3.0",
+    "postcss-loader": "^2.0.10",
     "sass-loader": "4.0.2",
     "shelljs": "0.7.5",
     "socket.io": "2.0.3",
@@ -67,9 +69,10 @@
     "vue-template-compiler": "2.3.4",
     "vuex-router-sync": "2.1.1",
     "webpack": "3.8.1",
+    "webpack-bundle-analyzer": "^2.9.2",
     "webpack-dev-middleware": "2.0.4",
     "webpack-dev-server": "1.16.2",
-    "webpack-hot-middleware": "2.14.0",
+    "webpack-hot-middleware": "^2.21.0",
     "webpack-merge": "4.1.1"
   },
   "scripts": {
