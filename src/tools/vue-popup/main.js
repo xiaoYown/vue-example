@@ -10,15 +10,14 @@ const createInstaller = function () {
 
     var popup = new PopupConstructor({ el: popupWrap })
 
-    Vue.prototype.$alert = function (options) {
-      popup.show('alert', options)
+    Vue.prototype.$popup = function (options) {
+      if (/^(alert|confirm|prompt)$/.test(options.type)) {
+        popup.show(options.type, options)
+      } else {
+        console.error('type error')
+      }
     }
-    Vue.prototype.$confirm = function (options) {
-      popup.show('confirm', options)
-    }
-    Vue.prototype.$prompt = function (options) {
-      popup.show('prompt', options)
-    }
+
     Vue.prototype.$closePopup = function (options) {
       popup.close()
     }
