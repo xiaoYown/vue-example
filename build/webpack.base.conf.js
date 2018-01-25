@@ -22,7 +22,6 @@ function getEntry(globPath) {
 	return entries;
 }
 var entries = getEntry("./src/views/*/*.js"); // 获得入口js文件
-console.log(entries)
 
 module.exports = {
 	entry: entries,
