@@ -1,5 +1,4 @@
 'use strict'
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const utils = require('./utils')
 const config = require('../config')
 const isProduction = process.env.NODE_ENV === 'production'

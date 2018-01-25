@@ -39,6 +39,7 @@
       }
     },
     created () {
+      console.log(6)
       this.show = false
     },
     mounted () {

@@ -26,10 +26,22 @@ module.exports = {
 	},
 	dev: {
 		env: require('./env.dev'),
-		favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
 		port: require('./config').port,
 		assetsSubDirectory: 'static',
 		assetsPublicPath: '/',
+		favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
+
+		host: 'localhost',
+		autoOpenBrowser: false,
+    errorOverlay: true,
+		notifyOnErrors: true,
+		poll: false,
+		useEslint: true,
+		showEslintErrorsInOverlay: false,
+		devtool: 'cheap-module-eval-source-map',
+		cacheBusting: true,
+    cssSourceMap: true,
+
 		proxyTable: {
 			'/api':{
 				target: require('./config').api,
@@ -37,12 +49,11 @@ module.exports = {
 				    '^/api': ''
 				}
 			}
-		},
+		}
 		// CSS Sourcemaps off by default because relative paths are "buggy"
 		// with this option, according to the CSS-Loader README
 		// (https://github.com/webpack/css-loader#sourcemaps)
 		// In our experience, they generally work as expected,
 		// just be aware of this issue when enabling this option.
-		cssSourceMap: false
 	}
 }
