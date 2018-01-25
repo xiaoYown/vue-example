@@ -7,9 +7,26 @@ const config  = 	require('../config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 搭配html-webapck-plugin使用,将css作为chunk追加到对应html中
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HappyPack = require('happypack')
+const happyThreadPool = HappyPack.ThreadPool({ size: 25 })
 const vueLoaderConfig = require('./vue-loader.conf')
 
 const isPro = process.env.NODE_ENV == 'production'
+
+function createHappyPlugin(id, loaders) {
+  console.log('id', id)
+  return new HappyPack({
+    id: id,
+    loaders: loaders,
+    threadPool: happyThreadPool,
+
+    // disable happy caching with HAPPY_CACHE=0
+    cache: true,
+
+    // make happy more verbose with HAPPY_VERBOSE=1
+    verbose: process.env.HAPPY_VERBOSE === '1',
+  });
+}
 
 function getEntry(globPath) {
   	var entries = {}, basename;
@@ -35,27 +52,31 @@ module.exports = {
 		// 配置脱离解析文件
 		noParse: /node_modules\/vue/,
 		rules: [
+			// {
+			// 	test: /\.vue$/,
+			// 	loader: 'vue-loader',
+			// 	options: vueLoaderConfig
+			// 	// options: {
+			// 	// 	loaders: {
+			// 	// 		css: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+			// 	// 			use: 'css-loader',
+			// 	// 			fallback: 'style-loader'
+			// 	// 		})),
+			// 	// 		scss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+			// 	// 			use: ['css-loader', 'postcss-loader', 'sass-loader'],
+			// 	// 			fallback: 'style-loader'
+			// 	// 		})),
+			// 	// 		postcss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+			// 	// 			use: ['css-loader', 'postcss-loader'],
+			// 	// 			fallback: 'style-loader'
+			// 	// 		}))
+			// 	// 	}
+			// 	// }
+			// },
 			{
-				test: /\.vue$/,
-				loader: 'vue-loader',
-				options: vueLoaderConfig
-				// options: {
-				// 	loaders: {
-				// 		css: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-				// 			use: 'css-loader',
-				// 			fallback: 'style-loader'
-				// 		})),
-				// 		scss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-				// 			use: ['css-loader', 'postcss-loader', 'sass-loader'],
-				// 			fallback: 'style-loader'
-				// 		})),
-				// 		postcss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-				// 			use: ['css-loader', 'postcss-loader'],
-				// 			fallback: 'style-loader'
-				// 		}))
-				// 	}
-				// }
-			},
+        test: /\.vue$/,
+        loader: 'happypack/loader?id=vue'
+      },
 			{
 				test: /\.js$/,
 				exclude:  /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
@@ -66,6 +87,7 @@ module.exports = {
 			},
 			{
 				test: /\.js|\.vue$/,
+				exclude:  /node_modules/,
 				loader: 'eslint-loader',
 				options: {
 					formatter: require('eslint-friendly-formatter')
@@ -104,7 +126,21 @@ module.exports = {
 			'dist'		: path.resolve(__dirname, '../dist')
 		},
 		extensions: ['.js', '.vue', '.json']
-	}
+	},
+	plugins: [
+		new HappyPack({
+      id: 'vue',
+      cache: true,
+			threadPool: happyThreadPool,
+			verbose: process.env.HAPPY_VERBOSE === '1',
+      loaders: [
+        {
+          loader: 'vue-loader',
+          options: vueLoaderConfig
+        }
+      ]
+    })
+	]
 	// postcss: [ require('autoprefixer') ],
 	// 	node: {
 	// 	fs: 'empty'
