@@ -164,12 +164,14 @@
       },
       xyPopup (type) {
         if (type === 'alert') {
-          this.$alert({
+          this.$popup({
+            type: 'alert',
             title: '提示',
             content: '您的信息有误'
           })
         } else if (type === 'confirm') {
-          this.$confirm({
+          this.$popup({
+            type: 'confirm',
             title: '提示',
             content: '确认删除',
             cb: (res) => {
@@ -178,7 +180,8 @@
             }
           })
         } else if (type === 'prompt') {
-          this.$prompt({
+          this.$popup({
+            type: 'prompt',
             title: '请输入内容',
             placeholder: '仅支持中文',
             cb: (res) => {
