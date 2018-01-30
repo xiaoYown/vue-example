@@ -5,7 +5,8 @@
         el-alert(
           v-if="typePop === 'alert'",
           :options="popOptions",
-          @close="close"
+          @close="close",
+          @choose="choose"
         )
         el-confirm(
           v-else-if="typePop === 'confirm'",
@@ -32,13 +33,19 @@
     data () {
       return {
         types: ['alert', 'confirm', 'prompt'],
-        type: '',
-        typePop: '',
+        type: '', // 组件显示使用 (整个组件的隐藏与内部组件隐藏有时间差, 需分开控制隐藏)
+        typePop: '', // 组件类型显示使用
         publicAttrs: ['width', 'title', 'content', 'placeholder'],
         popOptions: {},
         wrapStyle: {},
         cb: null
       }
+    },
+    mounted () {
+      window.addEventListener('keydown', this.esc)
+    },
+    beforeDestroy () {
+      window.removeEventListener('keydown', this.esc)
     },
     methods: {
       show (type, options) {
@@ -71,6 +78,11 @@
         setTimeout(() => {
           this.type = ''
         }, 200)
+      },
+      esc (event) {
+        if (this.type && event.keyCode === 27) {
+          this.close()
+        }
       },
       choose (res) {
         if (this.cb) {

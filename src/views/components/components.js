@@ -37,6 +37,14 @@ const routes = [
     }
   },
   {
+    path: '/components/its',
+    name: 'its',
+    component: require('./views/its.vue'),
+    meta: {
+      user: true
+    }
+  },
+  {
     path: '/login',
     name: 'login'
   },

@@ -3,7 +3,7 @@
     .xy__popup-title {{options.title}}
     .xy__popup-content {{options.content}}
     .xy__popup-btn
-      button(@click="close") 确 认
+      button(@click="choose") 确 认
 </template>
 
 <script>
@@ -15,6 +15,11 @@
     methods: {
       close () {
         this.$emit('close')
+      },
+      choose () {
+        this.$emit('choose', {
+          status: 1
+        })
       }
     }
   }
