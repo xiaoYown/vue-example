@@ -1,6 +1,7 @@
 <template lang="jade">
   button.global__btn(
     :class="{['btn--' + type]: true, 'btn--disable': disable}",
+    :style="{ width: width + 'px' }",
     @click="btnClick"
   )
     i.iconfont(
@@ -12,21 +13,25 @@
 
 <script>
   export default {
+    name: 'global-button',
     props: {
       type: {
         type: String,
-        default: 'default' // default, ghost, upload-image
+        default: 'default' // default, ghost
       },
       text: {
         type: String,
         default: '确认'
       },
+      width: Number,
       disable: Boolean,
       icon: String
     },
     methods: {
       btnClick ($event) {
-        this.$emit('click', $event)
+        if (!this.disable) {
+          this.$emit('click', $event)
+        }
       }
     }
   }
@@ -69,6 +74,12 @@
       &:active {
         background-color: $std_main_C;
       }
+    }
+    &.btn--disable,
+    &.btn--disable:hover {
+      background-color: $std_sub_4;
+      color: $std_sub_2;
+      cursor: not-allowed;
     }
     .iconfont {
       vertical-align: middle;

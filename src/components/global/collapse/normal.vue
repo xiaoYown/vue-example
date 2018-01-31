@@ -13,6 +13,7 @@
 
 <script>
   export default {
+    name: 'global-collapse',
     props: {
       spread: { // 是否展开
         type: Boolean,

@@ -10,8 +10,9 @@
 
 <script>
   export default {
+    name: 'global-switch',
     props: {
-      mark: String,
+      name: String,
       checked: {
         type: Boolean,
         default: false
@@ -31,9 +32,9 @@
 
         this.currentChecked = !this.currentChecked
 
-        if (this.mark) {
+        if (this.name) {
           data = {
-            mark: this.mark,
+            name: this.name,
             checked: this.currentChecked
           }
         } else {
