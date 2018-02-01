@@ -1,7 +1,22 @@
 <template lang="jade">
-  label.global__input(:style="{ width: width + 'px' }")
-    input(type="text",:placeholder="placeholder",:value="value")
-    .global__input-box
+  label.global__input(
+    :class="{ 'read-only': readOnly, 'has-icon': icon }",
+    :style="{ width: width + 'px' }"
+  )
+    input(
+      type="text",
+      :placeholder="placeholder",
+      v-model="val",
+      @input="input",
+      @blur="blur",
+      @keydown.13="enter",
+      :readOnly="readOnly"
+    )
+    i.iconfont(
+      :class="icon",
+      @mousedown.prevent="",
+      @click="enter"
+    )
 </template>
 
 <script>
@@ -9,14 +24,21 @@
     name: 'global-text',
     props: {
       name: String,
-      value: String,
+      value: [String, Number],
       width: Number,
-      placeholder: String
+      placeholder: [String, Number],
+      readOnly: {
+        type: Boolean,
+        default: false
+      },
+      icon: {
+        type: String,
+        default: 'icon-enter'
+      }
     },
     data () {
       return {
-        val: '',
-        style: {}
+        val: ''
       }
     },
     watch: {
@@ -26,15 +48,20 @@
     },
     created () {
       this.val = this.value
-      if (typeof this.width !== 'undefined') {
-        this.style = {
-          width: this.width + 'px'
-        }
-      }
     },
     methods: {
-      check () {
-        this.$emit('change', {
+      input (event) {
+        this.send('input', event)
+      },
+      enter (event) {
+        this.send('enter', event)
+      },
+      blur (event) {
+        this.send('blur', event)
+      },
+      send (evName, event) {
+        this.$emit(evName, {
+          event,
           name: this.name,
           value: this.val
         })
@@ -50,29 +77,35 @@
     position: relative;
     display: block;
     height: 32px;
-    margin: 0 10px;
-
-    &-box {
-      position: absolute;
-      top: 0;
-      right: -10px;
-      bottom: 0;
-      left: -10px;
-      z-index: 1;
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+      box-sizing: border-box;
       border: 1px solid $std_sub_5;
       border-radius: 2px;
-      cursor: text;
-      input:focus+& {
+      &:focus {
         border: 1px solid $std_main_A;
       }
+      &+.iconfont {
+        position: absolute;
+        top: 1px;
+        right: 10px;
+        bottom: 1px;
+        display: none;
+        color: $std_main_A;;
+      }
+      &:focus+.iconfont {
+        display: block;
+      }
     }
-    input {
-      position: absolute;
-      top: 1px;
-      bottom: 1px;
-      left: 1px;
-      z-index: 2;
-      width: 100%;
+    &.read-only input {
+      color: $std_sub_3;
+      background-color: $std_sub_6;
+      border: 1px solid $std_sub_5;
+    }
+    &.has-icon input {
+      padding-right: 32px;
     }
   }
 </style>

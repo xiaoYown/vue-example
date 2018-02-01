@@ -5,6 +5,7 @@
         ref="radio",
         type="radio",
         :name="name",
+        :checked="currentChecked",
         @change="check"
       )
       .global__radio-box
@@ -20,6 +21,19 @@
         type: Boolean,
         default: false
       }
+    },
+    data () {
+      return {
+        currentChecked: false
+      }
+    },
+    watch: {
+      checked (val) {
+        this.currentChecked = val
+      }
+    },
+    created () {
+      this.currentChecked = this.checked
     },
     methods: {
       check () {

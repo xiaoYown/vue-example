@@ -5,6 +5,7 @@
         ref="checkbox",
         type="checkbox",
         :name="name",
+        :checked="currentChecked",
         @change="check"
       )
       .global__checkbox-box
@@ -22,8 +23,22 @@
         default: false
       }
     },
+    data () {
+      return {
+        currentChecked: false
+      }
+    },
+    created () {
+      this.currentChecked = this.checked
+    },
+    watch: {
+      checked (val) {
+        this.currentChecked = val
+      }
+    },
     methods: {
       check () {
+        this.currentChecked = this.$refs.checkbox.checked
         this.$emit('change', {
           name: this.name,
           checked: this.$refs.checkbox.checked
