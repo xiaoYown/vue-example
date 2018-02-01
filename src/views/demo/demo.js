@@ -5,6 +5,7 @@ import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
 // import VueSocketIo from 'vue-socket.io'
 // import VueSocketIo from 'tools/vue-socket'
+import tip from 'tools/tip/main'
 
 import App from './app-demo.vue'
 // import lazy from 'vue-lazy-component'
@@ -12,6 +13,7 @@ import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
 Vue.use(VueRouter)
+Vue.use(tip)
 // Vue.use(VueSocketIo, {
 //   socketChat: 'http://192.168.0.222:3004',
 //   socketTest: 'http://192.168.0.222:3005'

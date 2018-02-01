@@ -17,6 +17,7 @@ const createInstaller = function () {
         console.error('tip type error')
       }
     }
+    Vue.tip = Vue.prototype.$tip
   }
 }
 
