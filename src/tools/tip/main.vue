@@ -11,8 +11,7 @@
             li(
               v-for="txt, index in text",
               :key="index"
-            )
-              {{txt}}
+            ) {{txt}}
 </template>
 
 <script>

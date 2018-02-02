@@ -23,6 +23,11 @@
         currentChecked: false
       }
     },
+    watch: {
+      checked () {
+        this.currentChecked = this.checked
+      }
+    },
     created () {
       this.currentChecked = this.checked
     },

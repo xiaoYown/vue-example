@@ -44,15 +44,12 @@
         this.val = ''
       },
       input (event) { // value 改变时回传事件
-        console.log(1)
         this.send('input', event)
       },
       enter (event) { // 按下 enter 时回传事件
-        console.log(1)
         this.send('enter', event)
       },
       search (event) { // 点击搜索
-        console.log(1)
         this.send('search', event)
       },
       send (evName, event) {
@@ -76,6 +73,9 @@
       width: 100%;
       height: 30px;
       box-sizing: border-box;
+      &:focus+.global__search-icon+.iconfont {
+        display: block;
+      }
     }
     &-icon {
       position: absolute;
@@ -106,7 +106,7 @@
         &:focus {
           border: 1px solid $std_main_A;
           &+.global__search-icon .iconfont {
-            color: $std_main_A;
+            // color: $std_main_A;
           }
         }
       }
@@ -122,6 +122,7 @@
       }
     }
     .icon-guanbi {
+      display: none;
       position: absolute;
       top: 1px;
       right: 65px;
