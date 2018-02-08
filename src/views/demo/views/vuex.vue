@@ -1,68 +1,3 @@
-<style lang="sass">
-  .vue-vuex-wrap{
-    .vuex-info-wrap{
-      display: inline-block;
-      vertical-align: top;
-      width: 50%;
-    }
-    .vuex-option-wrap{
-      line-height: 30px;
-      .title{
-        display: inline-block;
-        vertical-align: middle;
-        color: #999;
-        width: 60px;
-      }
-      input{
-        display: inline-block;
-        vertical-align: middle;
-      }
-      button{
-        color: #fff;
-        padding: 4px 5px;
-        border-radius: 4px;
-        background-color: #56aaff;
-      }
-      input[type='button']{
-        background-color: #56aaff;
-        padding: 2px 6px;
-        border: none;
-        color: #fff;
-        margin-right: 10px;
-      }
-    }
-    .border-choose{
-      display: inline-block;
-      vertical-align: top;
-      width: 20px;
-      height: 20px;
-      line-height: 20px;
-      text-align: center;
-      margin-top: 8px;
-      margin-right: 8px;
-      color: #fff;
-      border-radius: 4px;
-      background-color: rgba(0,0,0,.5);
-      cursor: pointer;
-      &.selected{
-        background-color: #000;
-      }
-      &::selection{
-        background: none;
-        color: none;
-      }
-    }
-    .border-el{
-      width: 50px;
-      height: 40px;
-      margin-top: 10px;
-    }
-    input{
-      border: 1px solid #000;
-    }
-  }
-</style>
-
 <template lang="jade">
   div.inner-wrap.vue-vuex-wrap
     .vuex-info-wrap
@@ -205,3 +140,68 @@
     }
   }
 </script>
+
+<style lang="sass">
+  .vue-vuex-wrap{
+    .vuex-info-wrap{
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+    }
+    .vuex-option-wrap{
+      line-height: 30px;
+      .title{
+        display: inline-block;
+        vertical-align: middle;
+        color: #999;
+        width: 60px;
+      }
+      input{
+        display: inline-block;
+        vertical-align: middle;
+      }
+      button{
+        color: #fff;
+        padding: 4px 5px;
+        border-radius: 4px;
+        background-color: #56aaff;
+      }
+      input[type='button']{
+        background-color: #56aaff;
+        padding: 2px 6px;
+        border: none;
+        color: #fff;
+        margin-right: 10px;
+      }
+    }
+    .border-choose{
+      display: inline-block;
+      vertical-align: top;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      margin-top: 8px;
+      margin-right: 8px;
+      color: #fff;
+      border-radius: 4px;
+      background-color: rgba(0,0,0,.5);
+      cursor: pointer;
+      &.selected{
+        background-color: #000;
+      }
+      &::selection{
+        background: none;
+        color: none;
+      }
+    }
+    .border-el{
+      width: 50px;
+      height: 40px;
+      margin-top: 10px;
+    }
+    input{
+      border: 1px solid #000;
+    }
+  }
+</style>

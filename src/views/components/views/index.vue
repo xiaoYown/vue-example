@@ -72,6 +72,12 @@
         button(@click="xyPopup('confirm')") confirm
         | &nbsp;
         button(@click="xyPopup('prompt')") prompt
+        | &nbsp;
+        button(@click="cmpPopup('alert')") alert
+    xy-popup(
+      v-show="popupType",
+      ref="xyPopup"
+    )
 </template>
 
 <script>
@@ -83,14 +89,15 @@
   export default {
     name: 'xy-ui',
     components: {
-      'xy-switch': require('components/ui/switch.vue'),
-      'xy-range': require('components/ui/range.vue'),
-      'xy-select': require('components/ui/select.vue'),
-      'xy-pages': require('components/ui/pages.vue'),
-      'xy-modal-confirm': require('components/modal/confirm.vue'),
-      'xy-button': require('components/button/index.vue'),
-      'xy-loading': require('components/loading/loading.vue'),
-      'xy-emot': require('components/emot/emot.vue')
+      'xy-switch': require('@/components/ui/switch.vue'),
+      'xy-range': require('@/components/ui/range.vue'),
+      'xy-select': require('@/components/ui/select.vue'),
+      'xy-pages': require('@/components/ui/pages.vue'),
+      'xy-modal-confirm': require('@/components/modal/confirm.vue'),
+      'xy-button': require('@/components/button/index.vue'),
+      'xy-loading': require('@/components/loading/loading.vue'),
+      'xy-emot': require('@/components/emot/emot.vue'),
+      'xy-popup': require('@/tools/vue-popup/main.vue')
     },
     data () {
       return {
@@ -128,7 +135,8 @@
           pageSize: 10
         },
         pagesListShow: [],
-        showModal: false
+        showModal: false,
+        popupType: ''
       }
     },
     created () {
@@ -162,33 +170,59 @@
       confirm (data) {
         this.showModal = false
       },
+      /* popup 组件全局使用方法 */
       xyPopup (type) {
-        if (type === 'alert') {
-          this.$popup({
-            type: 'alert',
-            title: '提示',
-            content: '您的信息有误'
-          })
-        } else if (type === 'confirm') {
-          this.$popup({
-            type: 'confirm',
-            title: '提示',
-            content: '确认删除',
-            cb: (res) => {
-              console.log(res)
-              this.$closePopup()
-            }
-          })
-        } else if (type === 'prompt') {
-          this.$popup({
-            type: 'prompt',
-            title: '请输入内容',
-            placeholder: '仅支持中文',
-            cb: (res) => {
-              console.log(res)
-              this.$closePopup()
-            }
-          })
+        switch (type) {
+          case 'alert':
+            this.$popup({
+              type: 'alert',
+              title: '提示',
+              content: '您的信息有误',
+              cb: (res) => {
+                console.log(res)
+                this.$closePopup()
+              }
+            })
+            break
+          case 'confirm':
+            this.$popup({
+              type: 'confirm',
+              title: '提示',
+              content: '确认删除',
+              cb: (res) => {
+                console.log(res)
+                this.$closePopup()
+              }
+            })
+            break
+          case 'prompt':
+            this.$popup({
+              type: 'prompt',
+              title: '请输入内容',
+              placeholder: '仅支持中文',
+              cb: (res) => {
+                console.log(res)
+                this.$closePopup()
+              }
+            })
+            break
+        }
+      },
+      /* popup 组件局部引入使用方法 */
+      cmpPopup (type) {
+        this.popupType = type
+        switch (type) {
+          case 'alert':
+            this.$refs.xyPopup.show(type, {
+              type: 'alert',
+              title: '提示',
+              content: '您的信息有误',
+              cb (status) {
+                console.log(status)
+                this.close()
+              }
+            })
+            break
         }
       }
     }

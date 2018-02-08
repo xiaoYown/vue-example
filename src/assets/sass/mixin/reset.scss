@@ -28,7 +28,7 @@ h1,h2,h3,h4,h5,h6{
   font-weight: normal;
 }
 
-input, textarea, select,button {
+input, textarea, select, button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -68,23 +68,5 @@ input::-webkit-input-placeholder {color:#999;}
 input:-ms-input-placeholder{color:#999;}
 input::-moz-placeholder{color:#999;}
 input:-moz-placeholder{color:#999;}
-
-.bk{display: block}
-.clear,.clearfix{*zoom:1;}
-.clear:after,.clearfix{content:'';display:block;clear:both;height:0;visibility:hidden;}
-.ovh{overflow:hidden;}
-.tal{text-align:left;}
-.tac{text-align:center;}
-.tar{text-align:right;}
-.show{display:block;}
-.hide{display:none;}
-.fr{float:right;}
-.fl{float:left;}
-
-.inline{display: inline-block;vertical-align: top;}
-
-/* 兼容PC */
-.maxWidth{
-  max-width: rem(750) !important;
-  .fixed,.shootlayer,#payBtn{left:50% !important; width: rem(750) !important; margin-left: rem(-375) !important;}
-}
+input::-ms-clear {display: none;}
+input::-webkit-search-cancel-button{display: none;}
