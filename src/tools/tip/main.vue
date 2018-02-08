@@ -30,9 +30,11 @@
     },
     methods: {
       show (options) {
+        // 遮罩层显示
         this.type = options.type
         this.text = options.text
         this.time = options.time || 2000
+        // 提示框显示
         setTimeout(() => {
           this.tipType = this.type
         }, 200)

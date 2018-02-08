@@ -105,9 +105,6 @@
         border-radius: 2px;
         &:focus {
           border: 1px solid $std_main_A;
-          &+.global__search-icon .iconfont {
-            // color: $std_main_A;
-          }
         }
       }
       .global__search-icon {

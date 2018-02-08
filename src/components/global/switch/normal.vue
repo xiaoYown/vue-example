@@ -4,8 +4,6 @@
     @click="check"
   )
     i.global__switch-point
-    span.global__switch-on
-    span.global__switch-off
 </template>
 
 <script>
@@ -64,9 +62,32 @@
     border: 1px solid $std_sub_2;
     cursor: pointer;
     transition: all .2s;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: 2px;
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(3);
+      transition: all .1s ease-in-out;
+    }
+    &:active:before {
+      opacity: 1;
+      background-color: rgba($std_sub_2, .2);
+    }
     &.checked {
       border: 1px solid $std_main_A;
       background-color: $std_main_A;
+      &:before {
+        left: 13px;
+      }
+      &:active:before {
+        background-color: rgba($std_main_A, .2);
+      }
     }
     &-point {
       position: absolute;

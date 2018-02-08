@@ -31,7 +31,7 @@
     methods: {
       btnClick ($event) {
         if (!this.disable) {
-          // this.$emit('click', $event)
+          this.$emit('click', $event)
         }
       }
     }
@@ -97,11 +97,18 @@
         box-shadow: 0 5px 6px $std_main_G;
       }
     }
+    &.btn--disable {
+      .global__btn-shadow {
+        display: none;
+      }
+    }
     &.btn--disable,
     &.btn--disable:hover {
       background-color: $std_sub_4;
       color: $std_sub_2;
       cursor: not-allowed;
+      border: none;
+      box-shadow: none;
     }
     .iconfont {
       position: relative;

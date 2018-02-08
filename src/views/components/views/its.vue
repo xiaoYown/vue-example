@@ -5,6 +5,7 @@
       global-button(:disable="true", :width="200")
       global-button(
         :type="'ghost'",
+        :disable="true",
         :text="'取消'",
         @click="btnBack(1)"
       )
@@ -18,10 +19,14 @@
         :title="'文本框'"
       )
     .ui-components-wrap
-      span 123
+      // global-switch(
+      //   :name="'switch'",
+      //   @change="change"
+      // )
       global-switch(
         :name="'switch'",
-        @change="switchChange"
+        :checked="true",
+        @change="change"
       )
     .ui-components-wrap
       global-checkbox(:checked="checkboxChecked")
@@ -32,11 +37,30 @@
     .ui-components-wrap
       global-slider
     .ui-components-wrap
-      global-text(:width="200",:placeholder="123",@input="textChange",@blur="textChange",:readOnly="false")
+      global-text(
+        :width="200",
+        :placeholder="123",
+        @input="change",
+        @blur="change",
+        :readOnly="false"
+      )
     .ui-components-wrap
-      global-search(:width="336")
+      global-search(
+        :name="'normal'",
+        :width="336",
+        @input="change",
+        @enter="change",
+        @search="change"
+      )
     .ui-components-wrap
-      global-search(:type="'ghost'",:width="336")
+      global-search(
+        :type="'ghost'",
+        :name="'ghost'",
+        :width="336",
+        @input="change",
+        @enter="change",
+        @search="change"
+      )
     .ui-components-wrap
       .color__box-choose
 </template>
@@ -72,10 +96,7 @@
           text: ['操作失败涉及到法律开始大幅离开的时间发；莱卡时间的离开房间的撒快乐；发生的纠纷快乐是的放假啊是；蝶恋蜂狂']
         })
       },
-      switchChange (option) {
-        console.log(option)
-      },
-      textChange (data) {
+      change (data) {
         console.log(data)
       }
     }
