@@ -1,10 +1,10 @@
 <template lang="jade">
   button.global__btn(
     :class="{['btn--' + type]: true, 'btn--disable': disable}",
-    :style="{ width: width + 'px' }",
+    :style="style",
     @click="btnClick"
   )
-    .global__btn-shadow(v-if="type === 'default'")
+    .global__btn-shadow(v-if="/default|fill/.test(type)")
     i.iconfont(
       v-if="icon",
       :class="icon"
@@ -13,20 +13,32 @@
 </template>
 
 <script>
+  function distanceStyle (d) {
+    return typeof d === 'number' ? d + 'px' : typeof d === 'string' ? d : ''
+  }
+
   export default {
     name: 'global-button',
     props: {
       type: {
         type: String,
-        default: 'default' // default, ghost
+        default: 'default' // default, ghost, fill
       },
       text: {
         type: String,
         default: '确认'
       },
-      width: Number,
+      width: [Number, String],
+      height: [Number, String],
       disable: Boolean,
       icon: String
+    },
+    computed: {
+      style () {
+        let width = distanceStyle(this.width)
+        let height = distanceStyle(this.height)
+        return { width, height }
+      }
     },
     methods: {
       btnClick ($event) {
@@ -47,34 +59,70 @@
     vertical-align: middle;
     overflow: hidden;
     min-width: 85px;
-    height: 30px;
+    height: 28px;
     border-radius: 2px;
-    line-height: 30px;
     text-align: center;
-    font-size: 12px;
+    font-size: 0;
     cursor: pointer;
-    transition: all .2s;
+    transition: all .1s;
     // 边框按钮
     &.btn--ghost {
       border: 1px solid $std_main_A;
       background-color: #fff;
-      color: $std_main_A;
+      &, .iconfont {
+        color: $std_main_A;
+      }
       &:hover {
-        color: $std_main_B;
-        border: 1px solid $std_main_B;
+        & {
+          border: 1px solid $std_main_B;
+          &, .iconfont {
+            color: $std_main_B;
+          }
+        }
       }
       &:active {
-        color: $std_main_C;
-        border: 1px solid $std_main_C;
+        & {
+          border: 1px solid $std_main_C;
+          &, .iconfont {
+            color: $std_main_C;
+          }
+        }
       }
     }
     // 默认按钮
     &.btn--default {
+      border: 1px solid $std_main_A;
       background-color: $std_main_A;
-      color: #fff;
+      &, .iconfont {
+        color: #fff;
+      }
       &:hover {
+        border: 1px solid $std_main_B;
         background-color: $std_main_B;
       }
+      // 阴影
+      &:hover,
+      &:active {
+        box-shadow: 0 5px 6px $std_main_G;
+      }
+    }
+    // 边框 -> 默认 按钮
+    &.btn--fill {
+      border: 1px solid $std_sub_3;
+      background-color: #fff;
+      &, .iconfont {
+        color: $std_sub_2;
+      }
+      &:hover {
+        background-color: $std_main_B;
+        border: 1px solid $std_main_B;
+        &, & .iconfont {
+          color: #fff;
+        }
+      }
+    }
+    &.btn--default,
+    &.btn--fill {
       // 点击闪烁
       & .global__btn-shadow {
         position: absolute;
@@ -84,17 +132,12 @@
         width: 100%;
         height: 100%;
         transform: scale(0);
-        transition: transform .3s ease-in-out;
         background-color: $std_main_A;
         border-radius: 15px;
       }
       &:active .global__btn-shadow {
         transform: scale(1.6);
-      }
-      // 阴影
-      &:hover,
-      &:active {
-        box-shadow: 0 5px 6px $std_main_G;
+        transition: transform .3s ease-in-out;
       }
     }
     &.btn--disable {
@@ -104,6 +147,7 @@
     }
     &.btn--disable,
     &.btn--disable:hover {
+      border: 1px solid $std_sub_4;
       background-color: $std_sub_4;
       color: $std_sub_2;
       cursor: not-allowed;
@@ -111,14 +155,16 @@
       box-shadow: none;
     }
     .iconfont {
+      display: inline-block;
       position: relative;
-      vertical-align: middle;
+      vertical-align: top;
       z-index: 1;
     }
     span {
       position: relative;
       z-index: 1;
       padding: 0 4px;
+      font-size: 12px;
     }
   }
 </style>

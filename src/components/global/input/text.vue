@@ -1,7 +1,7 @@
 <template lang="jade">
   label.global__input(
     :class="{ 'read-only': readOnly, 'has-icon': icon }",
-    :style="{ width: width + 'px' }"
+    :style="style"
   )
     input(
       type="text",
@@ -20,12 +20,16 @@
 </template>
 
 <script>
+  function distanceStyle (d) {
+    return typeof d === 'number' ? d + 'px' : typeof d === 'string' ? d : ''
+  }
   export default {
     name: 'global-text',
     props: {
       name: String,
       value: [String, Number],
-      width: Number,
+      width: [String, Number],
+      height: [String, Number],
       placeholder: [String, Number],
       readOnly: {
         type: Boolean,
@@ -34,6 +38,13 @@
       icon: {
         type: String,
         default: 'icon-enter'
+      }
+    },
+    computed: {
+      style () {
+        let width = distanceStyle(this.width)
+        let height = distanceStyle(this.height)
+        return { width, height }
       }
     },
     data () {
@@ -89,11 +100,15 @@
       }
       &+.iconfont {
         position: absolute;
-        top: 1px;
+        top: 50%;
         right: 10px;
-        bottom: 1px;
+        height: 30px;
+        line-height: 30px;
+        margin-top: -15px; 
         display: none;
-        color: $std_main_A;;
+        color: $std_main_A;
+        line-height: 30px;
+        cursor: pointer;
       }
       &:focus+.iconfont {
         display: block;

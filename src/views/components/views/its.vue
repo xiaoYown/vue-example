@@ -1,15 +1,29 @@
 <template lang="jade">
   .wrap-components
     .ui-components-wrap
-      global-button(@click="btnBack")
-      global-button(:disable="true", :width="200")
+      global-button(
+        @click="btnBack"
+      )
+      global-button(
+        :disable="true",
+        :width="200",
+        :height="36"
+      )
       global-button(
         :type="'ghost'",
-        :disable="true",
         :text="'取消'",
+        :height="40",
+        :width="200",
+        :icon="'icon-image'",
         @click="btnBack(1)"
       )
       global-button(
+        :text="'上传图片'",
+        :icon="'icon-image'",
+        @click="btnBack"
+      )
+      global-button(
+        :type="'fill'",
         :text="'上传图片'",
         :icon="'icon-image'",
         @click="btnBack"
@@ -62,7 +76,7 @@
         @search="change"
       )
     .ui-components-wrap
-      .color__box-choose
+      global-select(:width="160",:zIndex="10",:selected="selected",@select="change",:list="selectList")
 </template>
 
 <script>
@@ -78,13 +92,30 @@
       'global-checkbox': require('@/components/global/input/checkbox'),
       'global-radio': require('@/components/global/input/radio'),
       'global-text': require('@/components/global/input/text'),
-      'global-search': require('@/components/global/search/normal')
+      'global-search': require('@/components/global/search/normal'),
+      'global-select': require('@/components/global/select/normal')
     },
     data () {
       return {
         switchChecked: false,
         checkboxChecked: true,
-        radioChecked: true
+        radioChecked: true,
+        selected: '1',
+        selectList: [
+          {
+            id: '1',
+            txt: '11'
+          }, {
+            id: '2',
+            txt: '22'
+          }, {
+            id: '3',
+            txt: '33'
+          }, {
+            id: '4',
+            txt: '44'
+          }
+        ]
       }
     },
     methods: {
@@ -97,6 +128,9 @@
         })
       },
       change (data) {
+        if (data.id) {
+          this.selected = data.id
+        }
         console.log(data)
       }
     }

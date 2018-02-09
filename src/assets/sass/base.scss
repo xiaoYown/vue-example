@@ -24,3 +24,34 @@
   width: 800px;
   margin: 0 auto;
 }
+
+/* 滚动条 */
+%scroll-bar {
+  &::-webkit-scrollbar {
+    background-color: #f1f1f1 !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d3d3d3 !important;
+  }
+}
+.scroll__bar-8 {
+  &::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px !important;
+  }
+  @extend %scroll-bar;
+}
+.scroll__bar-4 {
+  &::-webkit-scrollbar {
+    width: 4px !important;
+    height: 4px !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px !important;
+  }
+  @extend %scroll-bar;
+}
+

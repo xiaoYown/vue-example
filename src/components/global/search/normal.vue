@@ -1,7 +1,7 @@
 <template lang="jade">
   .global__search(
     :class="'search--' + type",
-    :style="{ width: this.width + 'px' }",
+    :style="style"
   )
     input.global__search-input(
       type="text",
@@ -10,15 +10,18 @@
       @input="input",
       @keydown.13="enter"
     )
-    i.global__search-icon(@click="search")
-      .iconfont.icon-search
+    .global__search-icon(@click="search")
+      i.iconfont.icon-search
+      // v-show="val",
     i.iconfont.icon-guanbi(
-      v-show="val",
-      @click="clear"
+      @mousedown="clear"
     )
 </template>
 
 <script>
+  function distanceStyle (d) {
+    return typeof d === 'number' ? d + 'px' : typeof d === 'string' ? d : ''
+  }
   export default {
     name: 'global-search',
     props: {
@@ -26,10 +29,18 @@
         type: String,
         default: 'default' // ghost
       },
-      width: Number,
+      width: [Number, String],
+      height: [Number, String],
       name: String,
       placeholder: [String, Number],
       value: [String, Number]
+    },
+    computed: {
+      style () {
+        let width = distanceStyle(this.width)
+        let height = distanceStyle(this.height)
+        return { width, height }
+      }
     },
     data () {
       return {
@@ -40,8 +51,9 @@
       this.val = this.value
     },
     methods: {
-      clear () { // 清除 value
+      clear (event) { // 清除 value
         this.val = ''
+        this.send('clear', event)
       },
       input (event) { // value 改变时回传事件
         this.send('input', event)
@@ -69,12 +81,22 @@
   .global__search {
     position: relative;
     display: block;
+    height: 30px;
+    .iconfont {
+      position: absolute;
+      top: 50%;
+      margin-top: -15px;
+      line-height: 30px;
+    }
     &-input {
+      vertical-align: top;
       width: 100%;
-      height: 30px;
+      height: 100%;
       box-sizing: border-box;
-      &:focus+.global__search-icon+.iconfont {
-        display: block;
+      &:focus+.global__search-icon {
+        &+.iconfont {
+          display: block;
+        }
       }
     }
     &-icon {
@@ -87,6 +109,8 @@
       text-align: center;
       cursor: pointer;
       .iconfont {
+        left: 0;
+        width: 100%;
         color: #fff;
         font-size: 16px;
       }
@@ -103,8 +127,13 @@
         padding: 0 58px 0 10px;
         border: 1px solid $std_sub_4;
         border-radius: 2px;
-        &:focus {
+        &:hover, &:focus {
           border: 1px solid $std_main_A;
+          &+.global__search-icon {
+            .iconfont {
+              color: $std_main_A;
+            }
+          }
         }
       }
       .global__search-icon {
@@ -119,11 +148,11 @@
       }
     }
     .icon-guanbi {
-      display: none;
-      position: absolute;
-      top: 1px;
+      // display: none;
+      // position: absolute;
+      // top: 1px;
       right: 65px;
-      bottom: 1px;
+      // bottom: 1px;
       font-size: 12px;
       cursor: pointer;
     }
