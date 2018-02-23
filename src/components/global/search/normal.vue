@@ -12,8 +12,8 @@
     )
     .global__search-icon(@click="search")
       i.iconfont.icon-search
-      // v-show="val",
     i.iconfont.icon-guanbi(
+      v-show="val",
       @mousedown="clear"
     )
 </template>
@@ -93,11 +93,6 @@
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      &:focus+.global__search-icon {
-        &+.iconfont {
-          display: block;
-        }
-      }
     }
     &-icon {
       position: absolute;
@@ -148,11 +143,7 @@
       }
     }
     .icon-guanbi {
-      // display: none;
-      // position: absolute;
-      // top: 1px;
       right: 65px;
-      // bottom: 1px;
       font-size: 12px;
       cursor: pointer;
     }

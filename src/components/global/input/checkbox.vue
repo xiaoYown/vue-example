@@ -79,14 +79,13 @@
         .global__checkbox-animation {
           width: 100%;
         }
+        .iconfont {
+          color: $std_main_A;
+        }
       }
-      // .iconfont {
-      //   display: inline-block;
-      // }
-      // .iconfont {
-      //   display: none;
-      //   margin-left: -2px;
-      // }
+      .iconfont {
+        font-size: 16px;
+      }
     }
     &-animation {
       width: 0;
@@ -94,8 +93,9 @@
       transition: all .2s; 
       .iconfont {
         position: relative;
-        font-size: 12px;
+        vertical-align: top;
         margin-left: -1px;
+        font-size: 12px;
       }
     }
   }

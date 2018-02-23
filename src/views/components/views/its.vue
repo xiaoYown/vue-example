@@ -77,6 +77,8 @@
       )
     .ui-components-wrap
       global-select(:width="160",:zIndex="10",:selected="selected",@select="change",:list="selectList")
+    .ui-components-wrap
+      global-select(:type="'line'",:width="80",:selected="selectStyle",:zIndex="9",@select="change")
 </template>
 
 <script>
@@ -101,6 +103,7 @@
         checkboxChecked: true,
         radioChecked: true,
         selected: '1',
+        selectStyle: 'solid',
         selectList: [
           {
             id: '1',
@@ -130,6 +133,9 @@
       change (data) {
         if (data.id) {
           this.selected = data.id
+          if (/solid|dashed|dotted/.test(data.id)) {
+            this.selectStyle = data.id
+          }
         }
         console.log(data)
       }

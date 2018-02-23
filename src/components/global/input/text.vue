@@ -28,9 +28,14 @@
     props: {
       name: String,
       value: [String, Number],
+      valueType: String, // init, float
       width: [String, Number],
       height: [String, Number],
       placeholder: [String, Number],
+      digit: { // float 时使用(保留小数位数)
+        type: Number,
+        default: 2
+      },
       readOnly: {
         type: Boolean,
         default: false
@@ -61,20 +66,54 @@
       this.val = this.value
     },
     methods: {
+      filter () {
+        if (this.valueType === 'int') {                   // 整数过滤
+          this.val = this.val.replace(/[^\d]+/g, '')
+        } else if (this.valueType === 'float') {          // 浮点数过滤
+          let val = this.val.replace(/[^\d^.]+/g, '')
+          let pot = val.match(/\./g)
+          let last = 0
+          if (pot && pot.length > 1) {                  // 非 \d\. 字符过滤
+            for (let i = 0; i < pot.length - 1; i++) {
+              last = val.lastIndexOf('.')
+              val = val.substring(0, last) + val.substring(last + 1)
+            }
+          }
+          if (pot) { // 位数保留
+            last = val.indexOf('.')
+            val = val.substring(0, last + this.digit + 1)
+          }
+          this.val = val
+        }
+      },
       input (event) {
+        this.filter()
         this.send('input', event)
       },
       enter (event) {
+        this.filter()
         this.send('enter', event)
       },
       blur (event) {
+        this.filter()
         this.send('blur', event)
       },
       send (evName, event) {
+        let val
+        if (this.val && this.valueType === 'int') {
+          val = parseInt(this.val, 10)
+        } else if (this.val && this.valueType === 'float') {
+          val = parseFloat(this.val)
+        } else {
+          val = this.val
+        }
+        if (isNaN(val)) {
+          val = 0
+        }
         this.$emit(evName, {
           event,
           name: this.name,
-          value: this.val
+          value: val
         })
       }
     }
