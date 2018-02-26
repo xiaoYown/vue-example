@@ -67,6 +67,8 @@
     },
     methods: {
       filter () {
+        this.val += ''
+
         if (this.valueType === 'int') {                   // 整数过滤
           this.val = this.val.replace(/[^\d]+/g, '')
         } else if (this.valueType === 'float') {          // 浮点数过滤
@@ -106,9 +108,6 @@
           val = parseFloat(this.val)
         } else {
           val = this.val
-        }
-        if (isNaN(val)) {
-          val = 0
         }
         this.$emit(evName, {
           event,
