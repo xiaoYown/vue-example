@@ -101,9 +101,12 @@
         background-color: $std_main_B;
       }
       // 阴影
+      &, &:active {
+        box-shadow: 0 2px 2px 0 rgba($std_main_G, .14), 0 3px 1px -2px rgba($std_main_G, .2), 0 1px 5px 0 rgba($std_main_G, .12);
+      }
       &:hover,
       &:active {
-        box-shadow: 0 5px 6px $std_main_G;
+        box-shadow: 0 14px 26px 0 rgba($std_main_G, .2), 0 4px 10px 0 rgba($std_main_G, .8), 0 8px 2px -5px rgba($std_main_G, 1);
       }
     }
     // 边框 -> 默认 按钮
