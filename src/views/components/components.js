@@ -5,7 +5,7 @@ import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
 
 import App from './app-components.vue'
-import lazy from 'vue-lazy-component'
+// import lazy from 'vue-lazy-component'
 import XyPopup from 'tools/vue-popup/main'
 import tip from 'tools/tip/main'
 import { getCookie } from 'tools/client'
@@ -19,11 +19,11 @@ Vue.use(XyPopup)
 Vue.use(tip)
 // Vue.use(VueResource)
 Vue.prototype.$http = axios
-Vue.use(lazy)
+// Vue.use(lazy)
 
 const routes = [
   {
-    path: '/components/',
+    path: '/components',
     name: 'components',
     component: require('./views/index.vue'),
     meta: {

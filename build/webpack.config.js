@@ -82,7 +82,19 @@ module.exports = {
 				exclude:  /node_modules|vue\/dist|vue-hot-reload-api|vue-router\/|vue-loader/,
 				loader: 'babel-loader?cacheDirectory',
 				options: {
-					presets: ['es2015']
+					presets: [['es2015', 'stage-2']]
+					// "plugins": [
+					// 	"syntax-dynamic-import",
+					// 	"transform-async-to-generator",
+					// 	"transform-regenerator",
+					// 	["transform-runtime",
+					// 	{
+					// 		"helpers": false,
+					// 		"polyfill": false,
+					// 		"regenerator": true,
+					// 		"moduleName": "babel-runtime"
+					// 	}]
+					// ]
 				}
 			},
 			{
