@@ -5,6 +5,10 @@
         @click="btnBack"
       )
       global-button(
+        :loading="loading",
+        @click="loading = !loading"
+      )
+      global-button(
         :disable="true",
         :width="200",
         :height="36"
@@ -79,10 +83,23 @@
       global-select(:width="160",:zIndex="10",:selected="selected",@select="change",:list="selectList")
     .ui-components-wrap
       global-select(:type="'line'",:width="80",:selected="selectStyle",:zIndex="9",@select="change")
+    .ui-components-wrap
+      router-link.select.link(to="/components") 000000000
 </template>
 
 <script>
   require('sass/base.scss')
+
+  const jquery = require.ensure([], () => require('jquery'), 'jquery')
+
+  jquery.then($ => {
+    console.log($)
+  })
+
+  async function getWebUploader () {
+    let w = await require.ensure([], (require) => require('webuploader'), 'webuploader')
+    return w
+  }
 
   export default {
     name: 'its-ui',
@@ -99,6 +116,7 @@
     },
     data () {
       return {
+        loading: false,
         switchChecked: false,
         checkboxChecked: true,
         radioChecked: true,
@@ -120,6 +138,11 @@
           }
         ]
       }
+    },
+    created () {
+      getWebUploader().then(WebUploader => {
+        console.log(WebUploader)
+      })
     },
     methods: {
       btnBack (event) {

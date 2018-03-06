@@ -5,8 +5,11 @@
     @click="btnClick"
   )
     .global__btn-shadow(v-if="/default|fill/.test(type)")
+    i.iconfont.icon-loading(
+      v-if="loading"
+    )
     i.iconfont(
-      v-if="icon",
+      v-else-if="icon",
       :class="icon"
     )
     span {{text}}
@@ -28,6 +31,7 @@
         type: String,
         default: '确认'
       },
+      loading: Boolean,
       width: [Number, String],
       height: [Number, String],
       disable: Boolean,
@@ -56,7 +60,6 @@
   .global__btn {
     position: relative;
     display: inline-block;
-    vertical-align: middle;
     overflow: hidden;
     min-width: 85px;
     height: 28px;
@@ -143,6 +146,7 @@
         transition: transform .3s ease-in-out;
       }
     }
+    // 禁止
     &.btn--disable {
       .global__btn-shadow {
         display: none;
@@ -156,6 +160,16 @@
       cursor: not-allowed;
       border: none;
       box-shadow: none;
+    }
+    // 加载中
+    @keyframes btn-loading {
+      from { transform: rotate(0); }
+      to { transform: rotate(360deg); }
+    }
+    .icon-loading {
+      width: 17px;
+      height: 17px;
+      animation: btn-loading 1s linear infinite;
     }
     .iconfont {
       display: inline-block;
