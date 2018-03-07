@@ -9,7 +9,7 @@
       v-model="val",
       @input="input",
       @blur="blur",
-      @keydown.13="enter",
+      @keydown.enter="enter",
       :readOnly="readOnly"
     )
     i.iconfont(

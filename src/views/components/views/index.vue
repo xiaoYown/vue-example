@@ -75,7 +75,7 @@
         | &nbsp;
         button(@click="cmpPopup('alert')") alert
     .ui-components-wrap
-      #picker 选择文件
+      #picker 选择
     .ui-components-wrap
       div(style="height: 20px;background: #efefef;")
         .upload--inner(:style="uploadProgress") {{ percentShow }}
@@ -89,10 +89,10 @@
   import config from 'config/config'
   // import WebUploader from 'webuploader'
   // const WebUploader = resolve => require.ensure([], () => resolve(require('webuploader')), 'webuploader')
-  async function getWebUploader () {
-    let w = await require.ensure([], (require) => require('webuploader'), 'webuploader')
-    return w
-  }
+  // async function getWebUploader () {
+  //   let w = await require.ensure([], (require) => require('webuploader'), 'webuploader')
+  //   return w
+  // }
 
   export default {
     name: 'xy-ui',
@@ -148,14 +148,17 @@
         uploadProgress: {
           width: 0
         },
-        percentShow: '0%'
+        percentShow: '0%',
+        webUploaderLoaded: false
       }
     },
     created () {
       this.pageLink(this.pagesInfo)
+      console.log(this.$webUploader)
     },
     mounted () {
-      this.uploadOn()
+      this.bindWebUploader()
+      // this.uploadOn()
     },
     methods: {
       openChange (bool) {
@@ -240,53 +243,109 @@
             break
         }
       },
-      uploadOn () {
-        getWebUploader().then(WebUploader => {
-          var taskId = WebUploader.Base.guid() // 产生文件唯一标识符task_id
-          var uploader = WebUploader.create({
-            server: config.apiUrl + '/file/upload_file', // 上传分片地址
-            pick: '#picker',
-            auto: true,
-            chunked: true,
-            chunkSize: 20 * 1024 * 1024,
-            chunkRetry: 3,
-            threads: 1,
-            duplicate: true,
-            formData: { // 上传分片的http请求中一同携带的数据
-              task_id: taskId
-            }
+      // 绑定 uploader 组件
+      bindWebUploader () {
+        if (this.$webUploader && !this.webUploaderLoaded) {
+          this._uploadOn()
+          this.webUploaderLoaded = 1
+        } else if (!this.webUploaderLoaded) {
+          setTimeout(this.bindWebUploader.bind(this), 100)
+        }
+      },
+      // 使用全局
+      _uploadOn () {
+        var taskId = this.$webUploader.Base.guid() // 产生文件唯一标识符task_id
+        var uploader = this.$webUploader.create({
+          server: config.apiUrl + '/file/upload_file', // 上传分片地址
+          pick: '#picker',
+          auto: true,
+          chunked: true,
+          chunkSize: 20 * 1024 * 1024,
+          chunkRetry: 3,
+          threads: 1,
+          duplicate: true,
+          formData: { // 上传分片的http请求中一同携带的数据
+            task_id: taskId
+          }
+        })
+        uploader.on('startUpload', function () { // 开始上传时，调用该方法
+          console.log('start')
+        })
+        uploader.on('uploadProgress', (file, percentage) => { // 一个分片上传成功后，调用该方法
+          console.log(percentage)
+          this.setPercent(percentage)
+        })
+        uploader.on('uploadSuccess', file => { // 整个文件的所有分片都上传成功后，调用该方法
+          this.setPercent(1.01)
+          var data = {
+            'task_id': taskId,
+            'ext': file.source['ext'],
+            'type': file.source['type']
+          }
+          this.$http.get(config.apiUrl + '/file/upload_merge', {
+            params: { ...data }
           })
-          uploader.on('startUpload', function () { // 开始上传时，调用该方法
-            console.log('start')
-          })
-          uploader.on('uploadProgress', (file, percentage) => { // 一个分片上传成功后，调用该方法
-            console.log(percentage)
-            this.setPercent(percentage)
-          })
-          uploader.on('uploadSuccess', file => { // 整个文件的所有分片都上传成功后，调用该方法
-            this.setPercent(1.01)
-            var data = {
-              'task_id': taskId,
-              'ext': file.source['ext'],
-              'type': file.source['type']
-            }
-            this.$http.get(config.apiUrl + '/file/upload_merge', {
-              params: { ...data }
+            .then(res => {
+              console.log(res)
+            }, err => {
+              console.log(err)
             })
-              .then(res => {
-                console.log(res)
-              }, err => {
-                console.log(err)
-              })
-          })
-          uploader.on('uploadError', function (file) { // 上传过程中发生异常，调用该方法
-            console.log('error')
-          })
-          uploader.on('uploadComplete', function (file) { // 上传结束，无论文件最终是否上传成功，该方法都会被调用
-            console.log('end')
-          })
+        })
+        uploader.on('uploadError', function (file) { // 上传过程中发生异常，调用该方法
+          console.log('error')
+        })
+        uploader.on('uploadComplete', function (file) { // 上传结束，无论文件最终是否上传成功，该方法都会被调用
+          console.log('end')
         })
       },
+      // 直接异步绑定
+      // uploadOn () {
+      //   getWebUploader().then(WebUploader => {
+      //     var taskId = WebUploader.Base.guid() // 产生文件唯一标识符task_id
+      //     var uploader = WebUploader.create({
+      //       server: config.apiUrl + '/file/upload_file', // 上传分片地址
+      //       pick: '#picker',
+      //       auto: true,
+      //       chunked: true,
+      //       chunkSize: 20 * 1024 * 1024,
+      //       chunkRetry: 3,
+      //       threads: 1,
+      //       duplicate: true,
+      //       formData: { // 上传分片的http请求中一同携带的数据
+      //         task_id: taskId
+      //       }
+      //     })
+      //     uploader.on('startUpload', function () { // 开始上传时，调用该方法
+      //       console.log('start')
+      //     })
+      //     uploader.on('uploadProgress', (file, percentage) => { // 一个分片上传成功后，调用该方法
+      //       console.log(percentage)
+      //       this.setPercent(percentage)
+      //     })
+      //     uploader.on('uploadSuccess', file => { // 整个文件的所有分片都上传成功后，调用该方法
+      //       this.setPercent(1.01)
+      //       var data = {
+      //         'task_id': taskId,
+      //         'ext': file.source['ext'],
+      //         'type': file.source['type']
+      //       }
+      //       this.$http.get(config.apiUrl + '/file/upload_merge', {
+      //         params: { ...data }
+      //       })
+      //         .then(res => {
+      //           console.log(res)
+      //         }, err => {
+      //           console.log(err)
+      //         })
+      //     })
+      //     uploader.on('uploadError', function (file) { // 上传过程中发生异常，调用该方法
+      //       console.log('error')
+      //     })
+      //     uploader.on('uploadComplete', function (file) { // 上传结束，无论文件最终是否上传成功，该方法都会被调用
+      //       console.log('end')
+      //     })
+      //   })
+      // },
       setPercent (percent) {
         let percentage = Math.floor(percent * 100) - 1
         percentage = percentage < 0 ? 0 : percentage > 100 ? 100 : percentage
