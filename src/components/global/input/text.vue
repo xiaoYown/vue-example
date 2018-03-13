@@ -68,7 +68,6 @@
     methods: {
       filter () {
         this.val += ''
-
         if (this.valueType === 'int') {                   // 整数过滤
           this.val = this.val.replace(/[^\d]+/g, '')
         } else if (this.valueType === 'float') {          // 浮点数过滤
@@ -131,8 +130,11 @@
       height: 100%;
       padding: 0 10px;
       box-sizing: border-box;
-      border: 1px solid $std_sub_5;
+      border: 1px solid $std_sub_4;
       border-radius: 2px;
+      &::-webkit-input-placeholder{
+        color: $std_sub_3;
+      }
       &:focus {
         border: 1px solid $std_main_A;
       }

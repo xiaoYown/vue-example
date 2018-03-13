@@ -47,11 +47,17 @@
         @change="change"
       )
     .ui-components-wrap
-      global-checkbox(:checked="checkboxChecked")
+      label
+        global-checkbox(:checked="checkboxChecked")
+        span 123
     .ui-components-wrap
       // global-radio(:name="'radio'",:checked="true")
-      global-radio(:name="'radio'",:checked="radioChecked")
-      global-radio(:name="'radio'")
+      label
+        global-radio(:name="'radio'",:checked="radioChecked")
+        span 123
+      label
+        global-radio(:name="'radio'")
+        span 234
     .ui-components-wrap
       global-slider
     .ui-components-wrap
@@ -80,21 +86,17 @@
         @search="change"
       )
     .ui-components-wrap
-      global-select(:width="160",:zIndex="10",:selected="selected",@select="change",:list="selectList")
+      global-select(:width="200",:zIndex="10",:selected="selected",@select="change",:list="selectList")
     .ui-components-wrap
-      global-select(:type="'line'",:width="80",:selected="selectStyle",:zIndex="9",@select="change")
+      select-input(:zIndex="11",:width="200",:list="selectList",@select="change")
     .ui-components-wrap
-      router-link.select.link(to="/components") 000000000
+      select-input(:zIndex="10",:width="200",:list="selectList",:value="10",:selected="selected",@select="change")
+    .ui-components-wrap
+      global-select(:type="'line'",:width="200",:selected="selectStyle",:zIndex="9",@select="change")
 </template>
 
 <script>
   require('sass/base.scss')
-
-  const jquery = require.ensure([], () => require('jquery'), 'jquery')
-
-  jquery.then($ => {
-    console.log($)
-  })
 
   async function getWebUploader () {
     let w = await require.ensure([], (require) => require('webuploader'), 'webuploader')
@@ -112,7 +114,8 @@
       'global-radio': require('@/components/global/input/radio'),
       'global-text': require('@/components/global/input/text'),
       'global-search': require('@/components/global/search/normal'),
-      'global-select': require('@/components/global/select/normal')
+      'global-select': require('@/components/global/select/normal'),
+      'select-input': require('@/components/global/select/input')
     },
     data () {
       return {
@@ -134,14 +137,14 @@
             txt: '33'
           }, {
             id: '4',
-            txt: '44'
+            txt: '444444444444444444444444444444444'
           }
         ]
       }
     },
     created () {
       getWebUploader().then(WebUploader => {
-        console.log(WebUploader)
+        // console.log(WebUploader)
       })
     },
     methods: {

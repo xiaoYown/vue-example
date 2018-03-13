@@ -8,7 +8,6 @@ import App from './app-components.vue'
 // import lazy from 'vue-lazy-component'
 import XyPopup from 'tools/vue-popup/main'
 import tip from 'tools/tip/main'
-import plugins from './plugins'
 import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
@@ -18,7 +17,6 @@ Vue.component('el-global', require('components/ui/global.vue'))
 Vue.use(VueRouter)
 Vue.use(XyPopup)
 Vue.use(tip)
-Vue.use(plugins)
 // Vue.use(VueResource)
 Vue.prototype.$http = axios
 // Vue.use(lazy)

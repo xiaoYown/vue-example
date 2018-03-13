@@ -25,7 +25,7 @@
           :key="index",
           @mousedown="select(option, index)"
         )
-          .global__select-line(:style="{'border-top-style': option.id }")
+          .global__select-line(:style="{'border-top-style': option[selectKey] }")
       ul.global__select-list.scroll__bar-4(v-else="type === 'normal'")
         li.global__select-option(
           v-for="option, index in list",
@@ -44,6 +44,10 @@
       zIndex: Number,
       list: Array,
       selected: [Number, String],
+      selectKey: { // 以此参数作为 被选中选项判断依据 key
+        type: String,
+        default: 'id'
+      },
       type: {
         type: String,
         default: 'normal' // line
@@ -94,7 +98,7 @@
         this.selectedShow = this.placeholder
 
         for (let i = 0, len = list.length; i < len; i++) {
-          if (this.selected === list[i].id) {
+          if (this.selected === list[i][this.selectKey]) {
             this.selectedShow = list[i].txt
             break
           }
@@ -186,6 +190,7 @@
       border: 1px solid $std_sub_4;
       border-radius: 2px;
       background-color: #fff;
+      box-shadow: 0 1px 3px 0 rgba($std_sub_3, .6);
       .selecting & {
         display: block;
       }
