@@ -16,6 +16,7 @@
     name: 'global-radio',
     props: {
       name: String,
+      mark: [String, Number],
       checked: {
         type: Boolean,
         default: false
@@ -38,6 +39,7 @@
       check () {
         this.$emit('change', {
           name: this.name,
+          mark: this.mark,
           checked: this.$refs.radio.checked
         })
       }

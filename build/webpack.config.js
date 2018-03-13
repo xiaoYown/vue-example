@@ -56,22 +56,6 @@ module.exports = {
       	test: /\.vue$/,
       	loader: 'vue-loader',
       	options: vueLoaderConfig
-      	// options: {
-      	// 	loaders: {
-      	// 		css: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-      	// 			use: 'css-loader',
-      	// 			fallback: 'style-loader'
-      	// 		})),
-      	// 		scss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-      	// 			use: ['css-loader', 'postcss-loader', 'sass-loader'],
-      	// 			fallback: 'style-loader'
-      	// 		})),
-      	// 		postcss: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-      	// 			use: ['css-loader', 'postcss-loader'],
-      	// 			fallback: 'style-loader'
-      	// 		}))
-      	// 	}
-      	// }
       },
       // {
       //   test: /\.vue$/,
@@ -97,17 +81,17 @@ module.exports = {
           // ]
         }
       },
-      {
-        test: /\.ts$/,
-        loader: 'ts-loader',
-        options: {
-          // appendTsSuffixTo: [/\.vue$/],
-          transpileOnly: true
-        }
-      },
+      // {
+      //   test: /\.ts$/,
+      //   loader: 'ts-loader',
+      //   options: {
+      //     // appendTsSuffixTo: [/\.vue$/],
+      //     transpileOnly: true
+      //   }
+      // },
       {
         test: /\.js|\.vue$/,
-        exclude:  /node_modules/,
+        exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
           formatter: require('eslint-friendly-formatter')

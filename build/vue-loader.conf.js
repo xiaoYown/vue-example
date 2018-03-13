@@ -13,8 +13,7 @@ let cssLoader = utils.cssLoaders({
 })
 module.exports = {
   loaders: {
-    ...cssLoader,
-    // js: 'ts-loader'
+    ...cssLoader
   },
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,

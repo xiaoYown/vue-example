@@ -50,13 +50,16 @@
       label
         global-checkbox(:checked="checkboxChecked")
         span 123
+      label
+        global-checkbox(:checked="true",:disable="true")
+        span 234
     .ui-components-wrap
       // global-radio(:name="'radio'",:checked="true")
       label
-        global-radio(:name="'radio'",:checked="radioChecked")
+        global-radio(:mark="1",:name="'radio'",:checked="radioChecked",@change="change")
         span 123
       label
-        global-radio(:name="'radio'")
+        global-radio(:mark="2",:name="'radio'",@change="change")
         span 234
     .ui-components-wrap
       global-slider

@@ -9,8 +9,9 @@
     "socket"
   ],
   "dependencies": {
+    "av-ts": "^0.9.2",
     "axios": "0.16.2",
-    "jquery": "3.2.1",
+    "jquery": "^3.2.1",
     "npm": "5.6.0",
     "qs": "6.5.0",
     "react-cookie": "1.0.4",
@@ -20,7 +21,7 @@
     "vue-router": "2.6.0",
     "vue-socket.io": "2.1.1-a",
     "vuex": "2.3.1",
-    "webuploader": "0.1.8"
+    "webuploader": "^0.1.8"
   },
   "devDependencies": {
     "autoprefixer": "6.5.2",
@@ -67,7 +68,8 @@
     "style-loader": "0.13.1",
     "stylus": "0.54.5",
     "stylus-loader": "2.4.0",
-    "ts-loader": "4.0.1",
+    "ts-loader": "^4.0.1",
+    "typescript-eslint-parser": "^14.0.0",
     "url-loader": "0.5.7",
     "vue-html-loader": "1.2.3",
     "vue-lazy-component": "0.1.5",

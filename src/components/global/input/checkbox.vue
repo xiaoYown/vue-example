@@ -3,7 +3,7 @@
     :class="{ checked: currentChecked }",
     @click="check"
   )
-    .global__checkbox-box
+    .global__checkbox-box(:class="{ disable: disable }")
       .global__checkbox-animation
         i.iconfont &#xe613;
 </template>
@@ -13,6 +13,11 @@
     name: 'global-checkbox',
     props: {
       name: String,
+      index: Number,
+      disable: {
+        type: Boolean,
+        default: false
+      },
       checked: {
         type: Boolean,
         default: false
@@ -32,10 +37,18 @@
       }
     },
     methods: {
+      prevent (event) { // disable 状态下禁止 disable 状态改变
+        if (this.disable) {
+          event.preventDefualt()
+        }
+      },
       check () {
-        this.currentChecked = !this.currentChecked
+        if (!this.disable) {
+          this.currentChecked = !this.currentChecked
+        }
         this.$emit('change', {
           name: this.name,
+          index: this.index,
           checked: this.currentChecked
         })
       }
@@ -51,7 +64,7 @@
     width: 12px;
     height: 12px;
     &.checked &-box {
-      border: 1px solid $std_main_A;
+      border-color: $std_main_A;
       .global__checkbox-animation {
         width: 100%;
       }
@@ -69,6 +82,12 @@
       text-align: center;
       color: $std_main_A;
       line-height: 12px;
+      &.disable {
+        border-color: $std_sub_4 !important;
+        .iconfont {
+          color: $std_sub_4 !important;
+        }
+      }
       .iconfont {
         font-size: 16px;
       }

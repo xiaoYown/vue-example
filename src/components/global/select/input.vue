@@ -94,17 +94,17 @@
     },
     created () {
       this.setTxt()
-      window.addEventListener('mousedown', this.hide, false)
+      window.addEventListener('mousedown', this.close, false)
     },
     beforeDestroy () {
-      window.removeEventListener('mousedown', this.hide, false)
+      window.removeEventListener('mousedown', this.close, false)
     },
     methods: {
       setTxt () {
         this.val = this.value || ''
         this.txtShow = this.value || '请选择'
       },
-      hide (event) { // 点击下拉框外部时直接进行隐藏
+      close (event) { // 点击下拉框外部时直接进行隐藏
         if (event.target !== this.$refs.control) { // 点击目标元素非自身时进行隐藏
           this.show(false)
         }
