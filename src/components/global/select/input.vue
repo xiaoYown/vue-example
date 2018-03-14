@@ -1,21 +1,21 @@
 <template lang="jade">
-  section.p-cdt__select(
+  section.p-select_input(
     :class="{ selecting: isShow }",
     :style="wrapStyle"
   )
-    .p-cdt__select-checked
+    .p-select_input-checked
       span {{ txtShow }}
       i.iconfont.icon-triangle-b
-      .p-cdt__select-control(
+      .p-select_input-control(
         ref="control",
         @mousedown="show('switch')"
       )
-    .p-cdt__select-wrap(
+    .p-select_input-wrap(
       :style="{ zIndex: zIndex }",
       @mousedown.stop=""
     )
-      h4.p-cdt__select-title {{ title1 }}：
-      .p-cdt__select-input
+      h4.p-select_input-title {{ title1 }}：
+      .p-select_input-input
         global-text(
           :value="val",
           :icon="''",
@@ -25,9 +25,9 @@
           @input="input"
         )
         span(:class="{ active: val }",@click="enter") 完成
-      h4.p-cdt__select-title {{ title2 }}：
-      ul.p-cdt__select-list.scroll__bar-4
-        li.p-cdt__select-option(
+      h4.p-select_input-title {{ title2 }}：
+      ul.p-select_input-list.scroll__bar-4
+        li.p-select_input-option(
           v-for="option, index in list",
           :key="index",
           @click="select(option, index)"
@@ -143,7 +143,7 @@
 <style lang="sass">
   @import '../../../assets/sass/theme';
 
-  .p-cdt__select {
+  .p-select_input {
     position: relative;
     font-size: 12px;
     line-height: normal;

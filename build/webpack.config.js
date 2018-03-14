@@ -7,26 +7,26 @@ const config  = 	require('../config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 搭配html-webapck-plugin使用,将css作为chunk追加到对应html中
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HappyPack = require('happypack')
-const happyThreadPool = HappyPack.ThreadPool({ size: 25 })
+// const HappyPack = require('happypack')
+// const happyThreadPool = HappyPack.ThreadPool({ size: 25 })
 const vueLoaderConfig = require('./vue-loader.conf')
 
 const isPro = process.env.NODE_ENV == 'production'
 
-function createHappyPlugin(id, loaders) {
-  console.log('id', id)
-  return new HappyPack({
-    id: id,
-    loaders: loaders,
-    threadPool: happyThreadPool,
+// function createHappyPlugin(id, loaders) {
+//   console.log('id', id)
+//   return new HappyPack({
+//     id: id,
+//     loaders: loaders,
+//     threadPool: happyThreadPool,
 
-    // disable happy caching with HAPPY_CACHE=0
-    cache: true,
+//     // disable happy caching with HAPPY_CACHE=0
+//     cache: true,
 
-    // make happy more verbose with HAPPY_VERBOSE=1
-    verbose: process.env.HAPPY_VERBOSE === '1',
-  });
-}
+//     // make happy more verbose with HAPPY_VERBOSE=1
+//     verbose: process.env.HAPPY_VERBOSE === '1',
+//   });
+// }
 
 function getEntry(globPath) {
     var entries = {}, basename;
