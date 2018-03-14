@@ -120,7 +120,6 @@
         this.val = data.value
       },
       select (option, index) { // 选择下拉, 回传 name, index 以及所有该选项属性
-        // this.txtShow = option[this.txtKey]
         this.show(false)
         this.$emit('select', {
           ...option,
@@ -130,7 +129,6 @@
       },
       enter () { // keydown enter 时, 以及点击完成时回传
         this.show(false)
-        // this.txtShow = this.val || '请选择'
         this.$emit('enter', {
           value: this.val,
           name: this.name
