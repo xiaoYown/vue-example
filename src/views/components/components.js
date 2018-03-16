@@ -14,6 +14,17 @@ import store from 'Store/demo'
 // 此处注册后可全局直接引入
 Vue.component('el-global', require('components/ui/global.vue'))
 
+Vue.component('global-btn', require('@/components/global/button/normal'))
+Vue.component('global-collapse', require('@/components/global/collapse/normal'))
+Vue.component('global-switch', require('@/components/global/switch/normal'))
+Vue.component('global-slider', require('@/components/global/slider/normal'))
+Vue.component('global-checkbox', require('@/components/global/input/checkbox'))
+Vue.component('global-radio', require('@/components/global/input/radio'))
+Vue.component('global-text', require('@/components/global/input/text'))
+Vue.component('global-search', require('@/components/global/search/normal'))
+Vue.component('global-select', require('@/components/global/select/normal'))
+Vue.component('global-select-input', require('@/components/global/select/input'))
+
 Vue.use(VueRouter)
 Vue.use(XyPopup)
 Vue.use(tip)

@@ -1,19 +1,19 @@
 <template lang="jade">
   .wrap-components
     .ui-components-wrap
-      global-button(
+      global-btn(
         @click="btnBack"
       )
-      global-button(
+      global-btn(
         :loading="loading",
         @click="loading = !loading"
       )
-      global-button(
+      global-btn(
         :disable="true",
         :width="200",
         :height="36"
       )
-      global-button(
+      global-btn(
         :type="'ghost'",
         :text="'取消'",
         :height="40",
@@ -21,12 +21,12 @@
         :icon="'icon-image'",
         @click="btnBack(1)"
       )
-      global-button(
+      global-btn(
         :text="'上传图片'",
         :icon="'icon-image'",
         @click="btnBack"
       )
-      global-button(
+      global-btn(
         :type="'fill'",
         :text="'上传图片'",
         :icon="'icon-image'",
@@ -89,13 +89,44 @@
         @search="change"
       )
     .ui-components-wrap
-      global-select(:width="200",:zIndex="10",:selected="selected",@select="change",:list="selectList")
+      global-select(
+        :type="'line'",
+        :width="200",
+        :selected="selectStyle",
+        :zIndex="9",
+        @select="change"
+      )
     .ui-components-wrap
-      select-input(:zIndex="11",:width="200",:list="selectList",@select="change")
+      global-select(
+        :width="200",
+        :zIndex="10",
+        :selected="selected",
+        :list="selectList",
+        @select="change"
+      )
     .ui-components-wrap
-      select-input(:zIndex="10",:width="200",:list="selectList",:value="10",:selected="selected",@select="change")
+      p-add-condition(
+        :zIndex="10"
+      )
     .ui-components-wrap
-      global-select(:type="'line'",:width="200",:selected="selectStyle",:zIndex="9",@select="change")
+      global-select-input(
+        :zIndex="11",
+        :width="200",
+        :list="selectList",
+        @select="change",
+        @enter="change"
+      )
+    .ui-components-wrap
+      global-select-input(
+        :zIndex="10",
+        :width="200",
+        :list="selectList",
+        :value="10",
+        :txtKey="'name'",
+        :selected="selected",
+        @select="change"
+      )
+    
 </template>
 
 <script>
@@ -109,16 +140,7 @@
   export default {
     name: 'its-ui',
     components: {
-      'global-button': require('@/components/global/button/normal'),
-      'global-collapse': require('@/components/global/collapse/normal'),
-      'global-switch': require('@/components/global/switch/normal'),
-      'global-slider': require('@/components/global/slider/normal'),
-      'global-checkbox': require('@/components/global/input/checkbox'),
-      'global-radio': require('@/components/global/input/radio'),
-      'global-text': require('@/components/global/input/text'),
-      'global-search': require('@/components/global/search/normal'),
-      'global-select': require('@/components/global/select/normal'),
-      'select-input': require('@/components/global/select/input')
+      'p-add-condition': require('../mixin/addCondition')
     },
     data () {
       return {
@@ -126,20 +148,25 @@
         switchChecked: false,
         checkboxChecked: true,
         radioChecked: true,
+        selectInputVal: 10,
         selected: '1',
         selectStyle: 'solid',
         selectList: [
           {
             id: '1',
+            name: '11',
             txt: '11'
           }, {
             id: '2',
+            name: '22',
             txt: '22'
           }, {
             id: '3',
+            name: '33',
             txt: '33'
           }, {
             id: '4',
+            name: '44',
             txt: '444444444444444444444444444444444'
           }
         ]
@@ -166,6 +193,10 @@
             this.selectStyle = data.id
           }
         }
+        // select input test
+        // if (true) {
+
+        // }
         console.log(data)
       }
     }
@@ -174,6 +205,7 @@
 
 <style lang="sass">
   .ui-components-wrap {
+    position: relative;
     padding: 10px;
     line-height: 30px;
     .global__btn {

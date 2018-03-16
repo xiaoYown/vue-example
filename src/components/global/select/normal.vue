@@ -39,7 +39,7 @@
   export default {
     name: 'global-select',
     props: {
-      name: String,
+      name: [String, Number],
       width: [Number, String],
       zIndex: Number,
       list: Array,
