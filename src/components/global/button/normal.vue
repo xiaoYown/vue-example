@@ -32,7 +32,10 @@
         default: '确认'
       },
       loading: Boolean,
-      width: [Number, String],
+      width: {
+        type: [Number, String],
+        default: 85
+      },
       height: [Number, String],
       disable: Boolean,
       icon: String
@@ -61,7 +64,6 @@
     position: relative;
     display: inline-block;
     overflow: hidden;
-    min-width: 85px;
     height: 28px;
     border-radius: 2px;
     text-align: center;
