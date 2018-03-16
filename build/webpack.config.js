@@ -50,7 +50,7 @@ module.exports = {
   },
   module: {
     // 配置脱离解析文件
-    noParse: /node_modules\/vue/,
+    noParse: /node_modules\//,
     rules: [
       {
       	test: /\.vue$/,

@@ -126,7 +126,7 @@
         :selected="selected",
         @select="change"
       )
-    
+
 </template>
 
 <script>

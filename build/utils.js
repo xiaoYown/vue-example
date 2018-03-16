@@ -25,7 +25,7 @@ exports.cssLoaders = function (options) {
     options: {
       sourceMap: options.sourceMap,
       plugins: (loader) => [
-        require('autoprefixer')(), //CSSä¯ÀÀÆ÷¼æÈİ
+        require('autoprefixer')()
       ]
     }
   }
