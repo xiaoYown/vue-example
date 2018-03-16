@@ -21,7 +21,6 @@
           :icon="''",
           :placeholder="placeholder2",
           @enter="enter",
-          @blur="",
           @input="input"
         )
         span(:class="{ active: val }",@click="enter") 完成
@@ -31,7 +30,7 @@
           v-for="option, index in list",
           :key="index",
           @click="select(option, index)"
-        ) {{ option.txt }}
+        ) {{ option[txtKey] }}
 
 </template>
 
@@ -42,7 +41,7 @@
       'global-text': require('@/components/global/input/text')
     },
     props: {
-      name: String,
+      mark: [String, Number],
       width: [Number, String],
       zIndex: Number,
       list: Array,
@@ -121,17 +120,19 @@
       },
       select (option, index) { // 选择下拉, 回传 name, index 以及所有该选项属性
         this.show(false)
+        this.txtShow = this.val = option[this.txtKey]
         this.$emit('select', {
           ...option,
           index,
-          name: this.name
+          mark: this.mark
         })
       },
       enter () { // keydown enter 时, 以及点击完成时回传
         this.show(false)
+        this.txtShow = this.val
         this.$emit('enter', {
           value: this.val,
-          name: this.name
+          mark: this.mark
         })
       }
     }
