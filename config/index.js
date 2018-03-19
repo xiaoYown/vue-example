@@ -10,7 +10,7 @@ module.exports = {
 		assetsPublicPath: '/',
 		productionSourceMap: false,
 		cacheBusting: true,
-    		cssSourceMap: true,
+    cssSourceMap: true,
 		chunks: [
 			// {
 			// 	node_module: true,
@@ -21,7 +21,7 @@ module.exports = {
 			{
 				node_module: true,
 				name: 'vendor'
-			},
+			}
 		]
 	},
 	dev: {
