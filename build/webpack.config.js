@@ -6,13 +6,14 @@ const config  = 	require('../config')
 // 帮助生成 HTML 文件，在 body 元素中，使用 script 来包含所有你的 webpack bundles，只需要在你的 webpack 配置文件中如下配置：
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 搭配html-webapck-plugin使用,将css作为chunk追加到对应html中
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // const HappyPack = require('happypack')
 // const happyThreadPool = HappyPack.ThreadPool({ size: 25 })
 const vueLoaderConfig = require('./vue-loader.conf')
 
 const isPro = process.env.NODE_ENV == 'production'
 
+const entries = require('../config/entries').entries
 // function createHappyPlugin(id, loaders) {
 //   console.log('id', id)
 //   return new HappyPack({
@@ -28,17 +29,17 @@ const isPro = process.env.NODE_ENV == 'production'
 //   });
 // }
 
-function getEntry(globPath) {
-    var entries = {}, basename;
-  glob.sync(globPath).forEach(function (entry) {
-    basename = path.basename(entry, path.extname(entry));
-    entries[basename] = [];
-    // entries[basename].push(entry);
-    entries[basename].push(entry);
-  });
-  return entries;
-}
-var entries = getEntry("./src/views/*/*.js"); // 获得入口js文件
+// function getEntry(globPath) {
+//     var entries = {}, basename;
+//   glob.sync(globPath).forEach(function (entry) {
+//     basename = path.basename(entry, path.extname(entry));
+//     entries[basename] = [];
+//     // entries[basename].push(entry);
+//     entries[basename].push(entry);
+//   });
+//   return entries;
+// }
+// var entries = getEntry("./src/views/*/*.js"); // 获得入口js文件
 
 module.exports = {
   entry: entries,
