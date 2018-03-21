@@ -6,6 +6,8 @@ const utils =	require('./utils');
 const config = require('../config');
 const baseWebpack =	require('./webpack.config');
 
+const entries = require('../config/entries').pageEntries
+
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
 
 process.env.NODE_ENV = config.dev.env;
@@ -19,7 +21,7 @@ var plugins = [
 	new webpack.HotModuleReplacementPlugin()
 ];
 
-Object.keys(baseWebpack.entry).forEach(function(name){
+Object.keys(entries).forEach(function(name){
 	baseWebpack.entry[name] = ['./build/dev-client'].concat(baseWebpack.entry[name]);
 
 	var plugin = new HtmlWebpackPlugin({
@@ -34,7 +36,6 @@ Object.keys(baseWebpack.entry).forEach(function(name){
 
 var newWebpack = merge(baseWebpack, {
 	module: {
-		noParse: /node_modules\/(vue)/,
 		rules: utils.styleLoaders({ sourceMap: true, usePostCSS: false })
 	},
 	devtool: 'cheap-module-eval-source-map',

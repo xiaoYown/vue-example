@@ -1,5 +1,12 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path');
+const bundleLibs = require('./bundle.config.json').libs
+// 第三方库资源设置
+const libs = {}
+
+for (let key in bundleLibs) {
+	libs[key] = bundleLibs[key].modules
+}
 
 module.exports = {
 	build: {
@@ -10,7 +17,7 @@ module.exports = {
 		assetsPublicPath: '/',
 		productionSourceMap: false,
 		cacheBusting: true,
-    		cssSourceMap: true,
+    cssSourceMap: true,
 		chunks: [
 			// {
 			// 	node_module: true,
@@ -21,7 +28,7 @@ module.exports = {
 			{
 				node_module: true,
 				name: 'vendor'
-			},
+			}
 		]
 	},
 	dev: {
@@ -44,5 +51,6 @@ module.exports = {
 		// In our experience, they generally work as expected,
 		// just be aware of this issue when enabling this option.
 		cssSourceMap: false
-	}
+	},
+	libs
 }

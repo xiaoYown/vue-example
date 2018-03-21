@@ -1,15 +1,33 @@
 <template lang="jade">
   .wrap-components
     .ui-components-wrap
-      global-button(@click="btnBack")
-      global-button(:disable="true", :width="200")
-      global-button(
-        :type="'ghost'",
+      global-btn(
+        @click="btnBack"
+      )
+      global-btn(
+        :loading="loading",
+        @click="loading = !loading"
+      )
+      global-btn(
         :disable="true",
+        :width="200",
+        :height="36"
+      )
+      global-btn(
+        :type="'ghost'",
         :text="'取消'",
+        :height="40",
+        :width="200",
+        :icon="'icon-image'",
         @click="btnBack(1)"
       )
-      global-button(
+      global-btn(
+        :text="'上传图片'",
+        :icon="'icon-image'",
+        @click="btnBack"
+      )
+      global-btn(
+        :type="'fill'",
         :text="'上传图片'",
         :icon="'icon-image'",
         @click="btnBack"
@@ -29,11 +47,20 @@
         @change="change"
       )
     .ui-components-wrap
-      global-checkbox(:checked="checkboxChecked")
+      label
+        global-checkbox(:checked="checkboxChecked")
+        span 123
+      label
+        global-checkbox(:checked="true",:disable="true")
+        span 234
     .ui-components-wrap
       // global-radio(:name="'radio'",:checked="true")
-      global-radio(:name="'radio'",:checked="radioChecked")
-      global-radio(:name="'radio'")
+      label
+        global-radio(:mark="1",:name="'radio'",:checked="radioChecked",@change="change")
+        span 123
+      label
+        global-radio(:mark="2",:name="'radio'",@change="change")
+        span 234
     .ui-components-wrap
       global-slider
     .ui-components-wrap
@@ -62,30 +89,93 @@
         @search="change"
       )
     .ui-components-wrap
-      .color__box-choose
+      global-select(
+        :type="'line'",
+        :width="200",
+        :selected="selectStyle",
+        :zIndex="9",
+        @select="change"
+      )
+    .ui-components-wrap
+      global-select(
+        :width="200",
+        :zIndex="10",
+        :selected="selected",
+        :list="selectList",
+        @select="change"
+      )
+    .ui-components-wrap
+      p-add-condition(
+        :zIndex="10"
+      )
+    .ui-components-wrap
+      global-select-input(
+        :zIndex="11",
+        :width="200",
+        :list="selectList",
+        @select="change",
+        @enter="change"
+      )
+    .ui-components-wrap
+      global-select-input(
+        :zIndex="10",
+        :width="200",
+        :list="selectList",
+        :value="10",
+        :txtKey="'name'",
+        :selected="selected",
+        @select="change"
+      )
+
 </template>
 
 <script>
   require('sass/base.scss')
 
+  async function getWebUploader () {
+    let w = await require.ensure([], (require) => require('webuploader'), 'webuploader')
+    return w
+  }
+
   export default {
     name: 'its-ui',
     components: {
-      'global-button': require('@/components/global/button/normal'),
-      'global-collapse': require('@/components/global/collapse/normal'),
-      'global-switch': require('@/components/global/switch/normal'),
-      'global-slider': require('@/components/global/slider/normal'),
-      'global-checkbox': require('@/components/global/input/checkbox'),
-      'global-radio': require('@/components/global/input/radio'),
-      'global-text': require('@/components/global/input/text'),
-      'global-search': require('@/components/global/search/normal')
+      'p-add-condition': require('../mixin/addCondition')
     },
     data () {
       return {
+        loading: false,
         switchChecked: false,
         checkboxChecked: true,
-        radioChecked: true
+        radioChecked: true,
+        selectInputVal: 10,
+        selected: '1',
+        selectStyle: 'solid',
+        selectList: [
+          {
+            id: '1',
+            name: '11',
+            txt: '11'
+          }, {
+            id: '2',
+            name: '22',
+            txt: '22'
+          }, {
+            id: '3',
+            name: '33',
+            txt: '33'
+          }, {
+            id: '4',
+            name: '44',
+            txt: '444444444444444444444444444444444'
+          }
+        ]
       }
+    },
+    created () {
+      getWebUploader().then(WebUploader => {
+        // console.log(WebUploader)
+      })
     },
     methods: {
       btnBack (event) {
@@ -97,6 +187,16 @@
         })
       },
       change (data) {
+        if (data.id) {
+          this.selected = data.id
+          if (/solid|dashed|dotted/.test(data.id)) {
+            this.selectStyle = data.id
+          }
+        }
+        // select input test
+        // if (true) {
+
+        // }
         console.log(data)
       }
     }
@@ -105,6 +205,7 @@
 
 <style lang="sass">
   .ui-components-wrap {
+    position: relative;
     padding: 10px;
     line-height: 30px;
     .global__btn {

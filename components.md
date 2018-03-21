@@ -10,7 +10,7 @@ button 暂时没有 size 选项, 只有默认大小, 宽度设置 可直接设�
 
 |属性|类型|默认值|说明|
 |----|----|----|----|
-| type | String |default|button的类型选择, 可选 default, ghost |
+| type | String |default|button的类型选择, 可选 default, ghost, fill |
 | text | String |确认|-|
 | disable | Boolean |false|是否禁用点击|
 | icon | String |带图标button|iconfont 的 className|
@@ -42,6 +42,7 @@ button 暂时没有 size 选项, 只有默认大小, 宽度设置 可直接设�
 |属性|类型|默认值|说明|
 |----|----|----|----|
 | name | String |-|标识, 与原生 name 同效|
+| mark | String |-| 标识|
 | checked | Boolean |false| on/off |
 
 事件:
@@ -57,6 +58,7 @@ button 暂时没有 size 选项, 只有默认大小, 宽度设置 可直接设�
 |----|----|----|----|
 | name | String |-|标识, 与原生 name 同效|
 | checked | Boolean |false| on/off |
+| disable | Boolean |false| 是否禁用 |
 
 事件: @change: 选择改变
 
@@ -96,4 +98,5 @@ button 暂时没有 size 选项, 只有默认大小, 宽度设置 可直接设�
 @input: 用户输入时
 @enter: keydown 为 enter 时
 @search: 点击搜索按钮时
+@clear: 清除内容时
 ```

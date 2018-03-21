@@ -1,15 +1,14 @@
 <template lang="jade">
-  button.global__radio
-    label
-      input(
-        ref="radio",
-        type="radio",
-        :name="name",
-        :checked="currentChecked",
-        @change="check"
-      )
-      .global__radio-box
-        .global__radio-point
+  .global__radio
+    input(
+      ref="radio",
+      type="radio",
+      :name="name",
+      :checked="currentChecked",
+      @change="check"
+    )
+    .global__radio-box
+      .global__radio-point
 </template>
 
 <script>
@@ -17,6 +16,7 @@
     name: 'global-radio',
     props: {
       name: String,
+      mark: [String, Number],
       checked: {
         type: Boolean,
         default: false
@@ -39,6 +39,7 @@
       check () {
         this.$emit('change', {
           name: this.name,
+          mark: this.mark,
           checked: this.$refs.radio.checked
         })
       }
@@ -50,18 +51,18 @@
   @import '../../../assets/sass/theme';
 
   .global__radio {
+    position: relative;
     display: inline-block;
-    vertical-align: middle;
     width: 12px;
     height: 12px;
     background: none;
-    label {
-      display: block;
+    input {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-    }
-    input {
-      display: none;
+      cursor: pointer;
     }
     &-box {
       width: 10px;
