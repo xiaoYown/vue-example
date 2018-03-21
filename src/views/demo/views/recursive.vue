@@ -4,7 +4,6 @@
 </template>
 
 <script>
-
   export default {
     components: {
       'rec-cpn': require('../mixin/recursive.vue')

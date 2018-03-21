@@ -132,10 +132,10 @@
 <script>
   require('sass/base.scss')
 
-  async function getWebUploader () {
-    let w = await require.ensure([], (require) => require('webuploader'), 'webuploader')
-    return w
-  }
+  // async function getWebUploader () {
+  //   let w = await require.ensure([], (require) => require('webuploader'), 'webuploader')
+  //   return w
+  // }
 
   export default {
     name: 'its-ui',
@@ -173,9 +173,9 @@
       }
     },
     created () {
-      getWebUploader().then(WebUploader => {
-        // console.log(WebUploader)
-      })
+      // getWebUploader().then(WebUploader => {
+      //   console.log(WebUploader)
+      // })
     },
     methods: {
       btnBack (event) {

@@ -68,13 +68,13 @@
     methods: {
       filter () {
         this.val += ''
-        if (this.valueType === 'int') {                   // 整数过滤
+        if (this.valueType === 'int') { // 整数过滤
           this.val = this.val.replace(/[^\d]+/g, '')
-        } else if (this.valueType === 'float') {          // 浮点数过滤
+        } else if (this.valueType === 'float') { // 浮点数过滤
           let val = this.val.replace(/[^\d^.]+/g, '')
           let pot = val.match(/\./g)
           let last = 0
-          if (pot && pot.length > 1) {                  // 非 \d\. 字符过滤
+          if (pot && pot.length > 1) { // 非 \d\. 字符过滤
             for (let i = 0; i < pot.length - 1; i++) {
               last = val.lastIndexOf('.')
               val = val.substring(0, last) + val.substring(last + 1)

@@ -16,7 +16,6 @@
 </template>
 
 <script>
-
   import { getCookie } from 'tools/client'
   import { mapState, mapActions } from 'vuex'
 

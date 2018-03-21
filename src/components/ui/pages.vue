@@ -170,7 +170,6 @@
       }
     }
   }
-
 </script>
 
 <style lang="sass">

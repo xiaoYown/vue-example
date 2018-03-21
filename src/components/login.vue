@@ -8,9 +8,7 @@
 </template>
 
 <script>
-
   import { saveCookie } from 'tools/client'
-
   import { mapActions } from 'vuex'
 
   export default {
