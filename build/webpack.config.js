@@ -14,32 +14,6 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const isPro = process.env.NODE_ENV == 'production'
 
 const entries = require('../config/entries').entries
-// function createHappyPlugin(id, loaders) {
-//   console.log('id', id)
-//   return new HappyPack({
-//     id: id,
-//     loaders: loaders,
-//     threadPool: happyThreadPool,
-
-//     // disable happy caching with HAPPY_CACHE=0
-//     cache: true,
-
-//     // make happy more verbose with HAPPY_VERBOSE=1
-//     verbose: process.env.HAPPY_VERBOSE === '1',
-//   });
-// }
-
-// function getEntry(globPath) {
-//     var entries = {}, basename;
-//   glob.sync(globPath).forEach(function (entry) {
-//     basename = path.basename(entry, path.extname(entry));
-//     entries[basename] = [];
-//     // entries[basename].push(entry);
-//     entries[basename].push(entry);
-//   });
-//   return entries;
-// }
-// var entries = getEntry("./src/views/*/*.js"); // 获得入口js文件
 
 module.exports = {
   entry: entries,
@@ -82,14 +56,6 @@ module.exports = {
           // ]
         }
       },
-      // {
-      //   test: /\.ts$/,
-      //   loader: 'ts-loader',
-      //   options: {
-      //     // appendTsSuffixTo: [/\.vue$/],
-      //     transpileOnly: true
-      //   }
-      // },
       {
         test: /\.js|\.vue$/,
         exclude: /node_modules/,
