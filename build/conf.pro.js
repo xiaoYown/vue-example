@@ -8,16 +8,35 @@ const ExtractTextPlugin =	require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin =	require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const entries = require('../config/entries').pageEntries
+const pageEntries = require('../config/entries').pageEntries
+const entries = require('../config/entries').entries
 const bundleLibs = require('../config/bundle.config.json').libs
+// 提供全局变量的插件, 需要从所有入口文件中进行提取
+const provide = require('../config/bundle.config.json').provide
+// 分离公共模块
 const __bundleLibs = []
 
+let __chunks = []
+// lib 作为公共部分抽取
 for (let libName in bundleLibs) {
-	__bundleLibs.push(new webpack.optimize.CommonsChunkPlugin({
-		name: libName,
-		chunks: bundleLibs[libName].pages.concat([libName])
-	}))
+	if (provide.indexOf(libName) < 0) { // 非全局插件抽取
+		__chunks = bundleLibs[libName].pages.concat([libName])
+	} else { // 全局插件抽取
+		__chunks = Object.keys(entries)
+	}
+	__bundleLibs.push(
+		new webpack.optimize.CommonsChunkPlugin({
+			name: libName,
+			chunks: __chunks
+		})
+	)
 }
+__bundleLibs.push(
+	new webpack.optimize.CommonsChunkPlugin({
+		name: 'manifest',
+		minChunks: Infinity
+	})
+)
 
 var plugins =  [
 	new webpack.DefinePlugin({
@@ -29,62 +48,38 @@ var plugins =  [
 		}
 	}),
 	// new webpack.optimize.OccurenceOrderPlugin(),
-	new ExtractTextPlugin(utils.assetsPath('css/[name].css?[chunkhash]')), 	//单独使用style标签加载css并设置其路径
-	// 提取 vendor
-	// new webpack.optimize.CommonsChunkPlugin({
-	// 	name: 'vendor',
-	// 	minChunks: function(module, count){
-	// 		return 	( 
-	// 			module.resource && 
-	// 			/\.js$/.test(module.resource) && 
-	// 			module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0
-	// 		)
-	// 	}
-	// }),
-	// 提取 vue / vuex / vue-router
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'vue',
-		chunks: ['vue', 'index', 'demo', 'components']
-	}),
-	new webpack.optimize.CommonsChunkPlugin({
-    name: "manifest",
-    minChunks: Infinity
-  }),
-	// 打包解析
+	new ExtractTextPlugin(utils.assetsPath('css/[name].css?v=[chunkhash]')), 	//单独使用style标签加载css并设置其路径
 	new BundleAnalyzerPlugin()
-	// new webpack.optimize.CommonsChunkPlugin({
-	// 	name: 'common',
-	// 	chunks: ['index', 'components', 'demo']
-	// }),
 ].concat(__bundleLibs)
 
 var __pages = {}
-var pageName
-for (let libName in bundleLibs) {
-	for (let i = 0, len = bundleLibs[libName].pages.length; i < len; i++) {
-		pageName = bundleLibs[libName].pages[i]
-		if (!__pages[pageName]) { // 入口文件对应生成
-			__pages[pageName] = [pageName]
+Object.keys(pageEntries).forEach((page) => {
+	// manifest 插入
+	__pages[page] = ['manifest']
+	// 判断此页面是否需要插入对应的库
+	for (let libName in bundleLibs) {
+		if (bundleLibs[libName].pages.indexOf(page) > -1) {
+			__pages[page].push(libName)
 		}
-		__pages[pageName].push(libName) // 使用该 lib 的入口 html 插入对应的 lib
 	}
-}
-for (let __page in __pages) {
-	__pages[__page].push('manifest')
-}
-Object.keys(entries).forEach(function(name){
+	// 插入对应入口文件
+	__pages[page].push(page)
+})
+
+Object.keys(pageEntries).forEach(function(name){
 	var plugin = new HtmlWebpackPlugin({
 		filename: path.resolve(__dirname, `../dist/${name}.html`),
 		template: path.resolve(__dirname, `../src/pages/${name}.html`),
 		favicon: config.build.favicon,
 		inject: true,
-		chunks:  __pages[name], 		// 多文件打包引入
+		chunks: __pages[name], 		// 多文件打包引入
 		minify: {
 			removeComments: true,
 			collapseWhitespace: true,
 			removeAttributeQuotes: true
 		},
-		chunksSortMode: 'dependency'
+		// chunksSortMode: 'dependency'
+		chunksSortMode: 'auto'
 	});
 	plugins.push(plugin);
 });

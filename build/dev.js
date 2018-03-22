@@ -6,7 +6,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const proxyMiddleware = require('http-proxy-middleware')
 const opn = require('opn')
 const config = require('../config')
-const webpackMerge = 	require('./conf.dev')
+const webpackMerge = require('./conf.dev')
 const baseWebpack =	require('./webpack.config')
 
 var app = express();
