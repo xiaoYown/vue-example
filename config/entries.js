@@ -5,17 +5,12 @@ const libs = require('./index').libs
 function getEntry(globPath) {
   var entries = {}, basename;
   glob.sync(globPath).forEach(function (entry) {
-    basename = path.basename(entry, path.extname(entry));
-    entries[basename] = [];
-    // entries[basename].push(entry);
-    entries[basename].push(entry);
-  });
-  return entries;
+    basename = path.basename(entry, path.extname(entry))
+    entries[basename] = [entry]
+  })
+  return entries
 }
 const pageEntries = getEntry("./src/views/*/*.js"); // 获取对应 html 入口文件文件
-// var pageEntries = {
-// 	index: './src/views/index/index.js'
-// }
 const entries = {}
 
 for (let key in pageEntries) {

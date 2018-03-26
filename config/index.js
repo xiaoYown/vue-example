@@ -17,19 +17,7 @@ module.exports = {
 		assetsPublicPath: '/',
 		productionSourceMap: false,
 		cacheBusting: true,
-    cssSourceMap: true,
-		chunks: [
-			// {
-			// 	node_module: true,
-			// 	name: 'vue',
-			// 	filename: 'vue.js',
-			// 	chunks: Infinity
-			// },
-			{
-				node_module: true,
-				name: 'vendor'
-			}
-		]
+    cssSourceMap: true
 	},
 	dev: {
 		env: require('./env.dev'),
