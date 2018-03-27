@@ -17,12 +17,6 @@ const entries = require('../config/entries').entries
 
 module.exports = {
   entry: entries,
-  // output: {
-  //   path: config.build.assetsRoot,
-  //   // [name] 替换成chunk名称， [hash] 替换成对应chunk 的 hash 值, 解决hash的方式: 静态资源引入采用 import 方式
-  //   filename: '[name].js', // 使用chunkhash : '[name]-[hash].js'
-  //   publicPath: isPro ? config.build.assetsPublicPath : config.dev.assetsPublicPath // 文件引入路径
-  // },
   module: {
     // 配置脱离解析文件
     noParse: /node_modules\//,
@@ -113,9 +107,4 @@ module.exports = {
   //     ]
   //   })
   // ]
-  // postcss: [ require('autoprefixer') ],
-  // 	node: {
-  // 	fs: 'empty'
-  // }
 };
-

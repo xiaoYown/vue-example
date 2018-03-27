@@ -36,6 +36,12 @@
           }
         })
       }
+      class user {
+        getUsername () {
+          // to do
+        }
+      }
+      console.log(user)
     },
     methods: {
       ...mapActions(['saveUserInfo'])

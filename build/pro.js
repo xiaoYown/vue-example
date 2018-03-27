@@ -5,7 +5,7 @@ const config =	require('../config')
 const ora =	require('ora')
 const webpack =	require('webpack')
 
-if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.build.env.NODE_ENV);
+// if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.build.env.NODE_ENV);
 
 var webpackMerge = require('./conf.pro');
 

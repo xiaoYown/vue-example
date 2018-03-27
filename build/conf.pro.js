@@ -18,25 +18,32 @@ const __bundleLibs = []
 
 let __chunks = []
 // lib 作为公共部分抽取
+let __cacheGroups = {}
 for (let libName in bundleLibs) {
 	if (provide.indexOf(libName) < 0) { // 非全局插件抽取
 		__chunks = bundleLibs[libName].pages.concat([libName])
 	} else { // 全局插件抽取
 		__chunks = Object.keys(entries)
 	}
-	__bundleLibs.push(
-		new webpack.optimize.CommonsChunkPlugin({
-			name: libName,
-			chunks: __chunks
-		})
-	)
+	__cacheGroups[libName] = {
+		name: libName
+	}
+	// __bundleLibs.push(
+	// 	new webpack.optimize.CommonsChunkPlugin({
+	// 		name: libName,
+	// 		chunks: __chunks
+	// 	})
+	// )
 }
-__bundleLibs.push(
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'manifest',
-		minChunks: Infinity
-	})
-)
+__cacheGroups.manifest = {
+		name: 'manifest'
+}
+// __bundleLibs.push(
+// 	new webpack.optimize.CommonsChunkPlugin({
+// 		name: 'manifest',
+// 		minChunks: Infinity
+// 	})
+// )
 
 var plugins =  [
 	// new webpack.DefinePlugin({
@@ -99,6 +106,18 @@ var newWebpack = merge(baseWebpack, {
 			extract: true,
 			usePostCSS: true
 		})
+	},
+	optimization: {
+		splitChunks: {
+			chunks: "async",
+			minSize: 30000,
+			minChunks: 1,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3,
+			name: true,
+			cacheGroups: __cacheGroups
+		},
+		runtimeChunk: true
 	},
 	// vue: {
 	// 	loaders: utils.cssLoaders({
