@@ -12,6 +12,16 @@ import App from './app-demo.vue'
 import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
+import ViewIndex from './views/index.vue'
+import ViewFoo from './views/foo.vue'
+import ViewBar from './views/bar.vue'
+import ViewParams from './views/params.vue'
+import ViewVuex from './views/vuex.vue'
+import ViewSocket from './views/socket.vue'
+import ViewRecursive from './views/recursive.vue'
+import ViewNested from './views/nested.vue'
+import NotFound from 'Views/404.vue'
+
 Vue.use(VueRouter)
 Vue.use(tip)
 // Vue.use(VueSocketIo, {
@@ -31,7 +41,9 @@ const UserPosts = {
   template: '<div>children-2</div>'
 }
 
-var animation = r => require.ensure([], () => r(require('./views/animation.vue')), 'animation')
+var animation = resolve => require.ensure([], () => {
+  resolve(require('./views/animation.vue').default)
+}, 'animation')
 // const Animation = () => import('../views/animation.vue')
 // const Animation = resolve => require.ensure(['../views/animation.vue'], resolve)
 // const Animation = System.import('../views/animation.vue')
@@ -46,7 +58,7 @@ const routes = [
   {
     path: '/demo',
     name: 'demo',
-    component: require('./views/index.vue'),
+    component: ViewIndex,
     meta: {
       user: true
     }
@@ -54,7 +66,7 @@ const routes = [
   {
     path: '/demo/foo',
     name: 'demo-foo',
-    component: require('./views/foo.vue'),
+    component: ViewFoo,
     meta: {
       user: true
     }
@@ -62,7 +74,7 @@ const routes = [
   {
     path: '/demo/bar',
     name: 'demo-bar',
-    component: require('./views/bar.vue'),
+    component: ViewBar,
     meta: {
       user: true
     }
@@ -78,7 +90,7 @@ const routes = [
   {
     path: '/demo/params/:name/:age',
     name: 'params',
-    component: require('./views/params.vue'),
+    component: ViewParams,
     meta: {
       user: true
     }
@@ -86,7 +98,7 @@ const routes = [
   {
     path: '/demo/vuex',
     name: 'vuex',
-    component: require('./views/vuex.vue'),
+    component: ViewVuex,
     meta: {
       user: true
     }
@@ -94,7 +106,7 @@ const routes = [
   {
     path: '/demo/socket',
     name: 'socket',
-    component: require('./views/socket.vue'),
+    component: ViewSocket,
     meta: {
       user: true
     }
@@ -102,14 +114,14 @@ const routes = [
   {
     path: '/demo/recursive',
     name: 'recursive',
-    component: require('./views/recursive.vue'),
+    component: ViewRecursive,
     meta: {
       user: true
     }
   },
   {
     path: '/demo/nested',
-    component: require('./views/nested.vue'),
+    component: ViewNested,
     meta: {
       user: true
     },
@@ -134,7 +146,7 @@ const routes = [
   },
   {
     path: '*',
-    component: require('Views/404.vue')
+    component: NotFound
   }
 ]
 

@@ -8,15 +8,15 @@ const baseWebpack =	require('./webpack.config');
 
 const entries = require('../config/entries').pageEntries
 
-if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
+// if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
 
 process.env.NODE_ENV = config.dev.env;
 
 var plugins = [
 	// new webpack.optimize.OccurenceOrderPlugin(),
-	new webpack.DefinePlugin({
-      'process.env': config.dev.env
-    }),
+	// new webpack.DefinePlugin({
+	// 	'process.env': config.dev.env
+	// }),
 	new webpack.NoEmitOnErrorsPlugin(),
 	new webpack.HotModuleReplacementPlugin()
 ];
@@ -35,6 +35,11 @@ Object.keys(entries).forEach(function(name){
 });
 
 var newWebpack = merge(baseWebpack, {
+	mode: config.dev.env.NODE_ENV,
+	output: {
+		filename: '[name].js', // 使用chunkhash : '[name]-[hash].js'
+    publicPath: config.dev.assetsPublicPath
+	},
 	module: {
 		rules: utils.styleLoaders({ sourceMap: true, usePostCSS: false })
 	},

@@ -39,14 +39,14 @@ __bundleLibs.push(
 )
 
 var plugins =  [
-	new webpack.DefinePlugin({
-		'process.env': config.build.env
-	}),
-	new webpack.optimize.UglifyJsPlugin({
-		compress: {
-			warnings: false
-		}
-	}),
+	// new webpack.DefinePlugin({
+	// 	'process.env': config.build.env
+	// }),
+	// new webpack.optimize.UglifyJsPlugin({
+	// 	compress: {
+	// 		warnings: false
+	// 	}
+	// }),
 	// new webpack.optimize.OccurenceOrderPlugin(),
 	new ExtractTextPlugin(utils.assetsPath('css/[name].css?v=[chunkhash]')), 	//单独使用style标签加载css并设置其路径
 	new BundleAnalyzerPlugin()
@@ -85,10 +85,13 @@ Object.keys(pageEntries).forEach(function(name){
 });
 
 var newWebpack = merge(baseWebpack, {
+	mode: config.build.env.NODE_ENV,
 	output: {
+		path: config.build.assetsRoot,
 		filename: utils.assetsPath('js/[name].js?h=[chunkhash]'),
 		// 按需加载 模块路径指定
-		chunkFilename: utils.assetsPath('js/[name].js?[chunkhash]')
+		chunkFilename: utils.assetsPath('js/[name].js?[chunkhash]'),
+		publicPath: config.build.assetsPublicPath
 	},
 	module: {
 		rules: utils.styleLoaders({

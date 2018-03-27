@@ -13,7 +13,7 @@ var app = express();
 var compiler = webpack(webpackMerge);
 
 var devMiddleware = webpackDevMiddleware(compiler, {
-  publicPath: baseWebpack.output.publicPath,
+  publicPath: webpackMerge.output.publicPath,
   stats: {
     colors: true,
     chunks: false,

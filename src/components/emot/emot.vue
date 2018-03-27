@@ -14,7 +14,8 @@
 </template>
 
 <script>
-  require('./emot.scss')
+  import './emot.scss'
+  import EmotLib from './lib.vue'
   /**
     * @name Range
     * @grammar new UM.dom.Range(document)  => Range 实例
@@ -28,7 +29,7 @@
     */
   export default {
     components: {
-      'emot-lib': require('./lib.vue')
+      'emot-lib': EmotLib
     },
     props: {
       size: String

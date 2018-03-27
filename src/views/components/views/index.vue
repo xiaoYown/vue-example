@@ -87,6 +87,16 @@
 
 <script>
   import config from 'config/config'
+
+  import XySwitch from '@/components/ui/switch.vue'
+  import XyRange from '@/components/ui/range.vue'
+  import XySelect from '@/components/ui/select.vue'
+  import XyPages from '@/components/ui/pages.vue'
+  import XyConfirm from '@/components/modal/confirm.vue'
+  import XyButton from '@/components/button/index.vue'
+  import XyLoading from '@/components/loading/loading.vue'
+  import XyEmot from '@/components/emot/emot.vue'
+  import XyPopup from '@/tools/vue-popup/main.vue'
   // import WebUploader from 'webuploader'
   // const WebUploader = resolve => require.ensure([], () => resolve(require('webuploader')), 'webuploader')
   // async function getWebUploader () {
@@ -97,15 +107,15 @@
   export default {
     name: 'xy-ui',
     components: {
-      'xy-switch': require('@/components/ui/switch.vue'),
-      'xy-range': require('@/components/ui/range.vue'),
-      'xy-select': require('@/components/ui/select.vue'),
-      'xy-pages': require('@/components/ui/pages.vue'),
-      'xy-modal-confirm': require('@/components/modal/confirm.vue'),
-      'xy-button': require('@/components/button/index.vue'),
-      'xy-loading': require('@/components/loading/loading.vue'),
-      'xy-emot': require('@/components/emot/emot.vue'),
-      'xy-popup': require('@/tools/vue-popup/main.vue')
+      'xy-switch': XySwitch,
+      'xy-range': XyRange,
+      'xy-select': XySelect,
+      'xy-pages': XyPages,
+      'xy-modal-confirm': XyConfirm,
+      'xy-button': XyButton,
+      'xy-loading': XyLoading,
+      'xy-emot': XyEmot,
+      'xy-popup': XyPopup
     },
     data () {
       return {

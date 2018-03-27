@@ -10,7 +10,9 @@ for (let key in bundleLibs) {
 
 module.exports = {
 	build: {
-		env: require('./env.pro'),
+		env: {
+			NODE_ENV: 'production'
+		},
 		favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
 		assetsRoot: path.resolve(__dirname, '../dist'),
 		assetsSubDirectory: 'static',
@@ -20,7 +22,9 @@ module.exports = {
     cssSourceMap: true
 	},
 	dev: {
-		env: require('./env.dev'),
+		env: {
+			NODE_ENV: 'development'
+		},
 		favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
 		port: require('./config').port,
 		assetsSubDirectory: 'static',

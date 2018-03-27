@@ -130,17 +130,16 @@
 </template>
 
 <script>
-  require('sass/base.scss')
-
   // async function getWebUploader () {
   //   let w = await require.ensure([], (require) => require('webuploader'), 'webuploader')
   //   return w
   // }
+  import AddCondition from '../mixin/addCondition'
 
   export default {
     name: 'its-ui',
     components: {
-      'p-add-condition': require('../mixin/addCondition')
+      'p-add-condition': AddCondition
     },
     data () {
       return {

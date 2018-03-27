@@ -11,19 +11,36 @@ import tip from 'tools/tip/main'
 import { getCookie } from 'tools/client'
 import store from 'Store/demo'
 
-// 此处注册后可全局直接引入
-Vue.component('el-global', require('components/ui/global.vue'))
+import Index from './views/index.vue'
+import Drag from './views/drag.vue'
+import Its from './views/its.vue'
+import NotFound from 'Views/404.vue'
 
-Vue.component('global-btn', require('@/components/global/button/normal'))
-Vue.component('global-collapse', require('@/components/global/collapse/normal'))
-Vue.component('global-switch', require('@/components/global/switch/normal'))
-Vue.component('global-slider', require('@/components/global/slider/normal'))
-Vue.component('global-checkbox', require('@/components/global/input/checkbox'))
-Vue.component('global-radio', require('@/components/global/input/radio'))
-Vue.component('global-text', require('@/components/global/input/text'))
-Vue.component('global-search', require('@/components/global/search/normal'))
-Vue.component('global-select', require('@/components/global/select/normal'))
-Vue.component('global-select-input', require('@/components/global/select/input'))
+// 此处注册后可全局直接引入
+import Global from 'components/ui/global.vue'
+import Button from '@/components/global/button/normal'
+import Collapse from '@/components/global/collapse/normal'
+import Switch from '@/components/global/switch/normal'
+import Slider from '@/components/global/slider/normal'
+import InputCheckbox from '@/components/global/input/checkbox'
+import InputRadio from '@/components/global/input/radio'
+import InputText from '@/components/global/input/text'
+import Search from '@/components/global/search/normal'
+import Select from '@/components/global/select/normal'
+import SelectInput from '@/components/global/select/input'
+
+Vue.component('el-global', Global)
+
+Vue.component('global-btn', Button)
+Vue.component('global-collapse', Collapse)
+Vue.component('global-switch', Switch)
+Vue.component('global-slider', Slider)
+Vue.component('global-checkbox', InputCheckbox)
+Vue.component('global-radio', InputRadio)
+Vue.component('global-text', InputText)
+Vue.component('global-search', Search)
+Vue.component('global-select', Select)
+Vue.component('global-select-input', SelectInput)
 
 Vue.use(VueRouter)
 Vue.use(XyPopup)
@@ -36,7 +53,7 @@ const routes = [
   {
     path: '/components',
     name: 'components',
-    component: require('./views/index.vue'),
+    component: Index,
     meta: {
       user: true
     }
@@ -44,7 +61,7 @@ const routes = [
   {
     path: '/components/drag',
     name: 'drag',
-    component: require('./views/drag.vue'),
+    component: Drag,
     meta: {
       user: true
     }
@@ -52,7 +69,7 @@ const routes = [
   {
     path: '/components/its',
     name: 'its',
-    component: require('./views/its.vue'),
+    component: Its,
     meta: {
       user: true
     }
@@ -63,7 +80,7 @@ const routes = [
   },
   {
     path: '*',
-    component: require('Views/404.vue')
+    component: NotFound
   }
 ]
 
