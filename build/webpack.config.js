@@ -5,8 +5,6 @@ const utils	=	require('./utils')
 const config  = 	require('../config')
 // 帮助生成 HTML 文件，在 body 元素中，使用 script 来包含所有你的 webpack bundles，只需要在你的 webpack 配置文件中如下配置：
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 搭配html-webapck-plugin使用,将css作为chunk追加到对应html中
-// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // const HappyPack = require('happypack')
 // const happyThreadPool = HappyPack.ThreadPool({ size: 25 })
 const vueLoaderConfig = require('./vue-loader.conf')

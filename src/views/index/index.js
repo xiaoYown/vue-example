@@ -10,8 +10,8 @@ import App from './app-index.vue'
 import store from 'Store/index'
 
 import Index from '@/views/index/index.vue'
-import Login from '@/views/404.vue'
-import NotFound from '@/components/login.vue'
+import Login from '@/components/login.vue'
+import NotFound from '@/views/404.vue'
 
 Vue.use(VueRouter)
 // Vue.use(VueResource)

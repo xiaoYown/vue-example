@@ -4,7 +4,7 @@ const webpack =	require('webpack')
 const merge =	require('webpack-merge')
 const config = 	require('../config')
 const baseWebpack =	require('./webpack.config.js')
-const ExtractTextPlugin =	require('extract-text-webpack-plugin')
+// const ExtractTextPlugin =	require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin =	require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
@@ -55,7 +55,7 @@ var plugins =  [
 	// 	}
 	// }),
 	// new webpack.optimize.OccurenceOrderPlugin(),
-	new ExtractTextPlugin(utils.assetsPath('css/[name].css?v=[chunkhash]')), 	//单独使用style标签加载css并设置其路径
+	// new ExtractTextPlugin(utils.assetsPath('css/[name].css?v=[chunkhash]')), 	//单独使用style标签加载css并设置其路径
 	new BundleAnalyzerPlugin()
 ].concat(__bundleLibs)
 
@@ -107,18 +107,18 @@ var newWebpack = merge(baseWebpack, {
 			usePostCSS: true
 		})
 	},
-	optimization: {
-		splitChunks: {
-			chunks: "async",
-			minSize: 30000,
-			minChunks: 1,
-			maxAsyncRequests: 5,
-			maxInitialRequests: 3,
-			name: true,
-			cacheGroups: __cacheGroups
-		},
-		runtimeChunk: true
-	},
+	// optimization: {
+	// 	splitChunks: {
+	// 		chunks: "async",
+	// 		minSize: 30000,
+	// 		minChunks: 1,
+	// 		maxAsyncRequests: 5,
+	// 		maxInitialRequests: 3,
+	// 		name: true,
+	// 		cacheGroups: __cacheGroups
+	// 	},
+	// 	runtimeChunk: true
+	// },
 	// vue: {
 	// 	loaders: utils.cssLoaders({
 	// 		sourceMap: 	config.build.productionSourceMap,
