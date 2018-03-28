@@ -78,8 +78,8 @@ Object.keys(pageEntries).forEach(function(name){
 			collapseWhitespace: true,
 			removeAttributeQuotes: true
 		},
-		// chunksSortMode: 'dependency'
-		chunksSortMode: 'auto'
+		chunksSortMode: 'dependency'
+		// chunksSortMode: 'auto'
 	});
 	plugins.push(plugin);
 });
