@@ -466,6 +466,7 @@
         this.changing(axis)
       },
       resized (event) {
+        console.log(event)
         let axis = {
           x: this.axis.x,
           y: this.axis.y,

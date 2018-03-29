@@ -90,6 +90,7 @@
         this.axis.w = x / 100
       },
       dragend (event) {
+        console.log(event)
         this.$emit('range-change', this.axis.w)
       },
       progressChoose (event) {

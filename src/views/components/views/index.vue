@@ -182,10 +182,12 @@
       },
       // 列表获取
       pagesListChange (data) {
+        console.log(data)
         let start = (this.pagesInfo.page - 1) * this.pagesInfo.pageSize
         this.pagesListShow = this.pagesList.slice(start, start + this.pagesInfo.pageSize)
       },
       confirm (data) {
+        console.log(data)
         this.showModal = false
       },
       /* popup 组件全局使用方法 */
@@ -292,10 +294,10 @@
             })
         })
         uploader.on('uploadError', function (file) { // 上传过程中发生异常，调用该方法
-          console.log('error')
+          console.log('error', file)
         })
         uploader.on('uploadComplete', function (file) { // 上传结束，无论文件最终是否上传成功，该方法都会被调用
-          console.log('end')
+          console.log('end', file)
         })
       },
       // 直接异步绑定

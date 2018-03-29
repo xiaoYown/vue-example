@@ -33,7 +33,7 @@
         this.id = this.$socketChat.id
       },
       customEmit (val) {
-        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+        console.log(val, 'this method was fired by the socket server. eg: io.emit("customEmit", data)')
       }
     },
     created () {

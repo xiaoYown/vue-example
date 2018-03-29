@@ -71,7 +71,7 @@
     watch: {
       style: {
         handler (newVal) {
-          this.getStyle()
+          this.getStyle(newVal)
         },
         deep: true
       }

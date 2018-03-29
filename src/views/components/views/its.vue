@@ -174,7 +174,7 @@
     },
     created () {
       getWebUploader().then(WebUploader => {
-        // console.log(WebUploader)
+        console.log('tag:', WebUploader)
       })
     },
     methods: {
