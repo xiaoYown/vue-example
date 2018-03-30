@@ -98,7 +98,6 @@ module.exports = {
     },
     extensions: ['.js', '.vue', '.json']
   }
-  // ,
   // plugins: [
   //   new HappyPack({
   //     id: 'vue',
@@ -113,9 +112,5 @@ module.exports = {
   //     ]
   //   })
   // ]
-  // postcss: [ require('autoprefixer') ],
-  // 	node: {
-  // 	fs: 'empty'
-  // }
 };
 

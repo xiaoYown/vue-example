@@ -30,9 +30,11 @@
 </template>
 
 <script>
+  import Dynamic from 'components/animation/dynamic.vue'
+
   export default {
     components: {
-      dynamic: require('components/animation/dynamic.vue')
+      dynamic: Dynamic
     },
     data () {
       return {

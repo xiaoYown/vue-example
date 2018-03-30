@@ -4,10 +4,11 @@
 </template>
 
 <script>
+  import RecCpn from '../mixin/recursive.vue'
 
   export default {
     components: {
-      'rec-cpn': require('../mixin/recursive.vue')
+      'rec-cpn': RecCpn
     },
     data () {
       return {

@@ -43,12 +43,16 @@ var plugins =  [
 		'process.env': config.build.env
 	}),
 	new webpack.optimize.UglifyJsPlugin({
+		// minimize: false,
 		compress: {
 			warnings: false
 		}
 	}),
 	// new webpack.optimize.OccurenceOrderPlugin(),
-	new ExtractTextPlugin(utils.assetsPath('css/[name].css?v=[chunkhash]')), 	//单独使用style标签加载css并设置其路径
+	new ExtractTextPlugin({
+		filename: utils.assetsPath('css/[name].css?v=[chunkhash]'), //单独使用style标签加载css并设置其路径
+		allChunks: true // 异步组件样式提取, 防止 css 带入 js 文件, 可能会引起 css module production 环境中无法找到
+	}),
 	new BundleAnalyzerPlugin()
 ].concat(__bundleLibs)
 
@@ -78,8 +82,8 @@ Object.keys(pageEntries).forEach(function(name){
 			collapseWhitespace: true,
 			removeAttributeQuotes: true
 		},
-		// chunksSortMode: 'dependency'
-		chunksSortMode: 'auto'
+		chunksSortMode: 'dependency'
+		// chunksSortMode: 'auto'
 	});
 	plugins.push(plugin);
 });

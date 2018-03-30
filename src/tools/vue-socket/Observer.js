@@ -39,9 +39,7 @@ export default class {
 
       if (!action.startsWith('socket_')) continue
 
-      let camelcased = 'socket_' + event
-          .replace('SOCKET_', '')
-          .replace(/^([A-Z])|[\W\s_]+(\w)/g, (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase())
+      let camelcased = 'socket_' + event.replace('SOCKET_', '').replace(/^([A-Z])|[\W\s_]+(\w)/g, (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase())
 
       if (action === camelcased) this.store.dispatch(namespaced, payload)
     }

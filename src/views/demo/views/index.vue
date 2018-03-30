@@ -16,7 +16,7 @@
         .then(function (res) {
           console.log(res)
         }, function (status) {
-
+          console.log(status)
         })
     },
     methods: {
@@ -25,7 +25,7 @@
           .then(function (res) {
             console.log(res)
           }, function (status) {
-
+            console.log(status)
           })
       }
     }
