@@ -11,6 +11,8 @@
 </template>
 
 <script>
+  import XyDrag from 'components/ui/drag.vue'
+
   export default {
     data () {
       return {
@@ -36,7 +38,7 @@
       this.setStyle(this.axis)
     },
     components: {
-      'xy-drag': require('components/ui/drag.vue')
+      'xy-drag': XyDrag
     },
     methods: {
       changing (data) {
