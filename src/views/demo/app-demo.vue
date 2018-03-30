@@ -27,11 +27,12 @@
 </template>
 
 <script>
-  require('sass/base.scss')
+  import 'sass/base.scss'
+  import Nav from './mixin/nav.vue'
 
   export default {
     components: {
-      'nav-demo': require('./mixin/nav.vue')
+      'nav-demo': Nav
     },
     data () {
       return {

@@ -87,6 +87,16 @@
 
 <script>
   import config from 'config/config'
+
+  import XySwitch from '@/components/ui/switch.vue'
+  import XyRange from '@/components/ui/range.vue'
+  import XySelect from '@/components/ui/select.vue'
+  import XyPages from '@/components/ui/pages.vue'
+  import XyConfirm from '@/components/modal/confirm.vue'
+  import XyButton from '@/components/button/index.vue'
+  import XyLoading from '@/components/loading/loading.vue'
+  import XyEmot from '@/components/emot/emot.vue'
+  import XyPopup from '@/tools/vue-popup/main.vue'
   // import WebUploader from 'webuploader'
   // const WebUploader = resolve => require.ensure([], () => resolve(require('webuploader')), 'webuploader')
   // async function getWebUploader () {
@@ -97,15 +107,15 @@
   export default {
     name: 'xy-ui',
     components: {
-      'xy-switch': require('@/components/ui/switch.vue'),
-      'xy-range': require('@/components/ui/range.vue'),
-      'xy-select': require('@/components/ui/select.vue'),
-      'xy-pages': require('@/components/ui/pages.vue'),
-      'xy-modal-confirm': require('@/components/modal/confirm.vue'),
-      'xy-button': require('@/components/button/index.vue'),
-      'xy-loading': require('@/components/loading/loading.vue'),
-      'xy-emot': require('@/components/emot/emot.vue'),
-      'xy-popup': require('@/tools/vue-popup/main.vue')
+      'xy-switch': XySwitch,
+      'xy-range': XyRange,
+      'xy-select': XySelect,
+      'xy-pages': XyPages,
+      'xy-modal-confirm': XyConfirm,
+      'xy-button': XyButton,
+      'xy-loading': XyLoading,
+      'xy-emot': XyEmot,
+      'xy-popup': XyPopup
     },
     data () {
       return {
@@ -182,10 +192,12 @@
       },
       // 列表获取
       pagesListChange (data) {
+        console.log(data)
         let start = (this.pagesInfo.page - 1) * this.pagesInfo.pageSize
         this.pagesListShow = this.pagesList.slice(start, start + this.pagesInfo.pageSize)
       },
       confirm (data) {
+        console.log(data)
         this.showModal = false
       },
       /* popup 组件全局使用方法 */
@@ -292,10 +304,10 @@
             })
         })
         uploader.on('uploadError', function (file) { // 上传过程中发生异常，调用该方法
-          console.log('error')
+          console.log('error', file)
         })
         uploader.on('uploadComplete', function (file) { // 上传结束，无论文件最终是否上传成功，该方法都会被调用
-          console.log('end')
+          console.log('end', file)
         })
       },
       // 直接异步绑定

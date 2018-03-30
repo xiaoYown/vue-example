@@ -19,7 +19,7 @@ const createInstaller = function () {
     }
 
     Vue.prototype.$closePopup = function (options) {
-      popup.close()
+      popup.close(options)
     }
   }
 }
