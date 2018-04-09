@@ -10,6 +10,7 @@ import tip from 'tools/tip/main'
 import App from './app-demo.vue'
 // import lazy from 'vue-lazy-component'
 import { getCookie } from 'tools/client'
+import 'core-js/fn/promise'
 import store from 'Store/demo'
 
 import ViewIndex from './views/index.vue'

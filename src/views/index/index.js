@@ -7,6 +7,7 @@ import axios from 'axios'
 import {getCookie} from 'tools/client'
 
 import App from './app-index.vue'
+import 'core-js/fn/promise'
 import store from 'Store/index'
 
 import Index from '@/views/index/index.vue'

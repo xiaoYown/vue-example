@@ -9,6 +9,7 @@ import App from './app-components.vue'
 import XyPopup from 'tools/vue-popup/main'
 import tip from 'tools/tip/main'
 import { getCookie } from 'tools/client'
+import 'core-js/fn/promise'
 import store from 'Store/demo'
 
 import Index from './views/index.vue'

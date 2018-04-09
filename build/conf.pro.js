@@ -49,11 +49,6 @@ var plugins =  [
 	// new webpack.DefinePlugin({
 	// 	'process.env': config.build.env
 	// }),
-	// new webpack.optimize.UglifyJsPlugin({
-	// 	compress: {
-	// 		warnings: false
-	// 	}
-	// }),
 	// new webpack.optimize.OccurenceOrderPlugin(),
 	// new ExtractTextPlugin(utils.assetsPath('css/[name].css?v=[chunkhash]')), 	//单独使用style标签加载css并设置其路径
 	new BundleAnalyzerPlugin()
@@ -95,9 +90,9 @@ var newWebpack = merge(baseWebpack, {
 	mode: config.build.env.NODE_ENV,
 	output: {
 		path: config.build.assetsRoot,
-		filename: utils.assetsPath('js/[name].js?h=[chunkhash]'),
+		filename: utils.assetsPath('js/[name].js?t=' + config.build.time),
 		// 按需加载 模块路径指定
-		chunkFilename: utils.assetsPath('js/[name].js?[chunkhash]'),
+		chunkFilename: utils.assetsPath('js/[name].js?t=' + config.build.time),
 		publicPath: config.build.assetsPublicPath
 	},
 	module: {
@@ -107,24 +102,26 @@ var newWebpack = merge(baseWebpack, {
 			usePostCSS: true
 		})
 	},
-	// optimization: {
-	// 	splitChunks: {
-	// 		chunks: "async",
-	// 		minSize: 30000,
-	// 		minChunks: 1,
-	// 		maxAsyncRequests: 5,
-	// 		maxInitialRequests: 3,
-	// 		name: true,
-	// 		cacheGroups: __cacheGroups
-	// 	},
-	// 	runtimeChunk: true
-	// },
-	// vue: {
-	// 	loaders: utils.cssLoaders({
-	// 		sourceMap: 	config.build.productionSourceMap,
-	// 		extract: 	true
-	// 	})
-	// },
+	optimization: {
+		minimize: false,
+		splitChunks: {
+			chunks: "async",
+			minSize: 30000,
+			minChunks: 1,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3,
+			name: true,
+			// cacheGroups: __cacheGroups
+			cacheGroups: {
+				vue: {
+					name: "vue",
+					chunks: "all",
+					test: /[\\/]node_modules[\\/]vue/
+				}
+			}
+		},
+		runtimeChunk: true
+	},
 	plugins: plugins
 });
 

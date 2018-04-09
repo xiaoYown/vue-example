@@ -16,8 +16,6 @@ const entries = require('../config/entries').entries
 module.exports = {
   entry: entries,
   module: {
-    // 配置脱离解析文件
-    noParse: /node_modules\//,
     rules: [
       {
       	test: /\.vue$/,

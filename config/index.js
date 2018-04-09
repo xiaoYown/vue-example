@@ -8,6 +8,10 @@ for (let key in bundleLibs) {
 	libs[key] = bundleLibs[key].modules
 }
 
+function timeformat (time) {
+	return [time.getFullYear(), time.getMonth(), time.getDate() + ' ' + time.getHours() + ':' + time.getMinutes()].join('-')
+}
+
 module.exports = {
 	build: {
 		env: {
@@ -19,7 +23,8 @@ module.exports = {
 		assetsPublicPath: '/',
 		productionSourceMap: false,
 		cacheBusting: true,
-    cssSourceMap: true
+		cssSourceMap: true,
+		time: timeformat(new Date())
 	},
 	dev: {
 		env: {
