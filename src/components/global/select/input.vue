@@ -37,9 +37,6 @@
 <script>
   export default {
     name: 'select-input',
-    components: {
-      'global-text': require('@/components/global/input/text')
-    },
     props: {
       mark: [String, Number],
       width: [Number, String],

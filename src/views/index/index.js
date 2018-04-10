@@ -7,7 +7,12 @@ import axios from 'axios'
 import {getCookie} from 'tools/client'
 
 import App from './app-index.vue'
+import 'core-js/fn/promise'
 import store from 'Store/index'
+
+import Index from '@/views/index/index.vue'
+import Login from '@/components/login.vue'
+import NotFound from '@/views/404.vue'
 
 Vue.use(VueRouter)
 // Vue.use(VueResource)
@@ -16,21 +21,21 @@ Vue.prototype.$http = axios
 const routes = [
   {
     path: '/',
-    component: require('Views/index/index.vue'),
+    component: Index,
     name: 'index',
     meta: {
       user: true
     }
   }, {
     path: '/login',
-    component: require('components/login.vue'),
+    component: Login,
     name: 'login',
     meta: {
       user: false
     }
   }, {
     path: '*',
-    component: require('Views/404.vue'),
+    component: NotFound,
     meta: {
       user: false
     }

@@ -1,11 +1,11 @@
-const path =	require('path')
-const utils =	require('./utils')
-const webpack =	require('webpack')
-const merge =	require('webpack-merge')
-const config = 	require('../config')
+const path = require('path')
+const utils = require('./utils')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const config = require('../config')
 const baseWebpack =	require('./webpack.config.js')
-const ExtractTextPlugin =	require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin =	require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const pageEntries = require('../config/entries').pageEntries
@@ -13,6 +13,9 @@ const entries = require('../config/entries').entries
 const bundleLibs = require('../config/bundle.config.json').libs
 // 提供全局变量的插件, 需要从所有入口文件中进行提取
 const provide = require('../config/bundle.config.json').provide
+
+const package = require('../package.json')
+
 // 分离公共模块
 const __bundleLibs = []
 
@@ -39,17 +42,25 @@ __bundleLibs.push(
 )
 
 var plugins =  [
+	new webpack.BannerPlugin({
+		banner: `[name].js v${package.version}\n(c)2018 ${package.author}\nReleased under the ${package.license} License`,
+		include: /index|animation|components|demo/
+	}),
 	new webpack.DefinePlugin({
 		'process.env': config.build.env
 	}),
 	new webpack.optimize.UglifyJsPlugin({
+		// minimize: false,
 		compress: {
 			warnings: false
 		}
 	}),
 	// new webpack.optimize.OccurenceOrderPlugin(),
-	new ExtractTextPlugin(utils.assetsPath('css/[name].css?v=[chunkhash]')), 	//单独使用style标签加载css并设置其路径
-	new BundleAnalyzerPlugin()
+	new ExtractTextPlugin({
+		filename: utils.assetsPath('css/[name].css?v=[chunkhash]'), //单独使用style标签加载css并设置其路径
+		allChunks: true // 异步组件样式提取, 防止 css 带入 js 文件, 可能会引起 css module production 环境中无法找到
+	}),
+	// new BundleAnalyzerPlugin()
 ].concat(__bundleLibs)
 
 var __pages = {}

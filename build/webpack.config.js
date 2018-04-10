@@ -97,13 +97,7 @@ module.exports = {
       'dist'		: path.resolve(__dirname, '../dist')
     },
     extensions: ['.js', '.vue', '.json']
-  },
-  plugins: [
-    new webpack.ProvidePlugin({
-      polyfill: 'babel-polyfill'
-    })
-  ]
-  // ,
+  }
   // plugins: [
   //   new HappyPack({
   //     id: 'vue',
@@ -118,9 +112,5 @@ module.exports = {
   //     ]
   //   })
   // ]
-  // postcss: [ require('autoprefixer') ],
-  // 	node: {
-  // 	fs: 'empty'
-  // }
 };
 
