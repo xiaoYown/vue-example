@@ -12,7 +12,7 @@ const pageEntries = require('../config/entries').pageEntries
 const entries = require('../config/entries').entries
 const bundleLibs = require('../config/bundle.config.json').libs
 // 提供全局变量的插件, 需要从所有入口文件中进行提取
-const provide = require('../config/bundle.config.json').provide
+const bundleConfig = require('../config/bundle.config.json')
 
 const package = require('../package.json')
 
@@ -22,7 +22,7 @@ const __bundleLibs = []
 let __chunks = []
 // lib 作为公共部分抽取
 for (let libName in bundleLibs) {
-	if (provide.indexOf(libName) < 0) { // 非全局插件抽取
+	if (bundleConfig.provide.indexOf(libName) < 0) { // 非全局插件抽取
 		__chunks = bundleLibs[libName].pages.concat([libName])
 	} else { // 全局插件抽取
 		__chunks = Object.keys(entries)
@@ -44,7 +44,7 @@ __bundleLibs.push(
 var plugins =  [
 	new webpack.BannerPlugin({
 		banner: `[name].js v${package.version}\n(c)2018 ${package.author}\nReleased under the ${package.license} License`,
-		include: /index|animation|components|demo/
+		include: new RegExp(bundleConfig.bannerFiles.join('|'))
 	}),
 	new webpack.DefinePlugin({
 		'process.env': config.build.env
