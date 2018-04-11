@@ -12,7 +12,7 @@
         router-link.select.link(to="/demo/vuex") vuex
         router-link.select.link(to="/demo/socket") socket
         router-link.select.link(to="/demo/recursive") recursive
-        // router-link.select.link(to="/nested") nested
+        router-link.select.link(to="/demo/nested") nested
         router-link.select.link(:to="{ name: 'params', params: { name: userInfo.name, age: 12 } }") params
 </template>
 
