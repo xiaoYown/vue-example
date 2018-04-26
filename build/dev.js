@@ -1,4 +1,4 @@
-const path = require('path')
+var path = require('path')
 const express =	require('express')
 const webpack =	require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -6,14 +6,14 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const proxyMiddleware = require('http-proxy-middleware')
 const opn = require('opn')
 const config = require('../config')
+
 const webpackMerge = require('./conf.dev')
-const baseWebpack =	require('./webpack.config')
 
 var app = express();
 var compiler = webpack(webpackMerge);
 
 var devMiddleware = webpackDevMiddleware(compiler, {
-  publicPath: baseWebpack.output.publicPath,
+  publicPath: webpackMerge.output.publicPath,
   stats: {
     colors: true,
     chunks: false,

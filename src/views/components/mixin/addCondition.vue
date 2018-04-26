@@ -45,6 +45,7 @@
             :zIndex="4 - index",
             :list="valueList",
             :value="cdt.values",
+            :type="cdt.user",
             @select="valueChange",
             @enter="valueChange"
           )
@@ -149,7 +150,8 @@
           let item = {
             select: 'eq',
             values: '1',
-            connection: 'and'
+            connection: 'and',
+            user: 0
           }
           this.pList.push(item)
         }
@@ -164,14 +166,28 @@
       selectChange (data) {
         this.pList[data.name].select = data.id
       },
+      /**
+       * 赋值条件类型:
+       * @param {Object} data - data.type:
+       *    0: 直接使用 value 作为筛选条件
+       *    1: 使用用户昵称作为筛选条件
+       *    2: 使用自定义条件作为筛选条件
+       */
       valueChange (data) {
-        if (data.txt) { // 使用登录名作为条件
-          this.pList[data.mark].user = true
-          this.pList[data.mark].values = data.txt
-        } else {
-          this.pList[data.mark].user = false
-          this.pList[data.mark].values = data.value
+        switch (data.type) {
+          case 0:
+            this.pList[data.mark].values = data.value
+            break
+          case 1:
+            this.pList[data.mark].values = data.txt
+            break
+          case 2:
+            this.pList[data.mark].values = data.txt
+            break
+          default:
+            console.warn('type error')
         }
+        this.$set(this.pList[data.mark], 'user', data.type)
       },
       save () {
         this.$emit('save', {

@@ -4,7 +4,9 @@
     :style="wrapStyle"
   )
     .p-select_input-checked
-      span {{ txtShow }}
+      .main-txt
+        p {{ txtShow }}
+        .p-select_input-tip(v-show="type === 1") 系统
       i.iconfont.icon-triangle-b
       .p-select_input-control(
         ref="control",
@@ -18,19 +20,30 @@
       .p-select_input-input
         global-text(
           :value="val",
-          :icon="''",
           :placeholder="placeholder2",
           @enter="enter",
           @input="input"
         )
-        span(:class="{ active: val }",@click="enter") 完成
       h4.p-select_input-title {{ title2 }}：
       ul.p-select_input-list.scroll__bar-4
         li.p-select_input-option(
           v-for="option, index in list",
           :key="index",
-          @click="select(option, index)"
-        ) {{ option[txtKey] }}
+          @click="select(1, index, option)"
+        ) 
+          .p-select_input-system
+            .p-select_input-val
+              .inner {{ option[txtKey] }}
+            .p-select_input-tip 系统
+        li.p-select_input-option(
+          v-for="option, index in customList",
+          :key="index",
+          @click="select(2, index, option)"
+        )
+          .p-select_input-custom
+            .p-select_input-val
+              p.inner {{ option[customKey] }}
+          span.sub-txt {{ option[customSubKey] }}
 
 </template>
 
@@ -40,12 +53,22 @@
     props: {
       mark: [String, Number],
       width: [Number, String],
+      type: Number,
       zIndex: Number,
       list: Array,
+      customList: Array,
       value: [Number, String],
       txtKey: {
         type: String,
         default: 'txt'
+      },
+      customKey: {
+        type: String,
+        default: 'txt'
+      },
+      customSubKey: {
+        type: String,
+        default: 'txtSub'
       },
       selectKey: { // 以此参数作为 被选中选项判断依据 key
         type: String,
@@ -115,19 +138,21 @@
       input (data) { // 当前 val 赋值
         this.val = data.value
       },
-      select (option, index) { // 选择下拉, 回传 name, index 以及所有该选项属性
+      select (type, index, option) { // 选择下拉, 回传 name, index 以及所有该选项属性
         this.show(false)
         this.txtShow = this.val = option[this.txtKey]
         this.$emit('select', {
-          ...option,
+          type,
           index,
-          mark: this.mark
+          mark: this.mark,
+          ...option
         })
       },
       enter () { // keydown enter 时, 以及点击完成时回传
         this.show(false)
         this.txtShow = this.val
         this.$emit('enter', {
+          type: 0,
           value: this.val,
           mark: this.mark
         })
@@ -148,18 +173,25 @@
       height: 24px;
       padding: 0 22px 0 13px;
       background-color: #fff;
-      overflow: hidden;
       border: 1px solid $std_sub_4;
       border-radius: 2px;
       color: $std_sub_1;
       line-height: 24px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      word-break: break-all;
       cursor: pointer;
       font-size: 0;
-      span {
+      .main-txt {
+        box-sizing: border-box;
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        padding-right: 30px;
         font-size: 12px;
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-break: break-all;
+        }
       }
       .iconfont {
         position: absolute;
@@ -207,30 +239,11 @@
     &-input {
       position: relative;
       height: 32px;
-      padding: 0 54px 15px 24px;
+      padding: 0 30px 15px 30px;
       line-height: 32px;
-      span {
-        position: absolute;
-        top: 0;
-        right: 15px;
-        width: 36px;
-        color: $std_sub_3;
-        text-align: center;
-        cursor: pointer;
-        &.active {
-          color: $std_main_A;
-        }
-      }
     }
-    // &-value {
-    //   height: 30px;
-    //   width: 100%;
-    //   padding: 0 9px;
-    //   border: 1px solid $std_sub_4;
-    //   font-size: 12px;
-    // }
     &-list {
-      max-height: 90px;
+      max-height: 180px;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -245,6 +258,59 @@
       &:hover {
         background-color: $std_sub_5;
       }
+    }
+    &-system {
+      box-sizing: border-box;
+      position: relative;
+      display: inline-block;
+      padding-right: 30px;
+      max-width: 100%;
+    }
+    &-custom {
+      display: inline-block;
+      vertical-align: top;
+      max-width: 60%;
+    }
+    .sub-txt {
+      color: $std_sub_2;
+    }
+    &-val {
+      position: relative;
+      padding: 0 4px;
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "[";
+        display: inline;
+      }
+      &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        content: "]";
+        display: inline;
+      }
+      .inner {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    &-tip {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 32px;
+      height: 16px;
+      margin-top: -8px;
+      color: #fff;
+      line-height: 16px;
+      text-align: center;
+      border-radius: 2px;
+      background-color: $std_main_A;
+      transform: scale(.8);
+      transform-origin: 100% 50%;
     }
   }
 </style>

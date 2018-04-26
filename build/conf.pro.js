@@ -1,21 +1,20 @@
-const path = require('path')
-const utils = require('./utils')
-const webpack = require('webpack')
-const merge = require('webpack-merge')
+const path =	require('path')
+const utils =	require('./utils')
+const webpack =	require('webpack')
+const merge =	require('webpack-merge')
+// const chunks = require('./chunks')
 const config = require('../config')
 const baseWebpack =	require('./webpack.config.js')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const ExtractTextPlugin =	require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin =	require('html-webpack-plugin')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const pageEntries = require('../config/entries').pageEntries
 const entries = require('../config/entries').entries
 const bundleLibs = require('../config/bundle.config.json').libs
 // 提供全局变量的插件, 需要从所有入口文件中进行提取
 const bundleConfig = require('../config/bundle.config.json')
-
 const package = require('../package.json')
-
 // 分离公共模块
 const __bundleLibs = []
 
@@ -43,23 +42,22 @@ __bundleLibs.push(
 
 var plugins =  [
 	new webpack.BannerPlugin({
-		banner: `[name].js v${package.version}\n(c)2018 ${package.author}\nReleased under the ${package.license} License`,
+		banner: '[name].js v' + package.version + '\n(c)2018 ' + package.author + '\nReleased under the ' + package.license + ' License\nDate: ' + config.build.time,
 		include: new RegExp(bundleConfig.bannerFiles.join('|'))
 	}),
 	new webpack.DefinePlugin({
 		'process.env': config.build.env
 	}),
 	new webpack.optimize.UglifyJsPlugin({
-		// minimize: false,
 		compress: {
 			warnings: false
 		}
 	}),
 	// new webpack.optimize.OccurenceOrderPlugin(),
 	new ExtractTextPlugin({
-		filename: utils.assetsPath('css/[name].css?v=[chunkhash]'), //单独使用style标签加载css并设置其路径
-		allChunks: true // 异步组件样式提取, 防止 css 带入 js 文件, 可能会引起 css module production 环境中无法找到
-	}),
+		filename: utils.assetsPath('css/[name].css?t=' + config.build.time),
+		allChunks: true
+	}) 	//单独使用style标签加载css并设置其路径
 	// new BundleAnalyzerPlugin()
 ].concat(__bundleLibs)
 
@@ -89,17 +87,19 @@ Object.keys(pageEntries).forEach(function(name){
 			collapseWhitespace: true,
 			removeAttributeQuotes: true
 		},
-		chunksSortMode: 'dependency'
-		// chunksSortMode: 'auto'
+		// chunksSortMode: 'dependency'
+		chunksSortMode: 'auto'
 	});
 	plugins.push(plugin);
 });
 
 var newWebpack = merge(baseWebpack, {
 	output: {
-		filename: utils.assetsPath('js/[name].js?h=[chunkhash]'),
-		// 按需加载 模块路径指定
-		chunkFilename: utils.assetsPath('js/[name].js?[chunkhash]')
+
+		path: config.build.assetsRoot,
+		filename: utils.assetsPath('js/[name].js?t=' + config.build.time),
+		chunkFilename: utils.assetsPath('js/chunks/[name].js?t=' + config.build.time),
+		publicPath: config.build.assetsPublicPath
 	},
 	module: {
 		rules: utils.styleLoaders({
@@ -108,12 +108,6 @@ var newWebpack = merge(baseWebpack, {
 			usePostCSS: true
 		})
 	},
-	// vue: {
-	// 	loaders: utils.cssLoaders({
-	// 		sourceMap: 	config.build.productionSourceMap,
-	// 		extract: 	true
-	// 	})
-	// },
 	plugins: plugins
 });
 

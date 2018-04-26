@@ -160,7 +160,9 @@
       border: 1px solid $std_sub_5;
     }
     &.has-icon input {
-      padding-right: 32px;
+      &:focus {
+        padding-right: 32px;
+      }
     }
   }
 </style>

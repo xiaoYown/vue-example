@@ -105,10 +105,6 @@
         @select="change"
       )
     .ui-components-wrap
-      p-add-condition(
-        :zIndex="10"
-      )
-    .ui-components-wrap
       global-select-input(
         :zIndex="11",
         :width="200",
@@ -125,6 +121,15 @@
         :txtKey="'name'",
         :selected="selected",
         @select="change"
+      )
+    .ui-components-wrap(style="padding-bottom: 400px;")
+      p-add-condition(
+        :zIndex="10"
+      )
+    .ui-components-wrap(style="padding-bottom: 400px;width: 200px;")
+      global-select-input(
+        :list="selectList",
+        :customList="customList"
       )
 
 </template>
@@ -154,7 +159,7 @@
           {
             id: '1',
             name: '11',
-            txt: '11'
+            txt: '系统'
           }, {
             id: '2',
             name: '22',
@@ -162,11 +167,29 @@
           }, {
             id: '3',
             name: '33',
-            txt: '33'
+            txt: '33333333333333333333333333333333333333333333333333333333'
           }, {
             id: '4',
             name: '44',
             txt: '444444444444444444444444444444444'
+          }
+        ],
+        customList: [
+          {
+            id: '2',
+            name: '33',
+            txt: '城市',
+            txtSub: '深圳'
+          }, {
+            id: '3',
+            name: '33',
+            txt: '33',
+            txtSub: 'uuuuuuuuuuuuuuuuuuuuuuu'
+          }, {
+            id: '4',
+            name: '44',
+            txt: '444444444444444444444444444444444',
+            txtSub: 'uuuuuuuuuuuuuuuuuuuuuuu'
           }
         ]
       }
@@ -181,6 +204,7 @@
         this.checkboxChecked = !this.checkboxChecked
 
         this.$tip({
+          time: 300000,
           type: event === 1 ? 'success' : 'fail',
           text: ['操作失败涉及到法律开始大幅离开的时间发；莱卡时间的离开房间的撒快乐；发生的纠纷快乐是的放假啊是；蝶恋蜂狂']
         })
