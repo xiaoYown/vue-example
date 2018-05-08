@@ -15,6 +15,11 @@ const bundleLibs = require('../config/bundle.config.json').libs
 // 提供全局变量的插件, 需要从所有入口文件中进行提取
 const bundleConfig = require('../config/bundle.config.json')
 const package = require('../package.json')
+
+const banner =
+`[name].js v${package.version} Date: ${config.build.time}
+(c)2018 ${package.author}
+Released under the ${package.license} License`
 // 分离公共模块
 const __bundleLibs = []
 
@@ -42,8 +47,8 @@ __bundleLibs.push(
 
 var plugins =  [
 	new webpack.BannerPlugin({
-		banner: '[name].js v' + package.version + '\n(c)2018 ' + package.author + '\nReleased under the ' + package.license + ' License\nDate: ' + config.build.time,
-		include: new RegExp(bundleConfig.bannerFiles.join('|'))
+		banner: banner,
+		// include: new RegExp(bundleConfig.bannerFiles.join('|'))
 	}),
 	new webpack.DefinePlugin({
 		'process.env': config.build.env
