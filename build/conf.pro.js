@@ -10,9 +10,12 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const pageEntries = require('../config/entries').pageEntries
 const entries = require('../config/entries').entries
-const bundleLibs = require('../config/bundle.config.json').libs
+const bundleLibs = require('../config/bundle.config').libs
 // 提供全局变量的插件, 需要从所有入口文件中进行提取
-const provide = require('../config/bundle.config.json').provide
+const bundleConfig = require('../config/bundle.config')
+const package = require('../package.json')
+
+const banner = '[name].js v' + package.version + '\n(c)2018 ' + package.author + '\nReleased under the ' + package.license + ' License' + '\nDate: ' + config.build.time
 // 分离公共模块
 const __bundleLibs = []
 
@@ -20,7 +23,7 @@ let __chunks = []
 // lib 作为公共部分抽取
 let __cacheGroups = {}
 for (let libName in bundleLibs) {
-	if (provide.indexOf(libName) < 0) { // 非全局插件抽取
+	if (bundleConfig.provide.indexOf(libName) < 0) { // 非全局插件抽取
 		__chunks = bundleLibs[libName].pages.concat([libName])
 	} else { // 全局插件抽取
 		__chunks = Object.keys(entries)
@@ -46,6 +49,10 @@ __cacheGroups.manifest = {
 // )
 
 var plugins =  [
+	new webpack.BannerPlugin({
+		banner: banner
+		// include: new RegExp(bundleConfig.bannerFiles.join('|'))
+	}),
 	// new webpack.DefinePlugin({
 	// 	'process.env': config.build.env
 	// }),
@@ -92,7 +99,7 @@ var newWebpack = merge(baseWebpack, {
 		path: config.build.assetsRoot,
 		filename: utils.assetsPath('js/[name].js?t=' + config.build.time),
 		// 按需加载 模块路径指定
-		chunkFilename: utils.assetsPath('js/[name].js?t=' + config.build.time),
+		chunkFilename: utils.assetsPath('js/[name].js'),
 		publicPath: config.build.assetsPublicPath
 	},
 	module: {

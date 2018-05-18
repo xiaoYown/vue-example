@@ -87,9 +87,14 @@
     "webpack-merge": "4.1.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node ./build/dev.js",
-    "build": "node ./build/pro.js"
+    "create:dev": "cross-env NODE_BUILD_IN=dev node ./build/build.pre.js",
+    "create:pro": "cross-env NODE_BUILD_IN=pro node ./build/build.pre.js",
+    "create:test": "cross-env NODE_BUILD_IN=test node ./build/build.pre.js",
+    "dev": "npm run create:dev && npm run dev:start",
+    "build": "npm run create:pro && npm run build:start",
+    "build:test": "npm run create:test && npm run build:start",
+    "dev:start": "cross-env NODE_ENV=development node ./build/dev.js",
+    "build:start": "cross-env NODE_ENV=production node ./build/pro.js"
   },
   "author": "xiaoYown",
   "license": "ISC"

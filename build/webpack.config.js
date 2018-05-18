@@ -8,9 +8,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const HappyPack = require('happypack')
 // const happyThreadPool = HappyPack.ThreadPool({ size: 25 })
 const vueLoaderConfig = require('./vue-loader.conf')
-
-// const isPro = process.env.NODE_ENV == 'production'
-
 const entries = require('../config/entries').entries
 
 module.exports = {
@@ -65,6 +62,13 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('images/[name].[ext]')
         }
+			},
+			{
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+				loader: 'file-loader',
+				options: {
+					name: utils.assetsPath('files/[name].[ext]')
+				}
       }
     ]
   },

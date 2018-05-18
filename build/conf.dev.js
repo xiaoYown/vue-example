@@ -8,10 +8,6 @@ const baseWebpack =	require('./webpack.config');
 
 const entries = require('../config/entries').pageEntries
 
-// if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
-
-process.env.NODE_ENV = config.dev.env;
-
 var plugins = [
 	// new webpack.optimize.OccurenceOrderPlugin(),
 	// new webpack.DefinePlugin({
@@ -37,8 +33,9 @@ Object.keys(entries).forEach(function(name){
 var newWebpack = merge(baseWebpack, {
 	mode: config.dev.env.NODE_ENV,
 	output: {
-		filename: '[name].js', // 使用chunkhash : '[name]-[hash].js'
-    publicPath: config.dev.assetsPublicPath
+		path: config.build.assetsRoot,
+		filename: '[name].js',
+		publicPath: config.dev.assetsPublicPath
 	},
 	module: {
 		rules: utils.styleLoaders({ sourceMap: true, usePostCSS: false })

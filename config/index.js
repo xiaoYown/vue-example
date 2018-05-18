@@ -1,6 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
-var path = require('path');
-const bundleLibs = require('./bundle.config.json').libs
+const path = require('path');
+const bundleLibs = require('./bundle.config').libs
 // 第三方库资源设置
 const libs = {}
 
@@ -9,7 +9,7 @@ for (let key in bundleLibs) {
 }
 
 function timeformat (time) {
-	return [time.getFullYear(), time.getMonth(), time.getDate() + ' ' + time.getHours() + ':' + time.getMinutes()].join('-')
+	return [time.getFullYear(), time.getMonth() + 1, time.getDate() + ' ' + time.getHours() + ':' + time.getMinutes()].join('-')
 }
 
 module.exports = {

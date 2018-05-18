@@ -20,11 +20,18 @@ io.on('connection', function (socket) {
   var addedUser = false
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
-    console.log(data)
+    // console.log(data)
     // we tell the client to execute 'new message'
     allBroadCase(socket, 'new message', {
       name: data.name,
       msg: data.msg
     })
+  })
+  socket.on('event', function (data) {
+    console.log(data)
+  })
+  socket.on('disconnect', function (event) {
+    console.log('disconnect')
+    console.log(event)
   })
 })

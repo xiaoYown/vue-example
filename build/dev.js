@@ -7,10 +7,11 @@ const proxyMiddleware = require('http-proxy-middleware')
 const opn = require('opn')
 const config = require('../config')
 const webpackMerge = require('./conf.dev')
-const baseWebpack =	require('./webpack.config')
+// const baseWebpack = require('./webpack.config')
 
-var app = express();
-var compiler = webpack(webpackMerge);
+var app = express()
+
+var compiler = webpack(webpackMerge)
 
 var devMiddleware = webpackDevMiddleware(compiler, {
   publicPath: webpackMerge.output.publicPath,
@@ -18,7 +19,7 @@ var devMiddleware = webpackDevMiddleware(compiler, {
     colors: true,
     chunks: false,
     modules: false,
-    version: false,
+    version: false
   }
 })
 var hotMiddleware = webpackHotMiddleware(compiler);

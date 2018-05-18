@@ -5,8 +5,6 @@ const config =	require('../config')
 const ora =	require('ora')
 const webpack =	require('webpack')
 
-// if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.build.env.NODE_ENV);
-
 var webpackMerge = require('./conf.pro');
 
 console.log([
@@ -18,7 +16,7 @@ console.log([
 var spinner = ora('building for production...');
 spinner.start();
 
-var assetsPath = path.join(path.resolve(__dirname, '../dist'), config.build.assetsSubDirectory);
+var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory);
 
 rm('-rf', assetsPath);
 mkdir('-p', assetsPath);
