@@ -1,15 +1,25 @@
-var port = 1112;
+const PORT = 3002;
 
 const isPro = process.env.NODE_ENV == 'production';
 
+function getIPAdress() {
+  let networkInterfaces = require('os').networkInterfaces();
+  let IP;
+  
+  Object.keys(networkInterfaces).forEach(net => {
+    networkInterfaces[net].forEach(alias => {
+      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+        IP = alias.address
+      }
+    })
+  })
+
+  return IP;
+}
+
 module.exports = {
-    port: port,
-    pathUrl: 'http://192.168.0.222:' + port + '/',
-
-    apiUrl: isPro ? 'http://192.168.0.188:5566' : '/api',
-
-    api: 'http://192.168.0.188:5566',
-
-    //appId: 'wx3153da022bffe72e',  //线上,wx47b4a5ed84bf3fb0;测试,
-    appId: 'wx47b4a5ed84bf3fb0'
+  port: PORT,
+  pathUrl: 'http://' + getIPAdress() + ':' + PORT + '/',
+  apiUrl: isPro ? 'http://192.168.0.188:5566' : '/api',
+  api: 'http://192.168.0.188:5566'
 }

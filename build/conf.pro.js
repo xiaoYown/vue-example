@@ -2,11 +2,12 @@ const path =	require('path')
 const utils =	require('./utils')
 const webpack =	require('webpack')
 const merge =	require('webpack-merge')
-const config = 	require('../config')
+const config = require('../config')
 const baseWebpack =	require('./webpack.config.js')
 // const ExtractTextPlugin =	require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin =	require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CleanWebpackPlugin = require('clean-webpack-plugin'); //installed via npm
 
 const pageEntries = require('../config/entries').pageEntries
 const entries = require('../config/entries').entries
@@ -16,6 +17,16 @@ const bundleConfig = require('../config/bundle.config')
 const package = require('../package.json')
 
 const banner = '[name].js v' + package.version + '\n(c)2018 ' + package.author + '\nReleased under the ' + package.license + ' License' + '\nDate: ' + config.build.time
+
+// the path(s) that should be cleaned
+let pathsToClean = ['dist']
+// the clean options to use
+let cleanOptions = {
+  root: path.join(__dirname, '../'),
+  exclude: [],
+  verbose: true,
+  dry: false
+}
 // 分离公共模块
 const __bundleLibs = []
 
@@ -49,6 +60,7 @@ __cacheGroups.manifest = {
 // )
 
 var plugins =  [
+  new CleanWebpackPlugin(pathsToClean, cleanOptions),
 	new webpack.BannerPlugin({
 		banner: banner
 		// include: new RegExp(bundleConfig.bannerFiles.join('|'))

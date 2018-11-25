@@ -1,18 +1,19 @@
-<template lang="jade">
-  .index-wrap
-    .container 
-      h3 home
-      div
-        h4.user-name {{ userInfo.name }} 
-        | welcome !
+<template>
+  <div class="index-wrap">
+    <div class="container">
+      <h3>home</h3>
+      <div>
+        <h4 class="user-name">{{ userInfo.name }}</h4>
+        <span>welcome</span>
         br
-        a(href="/demo") link-demo
-        // router-link(:to="'/login'") login
+        <a href="/demo">link to demo</a>
         br
-        a(href="/components") link-components
-        // router-link(:to="'/components'") components
+        <a href="/components">link to components</a>
         br
-        router-link(:to="'/login'") login
+        <router-link to="/login">login</router-link>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

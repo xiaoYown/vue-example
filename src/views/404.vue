@@ -1,6 +1,7 @@
-<template lang="jade">
-  div
-    h1 {{msg}}
+<template>
+  <div>
+    <h1>{{ msg }}</h1>
+  </div>
 </template>
 
 <script>
