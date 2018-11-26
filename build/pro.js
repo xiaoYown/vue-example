@@ -1,11 +1,11 @@
-require('shelljs/global'); // can replace unix shell scripts on nodejs
+// require('shelljs/global'); // can replace unix shell scripts on nodejs
 
-const path =	require('path')
-const config =	require('../config')
+const path = require('path')
+const config = require('../config')
 const ora =	require('ora')
 const webpack =	require('webpack')
 
-var webpackMerge = require('./conf.pro');
+var webpackMerge = require('./conf.pro')
 
 console.log([
 	'  Tip:\n' ,
@@ -18,9 +18,9 @@ spinner.start();
 
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory);
 
-rm('-rf', assetsPath);
-mkdir('-p', assetsPath);
-cp('-R', 'static/', path.join(assetsPath, '../'));
+// rm('-rf', assetsPath);
+// mkdir('-p', assetsPath);
+// cp('-R', 'static/', path.join(assetsPath, '../'));
 
 webpack(webpackMerge, function (err, stats) {
 	spinner.stop()

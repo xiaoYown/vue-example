@@ -7,7 +7,8 @@ const baseWebpack =	require('./webpack.config.js')
 // const ExtractTextPlugin =	require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin =	require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const CleanWebpackPlugin = require('clean-webpack-plugin'); //installed via npm
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const pageEntries = require('../config/entries').pageEntries
 const entries = require('../config/entries').entries
@@ -26,6 +27,10 @@ let cleanOptions = {
   exclude: [],
   verbose: true,
   dry: false
+}
+let CopyOptions = {
+  from: path.join(__dirname, '../static'),
+  to: path.join(__dirname, '../dist/static')
 }
 // 分离公共模块
 const __bundleLibs = []
@@ -61,6 +66,7 @@ __cacheGroups.manifest = {
 
 var plugins =  [
   new CleanWebpackPlugin(pathsToClean, cleanOptions),
+  new CopyWebpackPlugin(['*', '*/*'], CopyOptions),
 	new webpack.BannerPlugin({
 		banner: banner
 		// include: new RegExp(bundleConfig.bannerFiles.join('|'))
