@@ -35,7 +35,7 @@ let CopyOptions = {
 // 分离公共模块
 const __bundleLibs = []
 
-let __chunks = []
+// let __chunks = []
 // lib 作为公共部分抽取
 let __cacheGroups = {}
 for (let libName in bundleLibs) {
@@ -66,7 +66,7 @@ __cacheGroups.manifest = {
 
 var plugins =  [
   new CleanWebpackPlugin(pathsToClean, cleanOptions),
-  new CopyWebpackPlugin(['*', '*/*'], CopyOptions),
+  new CopyWebpackPlugin([CopyOptions]),
 	new webpack.BannerPlugin({
 		banner: banner
 		// include: new RegExp(bundleConfig.bannerFiles.join('|'))
