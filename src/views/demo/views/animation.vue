@@ -6,7 +6,7 @@
       button(@click="dynamicAnimate(3)") 03
       button(@click="moveIn") show
       button 自定义方式
-      dynamic(:animation="dynamicType",:show="show")
+      el-dynamic(:animation="dynamicType",:show="show")
         .box
     .demo-animation
       button(@click="moveIn_01") show
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-  import Dynamic from 'components/animation/dynamic.vue'
+  import ElDynamic from '@/components/animation/dynamic.vue'
 
   export default {
     components: {
-      dynamic: Dynamic
+      ElDynamic
     },
     data () {
       return {

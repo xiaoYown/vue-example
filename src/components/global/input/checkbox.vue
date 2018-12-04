@@ -57,7 +57,7 @@
 </script>
 
 <style lang="sass">
-  @import '../../../assets/sass/theme';
+  @import '~@/assets/sass/theme';
 
   .global__checkbox {
     display: inline-block;

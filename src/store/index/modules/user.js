@@ -1,8 +1,3 @@
-// import Vue from 'vue'
-// import { saveCookie } from 'tools/client'
-// import { httpResponse } from 'tools/utils'
-
-// import api from '../api'
 import * as types from './types'
 const state = {
   userInfo: {}

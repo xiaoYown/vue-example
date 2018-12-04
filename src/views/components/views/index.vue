@@ -96,7 +96,7 @@
   import XyButton from '@/components/button/index.vue'
   import XyLoading from '@/components/loading/loading.vue'
   import XyEmot from '@/components/emot/emot.vue'
-  import XyPopup from '@/tools/vue-popup/main.vue'
+  import XyPopup from '@/utils/vue-popup/main.vue'
   // import WebUploader from 'webuploader'
   // const WebUploader = resolve => require.ensure([], () => resolve(require('webuploader')), 'webuploader')
   // async function getWebUploader () {

@@ -1,6 +1,3 @@
-// import { httpResponse, getAttribute } from 'tools/utils'
-
-// import api from '../api'
 import * as types from './types'
 
 const state = {

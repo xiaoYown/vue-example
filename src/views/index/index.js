@@ -4,11 +4,11 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 // import { sync } from 'vuex-router-sync' // 同步vuex与路由的状态
 
-import {getCookie} from 'tools/client'
+import { isLogin } from '@/utils/client'
 
 import App from './app-index.vue'
 import 'core-js/fn/promise'
-import store from 'Store/index'
+import store from '@/store/index'
 
 import Index from '@/views/index/index.vue'
 import Login from '@/components/login.vue'
@@ -48,8 +48,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(({meta, path}, from, next) => {
-  let sessionId = getCookie('session')
-  if (sessionId) {
+  if (isLogin()) {
     return next()
   } else if (meta.user && path !== '/login') {
     return next({path: '/login'})

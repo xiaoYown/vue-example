@@ -16,37 +16,39 @@
 </template>
 
 <script>
-  export default {
-    components: {
-      'xy-button': require('components/button/index.vue')
+import XyButton from '@/components/button/index.vue'
+
+export default {
+  components: {
+    XyButton
+  },
+  props: {
+    tip: {
+      type: String,
+      default: '提示'
     },
-    props: {
-      tip: {
-        type: String,
-        default: '提示'
-      },
-      message: {
-        type: String,
-        default: '是否删除'
-      }
-    },
-    data () {
-      return {
-        start: false
-      }
-    },
-    mounted () {
-      this.start = true
-    },
-    methods: {
-      confirm (bool) {
-        this.start = false
-        setTimeout(() => {
-          this.$emit('confirm', bool)
-        }, 200)
-      }
+    message: {
+      type: String,
+      default: '是否删除'
+    }
+  },
+  data () {
+    return {
+      start: false
+    }
+  },
+  mounted () {
+    this.start = true
+  },
+  methods: {
+    confirm (bool) {
+      this.start = false
+      setTimeout(() => {
+        this.$emit('confirm', bool)
+      }, 200)
     }
   }
+}
 </script>
 
 <style lang="sass">

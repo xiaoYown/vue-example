@@ -5,11 +5,11 @@
       <div>
         <h4 class="user-name">{{ userInfo.name }}</h4>
         <span>welcome</span>
-        br
+        <br>
         <a href="/demo">link to demo</a>
-        br
+        <br>
         <a href="/components">link to components</a>
-        br
+        <br>
         <router-link to="/login">login</router-link>
       </div>
     </div>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import { getCookie } from 'tools/client'
+  import { getCookie } from '@/utils/client'
   import { mapState, mapActions } from 'vuex'
 
   const jquery = r => require.ensure([], () => r(require('jquery')), 'jquery')

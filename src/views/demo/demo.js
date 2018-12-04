@@ -4,14 +4,14 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 // import { sync } from 'vuex-router-sync'
 // import VueSocketIo from 'vue-socket.io'
-// import VueSocketIo from 'tools/vue-socket'
-import tip from 'tools/tip/main'
+// import VueSocketIo from '@/utils/vue-socket'
+import tip from '@/utils/tip/main'
 
 import App from './app-demo.vue'
 // import lazy from 'vue-lazy-component'
-import { getCookie } from 'tools/client'
+import { getCookie } from '@/utils/client'
 import 'core-js/fn/promise'
-import store from 'Store/demo'
+import store from '@/store/demo'
 
 import ViewIndex from './views/index.vue'
 import ViewFoo from './views/foo.vue'
@@ -21,7 +21,7 @@ import ViewVuex from './views/vuex.vue'
 import ViewSocket from './views/socket.vue'
 import ViewRecursive from './views/recursive.vue'
 import ViewNested from './views/nested.vue'
-import NotFound from 'Views/404.vue'
+import NotFound from '@/views/404.vue'
 
 Vue.use(VueRouter)
 Vue.use(tip)

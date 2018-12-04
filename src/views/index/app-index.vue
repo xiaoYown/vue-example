@@ -7,20 +7,21 @@
 </template>
 
 <script>
-  require('sass/base.scss')
-  export default {
-    data () {
-      return {
-        show: false
-      }
-    },
-    created () {
-      this.show = false
-    },
-    mounted () {
-      this.show = true
+import '@/assets/sass/base.scss'
+
+export default {
+  data () {
+    return {
+      show: false
     }
+  },
+  created () {
+    this.show = false
+  },
+  mounted () {
+    this.show = true
   }
+}
 </script>
 
 <style lang="sass">

@@ -191,7 +191,7 @@
 </script>
 
 <style lang="sass">
-  @import '../../../assets/sass/theme';
+  @import '~@/assets/sass/theme';
 
   .p-add_cdt {
     position: absolute;

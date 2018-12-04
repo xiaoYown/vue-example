@@ -137,7 +137,7 @@
 </script>
 
 <style lang="sass">
-  @import '../../../assets/sass/theme';
+  @import '~@/assets/sass/theme';
 
   .p-select_input {
     position: relative;

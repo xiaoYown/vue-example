@@ -50,7 +50,7 @@
 </script>
 
 <style lang="sass">
-  @import '../../../assets/sass/theme';
+  @import '~@/assets/sass/theme';
 
   .global__switch {
     display: inline-block;

@@ -122,7 +122,7 @@
 </script>
 
 <style lang="sass">
-  @import '../../../assets/sass/theme';
+  @import '~@/assets/sass/theme';
 
   .global__select {
     position: relative;

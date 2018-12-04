@@ -8,7 +8,7 @@
 
 <script>
   
-  import { getCookie } from 'tools/client'
+  import { getCookie } from '@/utils/client'
   import { mapState, mapActions } from 'vuex'
 
   export default {

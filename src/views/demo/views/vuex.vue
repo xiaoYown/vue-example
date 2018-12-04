@@ -43,7 +43,7 @@
 <script>
   import { mapState, mapActions } from 'vuex'
 
-  import { getAttribute } from 'tools/utils'
+  import { getAttribute } from '@/utils/utils'
 
   export default {
     data () {
