@@ -1,0 +1,32 @@
+/** 主色
+ * A 默认色
+ * B 移至互动色
+ * C 边框色
+ * D hover色
+ */
+$std_main_A: #1fb6ff;
+$std_main_B: #00acff;
+$std_main_C: #01a4f2;
+$std_main_G: #c5e8fe;
+$std_main_H: #eff9fe;
+
+/** 辅色
+ * 1 主要字体, 导航图标颜色等
+ * 2 次要文字图表颜色
+ * 3 图标不可用等
+ * 4 各种边框分隔线颜色
+ * 5 各种 hover 底色
+ * 6 用于操作区整体底色
+ */
+ $std_sub_1: #3c4858;
+ $std_sub_2: #8492a6;
+ $std_sub_3: #bdc9db;
+ $std_sub_4: #dbe0e9;
+ $std_sub_5: #eff2f7;
+ $std_sub_6: #f9fafc;
+
+/** 字号
+ * 16 大标题, 导航字等
+ * 14 小标题, 用于简报标题, 描述
+ * 12 用于正文各, 种描述字体
+ */

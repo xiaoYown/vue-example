@@ -1,12 +1,12 @@
 <template lang="jade">
   .ui-compoents-drag
     textarea.input-test(
-        :style="style"
+      :style="style"
     )
     xy-drag(
-        :params="axis",
-        @changing="changing",
-        @changed="changed"
+      :params="axis",
+      @changing="changing",
+      @changed="changed"
     )
 </template>
 
@@ -14,6 +14,7 @@
   import XyDrag from '@/components/ui/drag.vue'
 
   export default {
+    name: 'PageDrag',
     components: {
       XyDrag
     },

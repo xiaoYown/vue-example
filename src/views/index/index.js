@@ -14,6 +14,8 @@ import Index from '@/views/index/index.vue'
 import Login from '@/components/login.vue'
 import NotFound from '@/views/404.vue'
 
+import '@/assets/sass/views/index/main.scss'
+
 Vue.use(VueRouter)
 // Vue.use(VueResource)
 Vue.prototype.$http = axios

@@ -12,9 +12,8 @@ import { getCookie } from '@/utils/client'
 import 'core-js/fn/promise'
 import store from '@/store/demo'
 
-import Index from './views/index.vue'
-import Drag from './views/drag.vue'
-import Its from './views/its.vue'
+import PageIndex from './index/main.vue'
+import PageDrag from './drag/main.vue'
 import NotFound from '@/views/404.vue'
 
 // 此处注册后可全局直接引入
@@ -29,6 +28,9 @@ import InputText from '@/components/global/input/text'
 import Search from '@/components/global/search/normal'
 import Select from '@/components/global/select/normal'
 import SelectInput from '@/components/global/select/input'
+
+// 样式
+import '@/assets/sass/views/components/main.scss'
 
 Vue.component('el-global', Global)
 
@@ -54,7 +56,7 @@ const routes = [
   {
     path: '/components',
     name: 'components',
-    component: Index,
+    component: PageIndex,
     meta: {
       user: true
     }
@@ -62,15 +64,7 @@ const routes = [
   {
     path: '/components/drag',
     name: 'drag',
-    component: Drag,
-    meta: {
-      user: true
-    }
-  },
-  {
-    path: '/components/its',
-    name: 'its',
-    component: Its,
+    component: PageDrag,
     meta: {
       user: true
     }

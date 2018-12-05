@@ -27,8 +27,7 @@
 </template>
 
 <script>
-  import '@/assets/sass/base.scss'
-  import Nav from './mixin/nav.vue'
+  import Nav from './components/nav.vue'
 
   export default {
     components: {

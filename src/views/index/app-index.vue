@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import '@/assets/sass/base.scss'
-
 export default {
   data () {
     return {

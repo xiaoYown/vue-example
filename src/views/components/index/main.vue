@@ -105,7 +105,7 @@
   // }
 
   export default {
-    name: 'xy-ui',
+    name: 'PageIndex',
     components: {
       'xy-switch': XySwitch,
       'xy-range': XyRange,
