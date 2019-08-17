@@ -1,4 +1,4 @@
-# vue-ts-example
+# start
 
 ## Project setup
 ```
