@@ -1,28 +1,26 @@
-const path = require('path');
 const utils = require('./utils');
 const webpack = require('webpack');
-const CONFIG_PRO = require('../config.pro');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const entries = require('./entries');
+const APP_CONFIG = require('../app.config');
+const { production } = APP_CONFIG;
 
-const BANNER =
-`[name].js v ${CONFIG_PRO.version}
-Date: ${CONFIG_PRO.timeStamp}
-Author: ${CONFIG_PRO.author}`;
-
+const BANNER = `[name].js v ${APP_CONFIG.version}
+Date: ${production.timeStamp}
+Author: ${APP_CONFIG.author}`;
 
 var plugins = [
   new webpack.BannerPlugin({
-    banner: BANNER
+    banner: BANNER,
   }),
   // new BundleAnalyzerPlugin()
 ];
 var newWebpack = {
   output: {
-    path: CONFIG_PRO.assetsRoot,
-    filename: utils.assetsPath(`js/[name].js?t=${CONFIG_PRO.timeStamp}`),
-    chunkFilename: utils.assetsPath(`js/chunks/[name].js?t=${CONFIG_PRO.timeStamp}`),
-    publicPath: CONFIG_PRO.assetsPublicPath
+    path: production.assetsRoot,
+    filename: utils.assetsPath(`js/[name].js?t=${production.timeStamp}`),
+    chunkFilename: utils.assetsPath(
+      `js/chunks/[name].js?t=${production.timeStamp}`,
+    ),
+    publicPath: production.assetsPublicPath,
   },
   plugins: plugins,
 };

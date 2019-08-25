@@ -2,44 +2,45 @@ const path = require('path');
 const utils = require('./build/utils');
 const webpackConfigProd = require('./build/config.pro');
 const entries = require('./build/entries');
-const CONFIG_PRO = require('./config.pro');
-const CONFIG_DEV = require('./config.dev');
+const APP_CONFIG = require('./app.config');
 
+const { development, production } = APP_CONFIG;
 const pages = {};
 
 Object.keys(entries).forEach(entry => {
-  let suffix = process.env.NODE_ENV === 'production' ? CONFIG_PRO.templateSuffix : CONFIG_DEV.templateSuffix;
-  let suffixFile = process.env.NODE_ENV === 'production' ? CONFIG_PRO.templateFileSuffix : CONFIG_DEV.templateFileSuffix;
+  let suffix = APP_CONFIG.templateSuffix;
+  let suffixFile =
+    process.env.NODE_ENV === 'production'
+      ? production.templateFileSuffix
+      : development.templateFileSuffix;
   pages[entry] = {
     entry: entries[entry],
-    template: path.join(CONFIG_PRO.templatePath, `${entry}.${suffixFile}`),
-    filename: `${entry}.${suffix}`,
+    template: path.join(APP_CONFIG.templatePath, `${entry}.${suffix}`),
+    filename: `${entry}.${suffixFile}`,
     chunksSortMode: 'dependency',
-    chunks: ['chunk-vendors', /* 'chunk-common',  */entry]
-  }
+    chunks: ['chunk-vendors', /* 'chunk-common',  */ entry],
+  };
 });
 
 let serverExtends = {};
-
-if (CONFIG_DEV.proxy && JSON.stringify(CONFIG_DEV.proxy) !== '{}') {
-  serverExtends.proxy = CONFIG_DEV.proxy;
+if (development.proxy && JSON.stringify(development.proxy) !== '{}') {
+  serverExtends.proxy = development.proxy;
 }
 
 module.exports = {
   integrity: true,
   pages,
   lintOnSave: false,
-  assetsDir: CONFIG_DEV.publicPath,
   devServer: {
     compress: true,
-    port: CONFIG_DEV.port,
+    port: development.port,
     quiet: true,
     historyApiFallback: {
-      rewrites: CONFIG_DEV.rewrites
+      rewrites: development.rewrites,
     },
-    ...serverExtends
+    ...serverExtends,
   },
-  configureWebpack: (config) => {
+  configureWebpack: () => {
     if (process.env.NODE_ENV === 'production') {
       return webpackConfigProd;
     }
@@ -53,22 +54,27 @@ module.exports = {
       config.module
         .rule('images')
         .use('url-loader')
-        .tap(options => {
+        .tap(() => {
           return {
             limit: 4096,
             fallback: {
               loader: 'file-loader',
               options: {
-                name: `${CONFIG_PRO.assetsFileDirectory}/images/[name].${CONFIG_PRO.timeStamp}.[ext]`
-              }
-            }
+                name: `${production.assetsFileDirectory}/images/[name].${production.timeStamp}.[ext]`,
+              },
+            },
           };
         });
-      config.plugin('extract-css')
-        .tap(args => [{
-          filename: utils.assetsPath(`css/[name].css?t=${CONFIG_PRO.timeStamp}`),
-          chunkFilename: utils.assetsPath(`css/[id].css?t=${CONFIG_PRO.timeStamp}`)
-        }]);
+      config.plugin('extract-css').tap(() => [
+        {
+          filename: utils.assetsPath(
+            `css/[name].css?t=${production.timeStamp}`,
+          ),
+          chunkFilename: utils.assetsPath(
+            `css/[id].css?t=${production.timeStamp}`,
+          ),
+        },
+      ]);
     }
-  }
-}
+  },
+};

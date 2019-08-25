@@ -8,6 +8,6 @@
 // $nextTick
 export default {
   inheritAttrs: false,
-  inject: ['scope'] // vm.$parent._provide
-}
+  inject: ['scope'], // vm.$parent._provide
+};
 </script>
