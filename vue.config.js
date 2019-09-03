@@ -1,4 +1,5 @@
 const path = require('path');
+const VueSkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 const utils = require('./build/utils');
 const webpackConfigProd = require('./build/config.pro');
 const entries = require('./build/entries');
@@ -43,6 +44,33 @@ module.exports = {
   configureWebpack: () => {
     if (process.env.NODE_ENV === 'production') {
       return webpackConfigProd;
+    } else {
+      return {
+        plugins: [
+          new VueSkeletonWebpackPlugin({
+            webpackConfig: {
+              entry: {
+                home: path.resolve('./skeletons/home.js'),
+              },
+            },
+            quiet: true,
+            minimize: true,
+            router: {
+              mode: 'history',
+              routes: [
+                {
+                  path: '/vue/home',
+                  skeletonId: 'vue-home',
+                },
+                {
+                  path: '/vue/home/about',
+                  skeletonId: 'vue-home-about',
+                },
+              ],
+            },
+          }),
+        ],
+      };
     }
   },
   chainWebpack: config => {
