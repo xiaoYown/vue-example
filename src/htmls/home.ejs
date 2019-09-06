@@ -13,5 +13,8 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <% for (var i = 0; i < externals.length; i++) { %>
+    <script src="<%= CDN + '\/' + externals[i] %>"></script>
+    <% } %>
   </body>
 </html>

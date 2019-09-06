@@ -8,6 +8,4 @@ function getEntries(folder) {
   });
   return entries;
 }
-let entries = getEntries('./src/pages'); // 获得入口js文件
-
-module.exports = entries;
+module.exports = getEntries('./src/pages'); // 获得入口js文件

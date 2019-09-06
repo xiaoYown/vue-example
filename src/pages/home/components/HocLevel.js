@@ -1,8 +1,8 @@
 export default {
   props: {
-    level: Number,
+    level: Number
   },
-  render(/* hyperscript */) {
+  render (/* hyperscript */) {
     const TAG = `h${this.level}`;
     return <TAG>{this.$slots.default}</TAG>;
     // 调用 hyperscript(原 createElement) 生成元素
@@ -16,5 +16,5 @@ export default {
     //     data: 'word'
     //   }
     // }, [hyperscript('span', {}, 'hello !')]);
-  },
+  }
 };
