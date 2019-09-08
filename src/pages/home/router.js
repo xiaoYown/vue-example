@@ -9,12 +9,12 @@ export default new Router({
     {
       path: '/vue/home',
       name: 'home',
-      component: () => import(/* webpackChunkName: "home-view-index" */ './views/Home.vue')
+      component: () => import(/* webpackChunkName: "home-view-index", webpackPrefetch: true */ './views/Home')
     },
     {
       path: '/vue/home/about',
       name: 'about',
-      component: () => import(/* webpackChunkName: "home-view-about" */ './views/About.vue')
+      component: () => import(/* webpackChunkName: "home-view-about", webpackPrefetch: true */ './views/About')
     }
   ]
 });

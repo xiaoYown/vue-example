@@ -1,8 +1,3 @@
-<template>
-  <div class="Test">{{ msg }} world!</div>
-</template>
-
-<script>
 export default {
   name: 'HelloWorld',
   props: {
@@ -14,5 +9,7 @@ export default {
       this.bool = false;
     },
   },
+  render () {
+    return <div class="Test">{{ msg }} world!</div>
+  }
 };
-</script>

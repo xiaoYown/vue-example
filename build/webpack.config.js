@@ -1,9 +1,7 @@
 const path = require('path');
 // const HappyPack = require('happypack');
-const os = require('os');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const VueSkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 const entries = require('./entries');
 const APP_CONFIG = require('../app.config');
@@ -29,15 +27,11 @@ module.exports = {
           ),
           {
             loader: process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-            // loader: 'style-loader',
             options: {
               sourceMap: true,
               hmr: process.env.NODE_ENV === 'development',
             }
           },
-          // {
-          //   loader: 'vue-style-loader',
-          // },
           {
             loader: 'css-loader',
             options: { sourceMap: true }
@@ -57,30 +51,20 @@ module.exports = {
           }
         ]
       },
-      // {
-      //   test: /\.vue?$/,
-      //   exclude: /node_modules/,
-      //   use: 'happypack/loader?id=vue'
-      // },
       {
-        test: /\.vue?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'vue-loader',
-          }
-        ],
-      },
-      {
-        test: /\.js$/,
+        test: /\.js[x]?$/,
         exclude: /node_modules/,
         use: [{
           loader: `babel-loader${process.env.NODE_ENV === 'development' ? '?cacheDirectory' : ''}`
         }]
       },
-      {
-        test: /\.html$/,
-        loader: 'vue-html-loader'
+      { // eslint 检查
+        test: /\.js[x]?$/,
+        exclude: /node_modules/,
+        include: [path.join(__dirname, '../src')],
+        use: [{
+          loader: 'eslint-loader',
+        }]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -90,56 +74,24 @@ module.exports = {
           name: utils.assetsPath('images/[name].[ext]'),
         }
       },
-      { // eslint 检查
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        include: [path.join(__dirname, '../src')],
-        use: [{
-          loader: 'eslint-loader',
-        }]
-      }
     ]
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin(),
-    // new HappyPack({
-    //   id: 'vue',
-    //   threadPool: happyThreadPool,
-    //   loaders: [
-    //     {
-    //       loader: 'vue-loader',
-    //     }
-    //   ],
-    // }),
     new VueSkeletonWebpackPlugin({
       webpackConfig: {
-        entry: {
-          home: path.resolve('./skeletons/home.js'),
-        },
+        entry: APP_CONFIG.skeletons.entry
       },
       quiet: true,
       minimize: true,
-      router: {
-        mode: 'history',
-        routes: [
-          {
-            path: '/vue/home',
-            skeletonId: 'skeletons-vue-home',
-          },
-          {
-            path: '/vue/home/about',
-            skeletonId: 'skeletons-vue-home-about',
-          },
-        ],
-      },
+      router: APP_CONFIG.skeletons.routers
     }),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '../src'),
     },
-    extensions: ['.js', '.vue', '.scss']
+    extensions: ['.js', '.jsx']
   },
   externals: APP_CONFIG.externals
 };

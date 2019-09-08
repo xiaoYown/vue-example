@@ -45,6 +45,7 @@ const CONFIG = {
       home: ['vue', 'vue-router', 'vuex']
     }
   },
+  skeletons: require('./skeletons'),
 
   development: {
     url: `http://${IP}:${PORT}/vue/home`,
