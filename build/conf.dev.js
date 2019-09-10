@@ -18,29 +18,16 @@ let plugins = [
   new DashboardPlugin()
 ];
 
-const generatorAssetsName = APP_CONFIG.inject.rename || (name => `${name}.js`);
-
 Object.keys(baseWebpack.entry).forEach(function(name){
   baseWebpack.entry[name].push('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true');
   let plugin = new HtmlWebpackPlugin({
     filename: name + `.${APP_CONFIG.development.templateFileSuffix}`,
     template: path.join(APP_CONFIG.templatePath, `${name}.${APP_CONFIG.templateSuffix}`), // page entries
     inject: true,
-    chunks: [name],
-    templateParameters: {
-      CDN: APP_CONFIG.inject.CDN,
-      externals: APP_CONFIG.inject.htmls[name].map(item => generatorAssetsName(item))
-    }
+    chunks: [name]
   });
   plugins.push(plugin);
 });
-
-// plugins.push(new ExternalsPlugin({
-//   cdn: '/static/react/js/libs',
-//   externals: {
-//     home: ['test'],
-//   }
-// }));
 
 let newWebpack = merge(baseWebpack, {
   mode: 'development',

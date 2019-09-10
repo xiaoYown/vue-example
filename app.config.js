@@ -38,11 +38,13 @@ const CONFIG = {
     'vue-router': 'VueRouter',
     'vuex': 'Vuex',
   },
-  inject: {
-    CDN: '/static/vue/js/libs',
-    rename: name => `${name}.min.js`, // not must
+  injectAssets: {
+    baseURL: '/static/vue/js/libs',
+    rename: (type, name) => `${name}.min.js?${BUILD_TIME.time}`, // not must
     htmls: {
-      home: ['vue', 'vue-router', 'vuex']
+      home: {
+        js: ['vue', 'vue-router', 'vuex']
+      }
     }
   },
   skeletons: require('./skeletons'),

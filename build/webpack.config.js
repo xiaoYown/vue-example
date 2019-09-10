@@ -3,6 +3,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueSkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
+const AssetsCDNPWebpackPlugin = require('./assets-cdn-webpack-plugin');
 const entries = require('./entries');
 const APP_CONFIG = require('../app.config');
 const utils = require('./utils');
@@ -78,6 +79,7 @@ module.exports = {
   },
   plugins: [
     new ProgressBarPlugin(),
+    new AssetsCDNPWebpackPlugin(APP_CONFIG.injectAssets),
     new VueSkeletonWebpackPlugin({
       webpackConfig: {
         entry: APP_CONFIG.skeletons.entry

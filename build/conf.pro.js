@@ -27,8 +27,6 @@ let plugins = [
   // new BundleAnalyzerPlugin()
 ];
 
-const generatorAssetsName = APP_CONFIG.inject.rename || (name => `${name}.js`);
-
 Object.keys(baseWebpack.entry).forEach(name => {
   let plugin = new HtmlWebpackPlugin({
     filename: path.resolve(APP_CONFIG.production.assetsRoot, `${name}.${APP_CONFIG.production.templateFileSuffix}`),
@@ -41,10 +39,6 @@ Object.keys(baseWebpack.entry).forEach(name => {
       removeComments: true,
       collapseWhitespace: true,
       removeAttributeQuotes: true
-    },
-    templateParameters: {
-      CDN: APP_CONFIG.inject.CDN,
-      externals: APP_CONFIG.inject.htmls[name].map(item => generatorAssetsName(item))
     }
   });
   plugins.push(plugin);
