@@ -17,6 +17,7 @@
     "vuex": "3.0.1"
   },
   "devDependencies": {
+    "assets-cdn-webpack-plugin": "1.0.1",
     "autoprefixer": "9.6.1",
     "babel": "6.23.0",
     "babel-core": "6.26.3",
