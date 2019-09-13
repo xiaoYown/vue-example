@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    home: path.resolve('./skeletons/home.jsx'),
+    home: path.resolve('./skeletons/home.vue'),
   },
   routers: {
     mode: 'history',

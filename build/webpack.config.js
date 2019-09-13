@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueSkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 const AssetsCDNPWebpackPlugin = require('assets-cdn-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const entries = require('./entries');
 const APP_CONFIG = require('../app.config');
 const utils = require('./utils');
@@ -11,6 +12,7 @@ const utils = require('./utils');
 // 开辟一个线程池
 // 拿到系统CPU的最大核数，happypack 将编译工作灌满所有线程
 // const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const IS_DEV = process.env.NODE_ENV !== 'development';
 
 module.exports = {
   entry: entries,
@@ -20,30 +22,33 @@ module.exports = {
         test: /\.(sc|sa|c)ss$/,
         use: [
           ...(
-            process.env.NODE_ENV === 'development' ? [
+            IS_DEV ? [
               {
                 loader: 'cache-loader',
               }
             ] : []
           ),
           {
-            loader: process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+            loader: !IS_DEV ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
             options: {
               sourceMap: true,
-              hmr: process.env.NODE_ENV === 'development',
+              hmr: IS_DEV,
             }
           },
           {
             loader: 'css-loader',
-            options: { sourceMap: true }
+            options: {
+              sourceMap: true,
+              // importLoaders: 1
+            }
           },
           {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              plugins: [
-                require('postcss-import')(),
-              ]
+              // plugins: [
+              //   require('postcss-import')(),
+              // ]
             }
           },
           {
@@ -53,14 +58,21 @@ module.exports = {
         ]
       },
       {
-        test: /\.js[x]?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         use: [{
-          loader: `babel-loader${process.env.NODE_ENV === 'development' ? '?cacheDirectory' : ''}`
+          loader: `babel-loader${IS_DEV ? '?cacheDirectory' : ''}`
         }]
       },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          hotReload: IS_DEV // disables Hot Reload
+        }
+      },
       { // eslint 检查
-        test: /\.js[x]?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         include: [path.join(__dirname, '../src')],
         use: [{
@@ -79,6 +91,7 @@ module.exports = {
   },
   plugins: [
     new ProgressBarPlugin(),
+    new VueLoaderPlugin(),
     new AssetsCDNPWebpackPlugin(APP_CONFIG.injectAssets),
     new VueSkeletonWebpackPlugin({
       webpackConfig: {
@@ -93,7 +106,7 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, '../src'),
     },
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.vue']
   },
   externals: APP_CONFIG.externals
 };

@@ -29,5 +29,5 @@ Vue.prototype['$xv:broadcast'] = function (event, payload) {
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount('#app');

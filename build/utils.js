@@ -17,5 +17,4 @@ exports.getIPAdress = function () {
 exports.assetsPath = function (_path) {
   var assetsSubDirectory = APP_CONFIG.production.assetsFileDirectory;
   return path.posix.join(assetsSubDirectory, _path);
-
 };

@@ -1,5 +1,5 @@
+<script>
 import Vue from 'vue';
-import './home.scss';
 
 export default new Vue({
   render() {
@@ -32,3 +32,17 @@ export default new Vue({
 // };
 // isMatched(/^\/vue\/home(?:\/)?$/i, "history") ? showSkeleton("vue-home") :
 // isMatched(/^\/vue\/home\/about(?:\/)?$/i, "history") && showSkeleton("vue-home-about");
+</script>
+
+<style>
+.pre-Skeletons {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+  padding-top: 100px;
+}
+</style>
