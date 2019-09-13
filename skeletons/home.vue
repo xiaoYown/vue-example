@@ -1,13 +1,15 @@
+<script>
 import Vue from 'vue';
+import './home.scss';
 
 export default new Vue({
   render() {
     return (
       <div>
-        <div id="vue-home" style="display: none;">
+        <div class="pre-Skeletons" id="skeletons-vue-home" style="display: none;">
           skeleton-home
         </div>
-        <div id="vue-home-about" style="display: none;">
+        <div class="pre-Skeletons" id="skeletons-vue-home-about" style="display: none;">
           skeleton-about
         </div>
       </div>
@@ -31,3 +33,4 @@ export default new Vue({
 // };
 // isMatched(/^\/vue\/home(?:\/)?$/i, "history") ? showSkeleton("vue-home") :
 // isMatched(/^\/vue\/home\/about(?:\/)?$/i, "history") && showSkeleton("vue-home-about");
+</script>
