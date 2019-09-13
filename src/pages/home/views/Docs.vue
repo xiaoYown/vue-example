@@ -1,9 +1,11 @@
 <script>
+import CommonDoc from '@/components/common/docs';
+
 export default {
   render () {
     return (
-      <div class="about">
-        <h1>This is an about page</h1>;
+      <div>
+        <CommonDoc />
       </div>
     );
   }

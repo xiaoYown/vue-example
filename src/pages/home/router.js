@@ -1,32 +1,25 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
-// import G2 from './views/G2.vue';
 
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  // base: process.env.BASE_URL,
   routes: [
     {
       path: '/vue/home',
       name: 'home',
-      component: Home,
+      component: () => import(/* webpackChunkName: "home-view-index", webpackPrefetch: true */ './views/Home'),
     },
     {
       path: '/vue/home/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './views/About.vue'),
+      component: () => import(/* webpackChunkName: "home-view-about", webpackPrefetch: true */ './views/About'),
     },
     {
-      path: '/vue/home/G2',
-      name: 'G2',
-      component: () => import(/* webpackChunkName: "G2" */ './views/G2.vue'),
+      path: '*',
+      name: 'NotFound',
+      component: () => import(/* webpackChunkName: "home-view-docs", webpackPrefetch: true */ '@/components/404'),
     },
   ],
 });
