@@ -1,16 +1,15 @@
-# start
+### commond
 
-## Project setup
 ```
 npm install
+dev: npm run dev
+build: npm run build
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run dev
-```
+### dependencies
 
-### Compiles and minifies for production
 ```
-npm run build
+webpack: 4
+babel: 6
+vue:: 2.6.10
 ```

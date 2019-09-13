@@ -24,23 +24,26 @@ function timeformat(time) {
 const IP = getIPAdress();
 const PORT = 8000;
 const BUILD_TIME = timeformat(new Date());
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 const CONFIG = {
   name: 'template-js',
   version: '0.0.1',
   author: 'xiaoYown',
   port: PORT,
-  templateSuffix: 'ejs', // 未编译文件后缀
+  templateSuffix: 'html', // 未编译文件后缀
   templatePath: path.resolve(__dirname, `./src/htmls`),
   assetsFileDirectory: path.resolve(__dirname, `./static`),
-  externals: {
+  // 生产打包时生效
+  externals: IS_DEV ? undefined : {
     'vue': 'Vue',
     'vue-router': 'VueRouter',
     'vuex': 'Vuex',
   },
-  injectAssets: {
+  // 生产打包时生效
+  injectAssets: IS_DEV ? {} : {
     baseURL: '/static/vue/js/libs',
-    rename: (type, name) => `${name}.min.js?${BUILD_TIME.time}`, // not must
+    rename: (type, name) => `${name}.min.js?${BUILD_TIME.time}`,
     htmls: {
       home: {
         js: ['vue', 'vue-router', 'vuex']

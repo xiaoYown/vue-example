@@ -1,3 +1,4 @@
+<script>
 export default {
   name: 'Home',
   render () {
@@ -7,3 +8,4 @@ export default {
     </div>;
   }
 };
+</script>

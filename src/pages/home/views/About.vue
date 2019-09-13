@@ -1,3 +1,4 @@
+<script>
 export default {
   render () {
     return (
@@ -7,3 +8,4 @@ export default {
     );
   }
 };
+</script>
