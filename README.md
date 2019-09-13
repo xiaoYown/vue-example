@@ -1,39 +1,16 @@
-# start
+### commond
 
-## Project setup
 ```
-yarn install
-```
+npm install
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
+dev: npm run dev
+build: npm run build
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+### dependencies
 
-### Run your tests
 ```
-yarn run test
+webpack: 4
+babel: 6
+vue:: 2.6.10
 ```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your end-to-end tests
-```
-yarn run test:e2e
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
