@@ -4,8 +4,9 @@ export default {
   },
   render () {
     /* hyperscript */
+    /* eslint-disable */
     const TAG = `h${this.level}`;
-    return <TAG>{this.$slots.default}</TAG>;
+    return <TAG>{ this.$slots.default }</TAG>;
     // 调用 hyperscript(原 createElement) 生成元素
     // return hyperscript('h1', {
     //   on: {

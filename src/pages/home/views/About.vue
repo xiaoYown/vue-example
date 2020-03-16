@@ -2,14 +2,14 @@
 <div class="about">
     <h1>This is an about page</h1>
     <Child />
-    <HocLevel level={1}>标题 1</HocLevel>
-    <HocLevel level={2}>标题 2</HocLevel>
-    <HocLevel level={3}>标题 3</HocLevel>
+    <HocLevel :level="1">标题 1</HocLevel>
+    <HocLevel :level="2">标题 2</HocLevel>
+    <HocLevel :level="3">标题 3</HocLevel>
     <!-- 组件封装 iview -->
-    <ItemList data={list} render={render} />
+    <ItemList :data="list" :render="render" />
     <br />
     <!-- 组件封装 element-ui -->
-    <XvSlot data={dataSlot}>
+    <XvSlot :data="dataSlot">
       <template v-slot:user="{ username, index }">
         <li>{{ index }} : {{ username }}</li>
       </template>
@@ -27,6 +27,12 @@ import XvSlot from '../components/Slot';
 export default {
   // functional: true,
   inheritAttrs: false, // 阻止上级传参添加到 dom 节点上
+  components: {
+    Child,
+    HocLevel,
+    ItemList,
+    XvSlot,
+  },
   provide() {
     // vm._provide
     return {

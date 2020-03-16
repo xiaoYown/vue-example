@@ -25,16 +25,16 @@ app.set('view engine', 'html')
 
 app.use('/static', express.static(path.join(__dirname, './front/static')))
 
-app.get('/', (req, res) => {
-  res.render('index', {})
-})
+// app.get('/', (req, res) => {
+//   res.render('index', {})
+// })
 
 app.get('/vue/:page', (req, res) => {
   console.log(path.join(__dirname, VIEWS_PATH + req.params.page + '.html'))
   findFile(path.join(__dirname, VIEWS_PATH + req.params.page + '.html'), () => {
     res.render(req.params.page, {})
   }, () => {
-    res.render('index', {})
+    // res.render('index', {})
   })
 })
 
@@ -42,7 +42,7 @@ app.get('/vue/:page/:params1', (req, res) => {
   findFile(path.join(__dirname, VIEWS_PATH + req.params.page + '.html'), () => {
     res.render(req.params.page, {})
   }, () => {
-    res.render('index', {})
+    // res.render('index', {})
   })
 })
 
@@ -50,7 +50,7 @@ app.get('/vue/:page/:params1/:params2', (req, res) => {
   findFile(path.join(__dirname, VIEWS_PATH + req.params.page + '.html'), () => {
     res.render(req.params.page, {})
   }, () => {
-    res.render('index', {})
+    // res.render('index', {})
   })
 })
 
